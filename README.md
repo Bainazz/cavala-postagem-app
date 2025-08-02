@@ -16,16 +16,16 @@ Vem comigo que vou evitar sua cavala de virar cola o/
 ## 📁 Estrutura de Pastas
 
 ```
-📁 telecom-churn-analysis/
+📁 cavala-trainer/
 │
-├── umamusume_app.py            # código base
-├── cavalas/                    # arquivos .json com os eventos das cavalas                   
 ├── cartas/                     # arquivos .json com os eventos das cartas
-├── icon_tipos/                 # icones dos tipos das cartas em formato .png
-├── icon_cavalas/               # icones das cavalas em formato .png
+├── cavalas/                    # arquivos .json com os eventos das cavalas                   
 ├── icon_cartas/                # icones das cartas em formato .png organizados por pastas
+├── icon_cavalas/               # icones das cavalas em formato .png
+├── icon_tipos/                 # icones dos tipos das cartas em formato .png
+├── README.md                   # este belo arquivo mal formatado
 ├── requirements.txt            # dependencias a serem instaladas para rodar a aplicação
-└── README.md                   # este belo arquivo mal formatado
+└── umamusume_app.py            # código base
 ```
 
 ## ▶️ Como usar
