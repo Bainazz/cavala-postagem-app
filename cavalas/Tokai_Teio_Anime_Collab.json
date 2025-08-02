@@ -1,0 +1,650 @@
+{
+  "nome": "Tokai Teio (Anime Collab)",
+  "imagem": "icon_cavalas/Tokai_Teio_Anime_Collab.png",
+  "eventos": {
+    "Eventos de figurino": [
+      {
+        "nome": "Rivals on Paper, Friends in Practice",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Hint para 'Stamina to Spare' +2",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "The Secret to Teio Tenacity",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Hint para 'Corner Acceleration ○' +2",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +10",
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "I'm Never Giving Up!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +15",
+          "Guts +5",
+          "(aleatório) Ganha o status 'Practice Perfect ○'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Wisdom +15",
+          "(aleatório) Ganha o status 'Practice Perfect ○'"
+        ]
+      }
+    ],
+    "Eventos padrão": [
+      {
+        "nome": "Empress vs Monarch",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30"
+        ]
+      },
+      {
+        "nome": "Cupcakes for All",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +5",
+          "Mood +1",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "Teio's Warrior Training",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "Skill points +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Hint para 'Prepared to Pass' +1"
+        ]
+      },
+      {
+        "nome": "Karaoke Power?",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "Teio, an Umadol?!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "Secret to Strength",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Skill points +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatoriamente entre:",
+          "Energy +30",
+          "Skill points +10",
+          "ou",
+          "Energy +30",
+          "Skill points +10",
+          "Speed -5",
+          "Power +5",
+          "Ganha o status 'Slow Metabolism'"
+        ]
+      }
+    ],
+    "Eventos de encontro": [
+      {
+        "nome": "I Got Praised!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "I Got Scolded!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "I Figured It Out!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Stamina +5",
+          "\\033[1mOpção do meio\\033[0m",
+          "Guts +5",
+          "Wisdom +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "Grown-Up Time",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +10"
+        ]
+      },
+      {
+        "nome": "Punny Prez",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Power +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      }
+    ],
+    "Eventos secretos": [
+      {
+        "nome": "After the Kikuka Sho: Triple Crown Champion!",
+        "detalhes": [
+          "Condição:", 
+          "Ganhe a Triple Crown",
+          "Satsuki Sho, Tokyo Yushun (Japanese Derby) e Kikuka Sho",
+          "Recompensas:",
+          "Speed +3",
+          "Stamina +3",
+          "Power +3",
+          "Guts +17",
+          "Wisdom +3",
+          "Skill points +45",
+          "Hint para 'Head-To-Head' +2",
+          "Yayoi Akikawa bond +5"
+        ]
+      },
+      {
+        "nome": "A Springtime Celebration",
+        "detalhes": [
+          "Condição: Ganhe a Spring Triple Crown",
+          "(Osaka Hai, Tenno Sho (Spring) e Takarazuka Kinen (Year 3)",
+          "Recompensas:",
+          "Speed +25",
+          "Power +25"
+        ]
+      }
+    ],
+    "Eventos especiais": [
+      {
+        "nome": "Bonus at start",
+        "detalhes": [
+          "Skill points +120"
+        ]
+      },
+      {
+        "nome": "Failed training (Get Well Soon!)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood -1",
+          "Último status que treinou -5",
+          "(aleatório) Ganha o status 'Practice Poor'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatoriamente entre:",
+          "Mood -1",
+          "Último status que treinou -10",
+          "(aleatório) Ganha o status 'Practice Poor'",
+          "ou",
+          "Ganha o status 'Practice Perfect ○'"
+        ]
+      },
+      {
+        "nome": "Failed training (Don't Overdo It!)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood -2",
+          "Último status que treinou -10",
+          "2 status aleatórios -10",
+          "(aleatório) Ganha o status 'Practice Poor'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatoriamente entre:",
+          "Mood -3",
+          "Último status que treinou -10",
+          "2 status aleatórios -10",
+          "Ganha o status 'Practice Poor'",
+          "ou",
+          "Energy +10",
+          "Ganha o status 'Practice Perfect ○'"
+        ]
+      },
+      {
+        "nome": "Extra Training",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -5",
+          "Último status que treinou +5",
+          "(aleatório) Cura um debuff negativo",
+          "Yayoi Akikawa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +5"
+        ]
+      },
+      {
+        "nome": "At Summer Camp (Year 2)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +10"
+        ]
+      },
+      {
+        "nome": "Fan Letter",
+        "detalhes": [
+          "Mood +1",
+          "Skill points +30"
+        ]
+      },
+      {
+        "nome": "Dance Lesson",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "New Year's Resolutions",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção do meio\\033[0m",
+          "Energy +20",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +20"
+        ]
+      },
+      {
+        "nome": "New Year's Shrine Visit",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +30",
+          "\\033[1mOpção do meio\\033[0m",
+          "Todos os status +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +35"
+        ]
+      },
+      {
+        "nome": "Acupuncture (Just an Acupuncturist, No Worries! ☆)",
+        "detalhes": [
+          "\\033[1mOpção 1\\033[0m",
+          "aleatoriamente entre (~30%):",
+          "Todos os status +20",
+          "ou (~70%):",
+          "Mood -2",
+          "Todos os status -15",
+          "Ganha o debuff 'Night Owl'",
+          "\\033[1mOpção 2\\033[0m",
+          "aleatoriamente entre (~45%):",
+          "Ganha a skill 'Corner Recovery ○'",
+          "Ganha a skill 'Straightaway Recovery'",
+          "ou (~55%):",
+          "Energy -20",
+          "Mood -2",
+          "\\033[1mOpção 3\\033[0m",
+          "aleatoriamente entre (~70%):",
+          "Maximum Energy +12",
+          "Energy +40",
+          "Cura todos os debuffs negativos",
+          "ou (~30%):",
+          "Energy -20",
+          "Mood -2",
+          "Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção 4\\033[0m",
+          "aleatoriamente entre (~85%):",
+          "Energy +20",
+          "Mood +1",
+          "Ganha o buff 'Charming ○'",
+          "ou (~15%):",
+          "Energy -10/-20",
+          "Mood -1",
+          "(aleatório) Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção 5\\033[0m",
+          "Energy +10"
+        ]
+      }
+    ],
+    "Eventos de corrida": [
+      {
+        "nome": "Victory! (G1) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -5/-20",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Victory! (G2/G3) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -5/-20",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Victory! (Pre/OP) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -5/-20",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Solid Showing (G1) (2º-5º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -20",
+          "1 status aleatório +8",
+          "Skill points +45",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10/-30",
+          "1 status aleatório +8",
+          "Skill points +45",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Solid Showing (Pre/OP) (2º-5º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -20",
+          "1 status aleatório +3",
+          "Skill points +30",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10/-30",
+          "1 status aleatório +3",
+          "Skill points +30",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (G1) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -25",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -15/-35",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (G2/G3) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -25",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -15/-35",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (Pre/OP) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -25",
+          "Skill points +10",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -15/-35",
+          "Skill points +10",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (G1)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (G2/G3)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (Pre/OP)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G1)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatoriamente entre:",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G2/G3)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatoriamente entre:",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (Pre/OP)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatoriamente entre:",
+          "Energy -25",
+          "Mood -1",
+          "Skill points +10",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "Skill points +10",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "Skill points +10",
+          "Etsuko Otonashi bond +10"
+        ]
+      }
+    ],
+    "Eventos sem escolha": [
+      {
+        "nome": "A Lofty Goal",
+        "detalhes": [
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "Pre-Classics Press Conference",
+        "detalhes": [
+          "Speed +5"
+        ]
+      },
+      {
+        "nome": "Going to the Kikuka Sho!",
+        "detalhes": [
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "Earth vs Heaven",
+        "detalhes": [
+          "Speed +5",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "The Path Beyond Defeat",
+        "detalhes": [
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "What's Lacking",
+        "detalhes": [
+          "Stamina +5"
+        ]
+      },
+      {
+        "nome": "I'm Fine...",
+        "detalhes": [
+          "Guts -5",
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "Master Trainer",
+        "detalhes": [
+          "Guts +10",
+          "(aleatório) Ganha o status 'Practice Perfect ○'"
+        ]
+      },
+      {
+        "nome": "Triumphant Return",
+        "detalhes": [
+          "Todos os status +5",
+          "Skill points +5"
+        ]
+      },
+      {
+        "nome": "No Encounter",
+        "detalhes": [
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "I Won't Lose!",
+        "detalhes": [
+          "Energy -10",
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "What's Missing",
+        "detalhes": [
+          "Todos os status +5",
+          "Skill points +30",
+          "Mood +2",
+          "(aleatório) Ganha o status 'Fast Learner'"
+        ]
+      },
+      {
+        "nome": "Teio's Got This ♪",
+        "detalhes": [
+          "aleatoriamente entre:",
+          "Energy +15",
+          "Guts -5",
+          "Mood -1",
+          "ou",
+          "Energy +15",
+          "Guts -5",
+          "Ganha o debuff 'Slacker'"
+        ]
+      }
+    ]
+  }
+}

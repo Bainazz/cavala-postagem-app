@@ -1,0 +1,635 @@
+{
+  "nome": "Oguri Cap",
+  "imagem": "icon_cavalas/Oguri_Cap.png",
+  "eventos": {
+    "Eventos de figurino": [
+      {
+        "nome": "Pinned Hopes",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +20"
+        ]
+      },
+      {
+        "nome": "Oguri the Forest Guide?",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +20",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +20"
+        ]
+      },
+      {
+        "nome": "Better Than a Plushie",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +20",
+          "(aleatório) Ganha o buff 'Hot Topic'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +20",
+          "(aleatório) Ganha o buff 'Hot Topic'"
+        ]
+      }
+    ],
+    "Eventos padrão": [
+      {
+        "nome": "Lost Umamusume",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "Field Workout",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "Running on Full",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Skill points +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Nakayama Racecourse ○ hint +1"
+        ]
+      },
+      {
+        "nome": "Oguri's Gluttony Championship",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy +30",
+          "Power +10",
+          "Skill points +10",
+          "ou",
+          "Energy +30",
+          "Skill points +10",
+          "Speed -5",
+          "Power +5",
+          "Ganha o debuff 'Slow Metabolism'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Power +5",
+          "Skill points +5"
+        ]
+      },
+      {
+        "nome": "Bottomless Pit",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Skill points +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatório",
+          "Energy +30",
+          "Skill points +10",
+          "ou",
+          "Energy +30",
+          "Skill points +10",
+          "Speed -5",
+          "Power +5",
+          "Ganha o debuff 'Slow Metabolism'"
+        ]
+      }
+    ],
+    "Eventos de encontro": [
+      {
+        "nome": "Oguri Makes a Resolution",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Wisdom +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +5",
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "Oguri Perseveres",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "Oguri Matures",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "\\033[1mOpção do meio\\033[0m",
+          "Stamina +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "Something Smells Good!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +10"
+        ]
+      },
+      {
+        "nome": "High-Level Rival",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Stamina +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Wisdom +5"
+        ]
+      }
+    ],
+    "Eventos secretos": [
+      {
+        "nome": "At the Tenno Sho (Spring)",
+        "detalhes": [
+          "Condição para ativação:",
+          "Corra no Tenno Sho (Spring)",
+          "Recompensa:",
+          "Energy -20/-15",
+          "Mood +1",
+          "1 status aleatório +4/+10",
+          "Skill points +25/+45"
+        ]
+      },
+      {
+        "nome": "At the Tenno Sho (Spring)",
+        "detalhes": [
+          "Condição para ativação:",
+          "NÃO CORRA no Tenno Sho (Spring)",
+          "Recompensa:",
+          "Mood +1"
+        ]
+      }
+    ],
+    "Eventos especiais": [
+      {
+        "nome": "Bonus at start",
+        "detalhes": [
+          "Skill points +120"
+        ]
+      },
+      {
+        "nome": "Failed training (Get Well Soon!)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood -1",
+          "Último status que treinou -5",
+          "(aleatório) Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatório",
+          "Mood -1",
+          "Último status que treinou -10",
+          "(aleatório) Ganha o debuff 'Practice Poor'",
+          "ou",
+          "Ganha o buff 'Practice Perfect'"
+        ]
+      },
+      {
+        "nome": "Failed training (Don't Overdo It!)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood -2",
+          "Último status que treinou -10",
+          "2 status aleatórios -10",
+          "(aleatório) Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "aleatório",
+          "Mood -3",
+          "Último status que treinou -10",
+          "2 status aleatórios -10",
+          "Ganha o debuff 'Practice Poor'",
+          "ou",
+          "Energy +10",
+          "Ganha o buff 'Practice Perfect'"
+        ]
+      },
+      {
+        "nome": "Extra Training",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -5",
+          "Último status que treinou +5",
+          "(aleatório) Cura um debuff aleatório",
+          "Yayoi Akikawa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +5"
+        ]
+      },
+      {
+        "nome": "At Summer Camp (Year 2)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +10"
+        ]
+      },
+      {
+        "nome": "Fan Letter",
+        "detalhes": [
+          "Mood +1",
+          "Skill points +30"
+        ]
+      },
+      {
+        "nome": "Dance Lesson",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "New Year's Resolutions",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "\\033[1mOpção do meio\\033[0m",
+          "Energy +20",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +20"
+        ]
+      },
+      {
+        "nome": "New Year's Shrine Visit",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +30",
+          "\\033[1mOpção do meio\\033[0m",
+          "Todos os status +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +35"
+        ]
+      },
+      {
+        "nome": "Acupuncture (Just an Acupuncturist, No Worries! ☆)",
+        "detalhes": [
+          "\\033[1mOpção 1\\033[0m",
+          "aleatório (~30%)",
+          "Todos os status +20",
+          "ou (~70%)",
+          "Mood -2",
+          "Todos os status -15",
+          "Ganha o debuff 'Night Owl'",
+          "\\033[1mOpção 2\\033[0m",
+          "aleatório (~45%)",
+          "Ganha a skill 'Corner Recovery'",
+          "Ganha a skill 'Straightaway Recovery'",
+          "ou (~55%)",
+          "Energy -20",
+          "Mood -2",
+          "\\033[1mOpção 3\\033[0m",
+          "aleatório (~70%)",
+          "Maximum Energy +12",
+          "Energy +40",
+          "Cura todos os debuffs",
+          "ou (~30%)",
+          "Energy -20",
+          "Mood -2",
+          "Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção 4\\033[0m",
+          "aleatório (~85%)",
+          "Energy +20",
+          "Mood +1",
+          "Ganha o buff 'Charming'",
+          "ou (~15%)",
+          "Energy -10/-20",
+          "Mood -1",
+          "(aleatório) Ganha o debuff 'Practice Poor'",
+          "\\033[1mOpção 5\\033[0m",
+          "Energy +10"
+        ]
+      }
+    ],
+    "Eventos de corrida": [
+      {
+        "nome": "Victory! (G1) (1º lugar)",
+        "detalhes": [
+          "Pode aleatoriamente ter um resultado diferente",
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "Energy -15",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "Energy -5/-20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Victory! (G2/G3) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Energy -15",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Energy -5/-20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Victory! (Pre/OP) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Energy -15",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Energy -5/-20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Solid Showing (G1) (2º-5º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +45",
+          "Energy -20",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +45",
+          "Energy -10/-30",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Solid Showing (Pre/OP) (2º-5º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +30",
+          "Energy -20",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +30",
+          "Energy -10/-30",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (G1) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Energy -25",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Energy -15/-35",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (G2/G3) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Energy -25",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Energy -15/-35",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Defeat (Pre/OP) (6º lugar ou pior)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +10",
+          "Energy -25",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +10",
+          "Energy -15/-35",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (G1)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (G2/G3)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (Pre/OP)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G1)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G2/G3)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (Pre/OP)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy -25",
+          "Mood -1",
+          "Skill points +10",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "Skill points +10",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "Skill points +10",
+          "Etsuko Otonashi bond +10"
+        ]
+      }
+    ],
+    "Eventos sem escolha": [
+      {
+        "nome": "That's Why I'll Win",
+        "detalhes": [
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "Spread the Word",
+        "detalhes": [
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "A Gathering of Greats",
+        "detalhes": [
+          "Stamina +5"
+        ]
+      },
+      {
+        "nome": "Like a River",
+        "detalhes": [
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "The Road Ahead",
+        "detalhes": [
+          "Speed +5"
+        ]
+      },
+      {
+        "nome": "Familiar Faces in the Clouds",
+        "detalhes": [
+          "Energy -10",
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "Master Trainer",
+        "detalhes": [
+          "Power +10",
+          "(aleatório) Ganha o buff 'Practice Perfect'"
+        ]
+      },
+      {
+        "nome": "Let's Give a Big Wave",
+        "detalhes": [
+          "Todos os status +5",
+          "Skill points +5"
+        ]
+      },
+      {
+        "nome": "Dream Feast",
+        "detalhes": [
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "City Shock",
+        "detalhes": [
+          "Energy -10",
+          "Mood -1"
+        ]
+      },
+      {
+        "nome": "Oguri's Heart-Pounding Training",
+        "detalhes": [
+          "Todos os status +5",
+          "Skill points +30",
+          "Mood +2",
+          "(aleatório) Ganha o buff 'Fast Learner'"
+        ]
+      },
+      {
+        "nome": "Oguri and the Fluffy Feline",
+        "detalhes": [
+          "aleatório",
+          "Energy +15",
+          "Guts -5",
+          "Mood -1",
+          "ou",
+          "Energy +15",
+          "Guts -5",
+          "Ganha o debuff 'Slacker'"
+        ]
+      }
+    ]
+  }
+}
