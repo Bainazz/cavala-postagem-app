@@ -1,0 +1,49 @@
+{
+  "nome": "Daiwa Scarlet",
+  "imagem": "icon_cartas/wisdom/Daiwa_Scarlet_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) I Won't Lose to Anyone!",
+        "detalhes": [
+          "Energy +15",
+          "Wisdom +5",
+          "Daiwa Scarlet SR bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) I Can Clean Better than Anyone!",
+        "detalhes": [
+          "Wisdom +10",
+          "Skill 'Tactical Tweak' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "I'm Going to Win Tomorrow!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "Daiwa Scarlet bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Daiwa Scarlet bond +5"
+        ]
+      },
+      {
+        "nome": "This Is Nothing!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill 'Stamina to Spare' +1",
+          "Daiwa Scarlet bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Mood +1",
+          "Daiwa Scarlet bond +5"
+        ]
+      }
+    ]
+  }
+}

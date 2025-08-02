@@ -1,0 +1,31 @@
+{
+  "nome": "Super Creek R",
+  "imagem": "icon_cartas/stamina/Super_Creek_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Leave it to Me to Help Out! ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Super Creek bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +10",
+          "Super Creek bond +5"
+        ]
+      },
+      {
+        "nome": "Leave it to Me to Be Considerate! ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Deep Breaths hint +1",
+          "Super Creek bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Stamina +5",
+          "Super Creek bond +5"
+        ]
+      }
+    ]
+  }
+}

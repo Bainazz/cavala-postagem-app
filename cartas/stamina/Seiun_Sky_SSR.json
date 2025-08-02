@@ -1,0 +1,68 @@
+{
+  "nome": "Seiun Sky",
+  "imagem": "icon_cartas/stamina/Seiun_Sky_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Be Strategic ☆",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Seiun Sky bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30",
+          "Second Wind hint +1",
+          "Seiun Sky bond -5",
+          "Encerra a cadeia de eventos únicos"
+        ]
+      },
+      {
+        "nome": "(❯❯) Beware of the Trap",
+        "detalhes": [
+          "Speed +5",
+          "Stamina +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) It's All to Win",
+        "detalhes": [
+          "Energy +10",
+          "Mood +1",
+          "Speed +5",
+          "Stamina +5",
+          "Wisdom +5",
+          "Skill points +5",
+          "Escape Artist hint +1/+3 ou Fast-Paced hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Recruiting Cat Catchers",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Seiun Sky bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +15",
+          "Stamina +5",
+          "Seiun Sky bond +5"
+        ]
+      },
+      {
+        "nome": "Recruiting Advisors",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +15",
+          "Seiun Sky bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Keeping the Lead hint +1",
+          "Seiun Sky bond +5"
+        ]
+      }
+    ]
+  }
+}

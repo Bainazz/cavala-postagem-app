@@ -1,0 +1,54 @@
+{
+  "nome": "Gold Ship",
+  "imagem": "icon_cartas/stamina/Gold_Ship_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Fervor! Air Basketball!",
+        "detalhes": [
+          "Energy -10",
+          "Stamina +25"
+        ]
+      },
+      {
+        "nome": "(❯❯) Respect the Salmon!",
+        "detalhes": [
+          "Energy -10",
+          "Guts +25"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Can't Spell \"Rival\" without \"Friend\"!",
+        "detalhes": [
+          "Stamina +10",
+          "Corner Connoisseur hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Adventurer Gold Ship",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +15",
+          "Gold Ship bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +10",
+          "Skill points +15",
+          "Gold Ship bond +5"
+        ]
+      },
+      {
+        "nome": "Revive the Brand! Golshi's Yakisoba",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Stamina +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Hanshin Racecourse ○ hint +1",
+          "Gold Ship bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "nome": "Twin Turbo",
+  "imagem": "icon_cartas/speed/Twin_Turbo_SSR.png", 
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) I'm Not Afraid!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre",
+          "Speed +10",
+          "Twin Turbo bond +5",
+          "ou",
+          "Energy -10",
+          "Speed +10",
+          "Encerra os eventos únicos",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Encerra os eventos únicos"
+        ]
+      },
+      {
+        "nome": "(❯❯) Can't Catch Me!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre",
+          "Speed +15",
+          "Skill 'Leader's Pride' +3",
+          "Twin Turbo bond +5",
+          "ou",
+          "Energy -10",
+          "Speed +10",
+          "Encerra os eventos únicos",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +25",
+          "Encerra os eventos únicos"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Turbo Is Strong!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre",
+          "Energy -10",
+          "Speed +5",
+          "Early Lead hint +3",
+          "ou",
+          "Energy -10",
+          "Speed +25",
+          "Skill 'Taking the Lead' +3",
+          "Twin Turbo bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +15",
+          "Skill 'Watchful Eye' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Just Start Running!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood -1",
+          "Speed +20",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Power +20"
+        ]
+      },
+      {
+        "nome": "I'm All Fired Up!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Twin Turbo bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'Early Lead' +1",
+          "Twin Turbo bond +5"
+        ]
+      }
+    ]
+  }
+}

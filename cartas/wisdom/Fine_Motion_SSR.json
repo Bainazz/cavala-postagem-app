@@ -1,0 +1,69 @@
+{
+  "nome": "Fine Motion",
+  "imagem": "icon_cartas/wisdom/Fine_Motion_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Lovely Training Weather ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +5",
+          "Skill points +20",
+          "Fine Motion bond +5",
+          "\\033[1mOpção do meio\\033[0m",
+          "Speed +10",
+          "Stamina +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Ganha o buff 'Practice Perfect'",
+          "Fine Motion bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Lovely Concert Weather ♪",
+        "detalhes": [
+          "Energy +10",
+          "Skill points +10"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Lovely Racing Weather ♪",
+        "detalhes": [
+          "Energy -10",
+          "Guts +5",
+          "Wisdom +5/+10",
+          "Skill points +15",
+          "Skill 'Speed Star' +1/+3",
+          "ou",
+          "Skill 'Prepared to Pass' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Wonderful New Shoes",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Skill points +10",
+          "Fine Motion bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Stamina +5",
+          "Skill points +20",
+          "Fine Motion bond +5"
+        ]
+      },
+      {
+        "nome": "Reminiscent Clover",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill 'Corner Adept' +1",
+          "Fine Motion bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +15",
+          "Fine Motion bond +5"
+        ]
+      }
+    ]
+  }
+}

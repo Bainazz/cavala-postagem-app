@@ -1,0 +1,29 @@
+{
+  "nome": "Maruzensky",
+  "imagem": "icon_cartas/speed/Maruzensky_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "For an Adorable Younger Student",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Early Lead hint +1",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +5",
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "Drive Destination",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Speed +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Wisdom +5"
+        ]
+      }
+    ]
+  }
+}

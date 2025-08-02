@@ -1,0 +1,50 @@
+{
+  "nome": "King Halo",
+  "imagem": "icon_cartas/speed/King_Halo_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) First-Rate Coaching",
+        "detalhes": [
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) First-Rate Advice",
+        "detalhes": [
+          "Speed +15",
+          "Skill points +15"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "You May Socialize With Me!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -20",
+          "Speed +10",
+          "Power +10",
+          "Wisdom +5",
+          "King Halo bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood -1",
+          "Guts +25",
+          "King Halo bond +5"
+        ]
+      },
+      {
+        "nome": "You May Advise Me!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "Wisdom +5",
+          "King Halo bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'Homestretch Haste' +1",
+          "King Halo bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "nome": "Vodka",
+  "imagem": "icon_cartas/power/Vodka_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Gotta Follow My Heart",
+        "detalhes": [
+          "Power +5",
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "(❯❯) A Vow to the Setting Sun",
+        "detalhes": [
+          "Power +5",
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Put That on the Record, Okay?",
+        "detalhes": [
+          "Power +5",
+          "Skill points +30",
+          "Breath of Fresh Air hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "The Coolest Line",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "Vodka bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Skill points +15",
+          "Vodka bond +5"
+        ]
+      },
+      {
+        "nome": "Enemies on Main Street",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Nimble Navigator hint +1",
+          "Vodka bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Skill points +15",
+          "Vodka bond +5"
+        ]
+      }
+    ]
+  }
+}

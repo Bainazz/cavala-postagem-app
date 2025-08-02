@@ -1,0 +1,48 @@
+{
+  "nome": "Eishin Flash",
+  "imagem": "icon_cartas/speed/Eishin_Flash_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) A Good Manager",
+        "detalhes": [
+          "Maximum Energy +4",
+          "Energy +10",
+          "Mood +1"
+        ]
+      },
+      {
+        "nome": "(❯❯) A Good Friend",
+        "detalhes": [
+          "Energy +20",
+          "Skill 'Homestretch Haste' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Unforeseen Lunch",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Eishin Flash bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Guts +5",
+          "Eishin Flash bond +5"
+        ]
+      },
+      {
+        "nome": "Responding to the Unforeseen",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "Eishin Flash bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'Target in Sight' +1",
+          "Eishin Flash bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "nome": "Twin Turbo R",
+  "imagem": "icon_cartas/speed/Twin_Turbo_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Just Start Running!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood -1",
+          "Speed +20",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Power +20"
+        ]
+      },
+      {
+        "nome": "I'm All Fired Up!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Twin Turbo bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'Early Lead' +1",
+          "Twin Turbo bond +5"
+        ]
+      }
+    ]
+  }
+}

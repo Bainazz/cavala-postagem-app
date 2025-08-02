@@ -1,0 +1,56 @@
+{
+  "nome": "Sakura Bakushin O",
+  "imagem": "icon_cartas/speed/Sakura_Bakushin_O_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Bakushin's Cooking!",
+        "detalhes": [
+          "Speed +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Bakushin's Love!",
+        "detalhes": [
+          "Speed +5",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Bakushin's Huge Success!",
+        "detalhes": [
+          "Speed +10",
+          "Power +5",
+          "Turbo Sprint hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Enough to Break into a Dash!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill 'Gap Closer' +1",
+          "Sakura Bakushin O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +10",
+          "Power +5",
+          "Sakura Bakushin O bond +5"
+        ]
+      },
+      {
+        "nome": "Genius Efficiency!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +15",
+          "Sakura Bakushin O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Power +10",
+          "Sakura Bakushin O bond +5"
+        ]
+      }
+    ]
+  }
+}

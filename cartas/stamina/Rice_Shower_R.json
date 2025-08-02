@@ -1,0 +1,31 @@
+{
+  "nome": "Rice Shower R",
+  "imagem": "icon_cartas/stamina/Rice_Shower_SSR.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "A Page of Flower Shop Assistance",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +2",
+          "Rice Shower bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +10",
+          "Rice Shower bond +5"
+        ]
+      },
+      {
+        "nome": "A Page About Cloudy Weather",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Guts +5",
+          "Rice Shower bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Firm Conditions ○ hint +1",
+          "Rice Shower bond +5"
+        ]
+      }
+    ]
+  }
+}
