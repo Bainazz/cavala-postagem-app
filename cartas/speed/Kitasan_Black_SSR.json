@@ -1,0 +1,72 @@
+{
+  "nome": "Kitasan Black",
+  "imagem": "icon_cartas/speed/Kitasan_Black_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Chasing Brilliance",
+        "detalhes": [
+          "Mood +1",
+          "Speed +2",
+          "Power +2",
+          "Wisdom +2",
+          "Kitasan Black bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Paying It Forward",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Kitasan Black bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5/+10",
+          "Skill 'Straightaway Adept' +1/+3",
+          "Kitasan Black bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) We Walk Together",
+        "detalhes": [
+          "Aleatoriamente entre:",
+          "Speed +5",
+          "Power +5",
+          "Kitasan Black bond +5",
+          "Skill 'Professor of Curvature' +1",
+          "ou",
+          "Speed +10",
+          "Power +10",
+          "Kitasan Black bond +5",
+          "Skill 'Professor of Curvature' +3"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Ah, Friendship",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Power +5",
+          "Kitasan Black bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Kitasan Black bond +5"
+        ]
+      },
+      {
+        "nome": "Ah, Home Sweet Home",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Power +10",
+          "Kitasan Black bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Ganha o buff 'Practice Perfect'",
+          "Kitasan Black bond +5"
+        ]
+      }
+    ]
+  }
+}

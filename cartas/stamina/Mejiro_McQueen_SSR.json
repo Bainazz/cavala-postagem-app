@@ -1,0 +1,60 @@
+{
+  "nome": "Mejiro McQueen",
+  "imagem": "icon_cartas/stamina/Mejiro_McQueen_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Expectations Are Power",
+        "detalhes": [
+          "Stamina +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Expectations Are Affection",
+        "detalhes": [
+          "Mood +1",
+          "Stamina +10"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Meeting Expectations",
+        "detalhes": [
+          "Aleatoriamente entre:",
+          "Energy -10",
+          "Stamina +10",
+          "Cooldown hint +3",
+          "ou",
+          "Energy -10",
+          "Deep Breaths hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "To Maintain My Weight",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Stamina +15",
+          "Mejiro McQueen bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Maximum Energy +4",
+          "Stamina +5",
+          "Mejiro McQueen bond +5"
+        ]
+      },
+      {
+        "nome": "To Reach the Greatest Heights",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Guts +5",
+          "Mejiro McQueen bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Early Lead hint +1",
+          "Mejiro McQueen bond +5"
+        ]
+      }
+    ]
+  }
+}

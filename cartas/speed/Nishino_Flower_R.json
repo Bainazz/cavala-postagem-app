@@ -1,0 +1,31 @@
+{
+  "nome": "Nishino Flower R",
+  "imagem": "icon_cartas/speed/Nishino_Flower_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Warmth, Love, and Lunch",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Ganha o buff 'Charming'",
+          "Nishino Flower bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Nishino Flower bond +5"
+        ]
+      },
+      {
+        "nome": "Let's Bloom Beautifully ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +15",
+          "Nishino Flower bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Power +5",
+          "Nishino Flower bond +5"
+        ]
+      }
+    ]
+  }
+}

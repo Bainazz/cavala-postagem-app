@@ -1,0 +1,32 @@
+{
+  "nome": "Gold City R",
+  "imagem": "icon_cartas/speed/Gold_City_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "08:36 / Crap, I Overslept",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood -1",
+          "Skill points +45",
+          "Gold City bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Gold City bond +5"
+        ]
+      },
+      {
+        "nome": "13:12 / Lunch Break, Gotta Get Myself Together",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +30",
+          "Gold City bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'A Small Breather' +1",
+          "Gold City bond +5"
+        ]
+      }
+    ]
+  }
+}

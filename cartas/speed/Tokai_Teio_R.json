@@ -1,0 +1,32 @@
+{
+  "nome": "Tokai Teio R",
+  "imagem": "icon_cartas/speed/Tokai_Teio_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "My Way, Or...",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Tokai Teio bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +15",
+          "Tokai Teio bond +5"
+        ]
+      },
+      {
+        "nome": "My Weapon",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Guts +10",
+          "Tokai Teio bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill 'Pace Chaser Straightaways' +1",
+          "Tokai Teio bond +5"
+        ]
+      }
+    ]
+  }
+}

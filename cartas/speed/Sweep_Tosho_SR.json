@@ -1,0 +1,65 @@
+{
+  "nome": "Sweep Tosho",
+  "imagem": "icon_cartas/speed/Sweep_Tosho_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Some Very Green Friends",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Skill points +10",
+          "Skill 'Lucky Seven' +1",
+          "Sweep Tosho bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood -1",
+          "Skill 'Maverick' +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Premeditated Mischief",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +10",
+          "Skill points +20",
+          "Skill 'Levelheaded' +1",
+          "Sweep Tosho bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood -1",
+          "Skill 'Lone Wolf' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Miracle ☆ Escape!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Speed +5",
+          "Sweep Tosho bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +20",
+          "Sweep Tosho bond +5"
+        ]
+      },
+      {
+        "nome": "Wonderful ☆ Mistake!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre:",
+          "Energy -15",
+          "Skill points +40",
+          "ou",
+          "Energy -20",
+          "Skill points +40",
+          "Sweep Tosho bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Ganha o buff 'Charming'",
+          "Sweep Tosho bond +5"
+        ]
+      }
+    ]
+  }
+}

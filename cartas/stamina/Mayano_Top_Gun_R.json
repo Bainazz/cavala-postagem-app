@@ -1,0 +1,31 @@
+{
+  "nome": "Mayano Top Gun R",
+  "imagem": "icon_cartas/stamina/Mayano_Top_Gun_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Snack Advice for Mayano!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Guts +5",
+          "Mayano Top Gun bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +10",
+          "Mayano Top Gun bond +5"
+        ]
+      },
+      {
+        "nome": "Fashion Advice for Mayano!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Straightaway Adept hint +1",
+          "Mayano Top Gun bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +10",
+          "Mayano Top Gun bond +5"
+        ]
+      }
+    ]
+  }
+}

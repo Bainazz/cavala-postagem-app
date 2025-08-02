@@ -1,0 +1,31 @@
+{
+  "nome": "Gold Ship R",
+  "imagem": "icon_cartas/stamina/Gold_Ship_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Adventurer Gold Ship",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +15",
+          "Gold Ship bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +10",
+          "Skill points +15",
+          "Gold Ship bond +5"
+        ]
+      },
+      {
+        "nome": "Revive the Brand! Golshi's Yakisoba",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Stamina +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Hanshin Racecourse ○ hint +1",
+          "Gold Ship bond +5"
+        ]
+      }
+    ]
+  }
+}

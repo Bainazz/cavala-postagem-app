@@ -1,0 +1,32 @@
+{
+  "nome": "Tamamo Cross R",
+  "imagem": "icon_cartas/stamina/Tamamo_Cross_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Tamamo's School Tour",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "Tamamo Cross bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +5",
+          "Guts +5",
+          "Tamamo Cross bond +5"
+        ]
+      },
+      {
+        "nome": "A Battle I Can't Lose!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Calm in a Crowd hint +1",
+          "Tamamo Cross bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +5",
+          "Wisdom +5",
+          "Tamamo Cross bond +5"
+        ]
+      }
+    ]
+  }
+}
