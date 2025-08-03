@@ -786,6 +786,10 @@ class UmaApp:
                     coluna = 0
                     linha += 1
 
+            # Resetar rolagem ao topo ao trocar de tipo
+            canvas.update_idletasks()
+            canvas.yview_moveto(0)
+
         tipos = ['speed', 'wisdom', 'power', 'stamina', 'guts', 'pal']
         for tipo in tipos:
             try:
