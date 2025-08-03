@@ -183,7 +183,7 @@ class UmaApp:
         )
         self.btn_carta_avulsa.pack()
 
-        # Painel principal arredondado
+        # Painel principal arredondado (SEM mudanças)
         self.area_cor = '#505050'
         self.area_border = '#6a6a6a'
         self.area_canvas = tk.Canvas(root, bg='#606060', highlightthickness=0, bd=0)
@@ -233,6 +233,7 @@ class UmaApp:
             self.canvas_eventos.itemconfig(self.wrapper_id, width=event.width)
         self.canvas_eventos.bind("<Configure>", on_canvas_configure)
 
+        # [SCROLL MAIN FIX] binds locais + fallback no root
         def on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -246,18 +247,31 @@ class UmaApp:
             self.canvas_eventos.yview_scroll(1, "units")
             return "break"
 
-        def bind_mousewheel(_):
-            self.canvas_eventos.bind("<MouseWheel>", on_mousewheel)
-            self.canvas_eventos.bind("<Button-4>", on_button4)
-            self.canvas_eventos.bind("<Button-5>", on_button5)
+        # Bind diretamente no canvas e no wrapper (conteúdo)
+        self.canvas_eventos.bind("<MouseWheel>", on_mousewheel, add="+")
+        self.canvas_eventos.bind("<Button-4>", on_button4, add="+")
+        self.canvas_eventos.bind("<Button-5>", on_button5, add="+")
+        self.wrapper_eventos.bind("<MouseWheel>", on_mousewheel, add="+")
+        self.wrapper_eventos.bind("<Button-4>", on_button4, add="+")
+        self.wrapper_eventos.bind("<Button-5>", on_button5, add="+")
 
-        def unbind_mousewheel(_):
-            self.canvas_eventos.unbind("<MouseWheel>")
-            self.canvas_eventos.unbind("<Button-4>")
-            self.canvas_eventos.unbind("<Button-5>")
+        # Fallback no root: só rola se ponteiro estiver sobre a área do canvas
+        def fallback_root_wheel(event):
+            w = self.root.winfo_containing(event.x_root, event.y_root)
+            if w and (w == self.canvas_eventos or self.canvas_eventos.winfo_containing(event.x_root, event.y_root)):
+                if hasattr(event, "delta") and event.delta:
+                    self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
+                elif getattr(event, "num", None) == 4:
+                    self.canvas_eventos.yview_scroll(-1, "units")
+                elif getattr(event, "num", None) == 5:
+                    self.canvas_eventos.yview_scroll(1, "units")
+                return "break"
 
-        self.canvas_eventos.bind("<Enter>", bind_mousewheel)
-        self.canvas_eventos.bind("<Leave>", unbind_mousewheel)
+        self.root.bind("<MouseWheel>", fallback_root_wheel, add="+")
+        self.root.bind("<Button-4>", fallback_root_wheel, add="+")
+        self.root.bind("<Button-5>", fallback_root_wheel, add="+")
+
+        # [FIM SCROLL MAIN FIX]
 
         self.imagens_exibidas = {}
         self.evento_expandido_atual = None
@@ -346,7 +360,6 @@ class UmaApp:
             canvas.create_arc(x2 - 2 * r, y1, x2, y1 + 2 * r, start=0, extent=90, style="arc", outline=outline, width=width, tags="roundpanel")
             canvas.create_arc(x1, y1, x1 + 2 * r, y1 + 2 * r, start=90, extent=90, style="arc", outline=outline, width=width, tags="roundpanel")
             canvas.create_arc(x1, y2 - 2 * r, x1 + 2 * r, y2, start=180, extent=90, style="arc", outline=outline, width=width, tags="roundpanel")
-            canvas.create_arc(x2 - 2 * r, y2 - 2 * r, x2, y2, start=270, extent=90, style="arc", outline=outline, width=width, tags="roundpanel")
 
     def _criar_painel_arredondado(self, parent, fill='#505050', outline='#6a6a6a', radius=14, pad=8, min_height=80, fill_parent_x=True, pady=(6, 6), padx=10):
         canvas = tk.Canvas(parent, bg=parent['bg'], highlightthickness=0, bd=0)
@@ -354,6 +367,14 @@ class UmaApp:
             canvas.pack(fill='x', padx=padx, pady=pady)
         else:
             canvas.pack(padx=padx, pady=pady)
+
+        # Guardar valores no canvas para consulta
+        canvas._round_pad = pad
+        canvas._round_fill = fill
+        canvas._round_outline = outline
+        canvas._round_radius = radius
+        canvas._round_min_height = min_height
+
         frame = tk.Frame(canvas, bg=fill)
         win = canvas.create_window((0, 0), window=frame, anchor='n')
 
@@ -364,9 +385,14 @@ class UmaApp:
             canvas.coords(win, w // 2, pad)
             canvas.itemconfig(win, width=w - 2 * pad)
             self._desenhar_roundrect(canvas, 1, 1, w - 2, h - 2, radius, fill=fill, outline=outline, width=1)
+            # Expor a altura útil interna (sem bordas) para filhos
+            canvas._round_inner_height = h
 
         canvas.bind("<Configure>", redraw)
         frame.bind("<Configure>", redraw)
+        # Inicializa valor
+        canvas._round_inner_height = min_height
+
         return canvas, frame, redraw
 
     def abrir_seletor_cavala(self):
@@ -379,7 +405,7 @@ class UmaApp:
         win.configure(bg='#606060')
 
         largura = 1245
-        altura = 370
+        altura = 715
 
         self.root.update_idletasks()
         geom = self.root.winfo_geometry()
@@ -401,15 +427,16 @@ class UmaApp:
             win.destroy()
         win.protocol("WM_DELETE_WINDOW", fechar)
 
-        _, grade_frame, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=200, pady=(10, 10), padx=10)
+        # Painel com min_height=700
+        painel_canvas, grade_frame, _ = self._criar_painel_arredondado(
+            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(10, 10), padx=10
+        )
 
-        # Cabeçalho arredondado (sem comando)
         header_btn = self.criar_botao_arredondado(
             grade_frame, "Selecione sua cavala", comando=None, min_w=220, min_h=40
         )
         header_btn.pack(pady=(10, 0))
 
-        # Área rolável de cavalas
         canvas = tk.Canvas(grade_frame, bg='#505050', highlightthickness=0)
         scrollbar = ttk.Scrollbar(grade_frame, orient='vertical', command=canvas.yview)
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -425,26 +452,42 @@ class UmaApp:
         frame.bind("<Configure>", on_configure)
 
         def on_canvas_configure(event):
+            # A janela interna acompanha a largura do canvas
             canvas.itemconfig(janela_id, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # Scroll do mouse
-        def on_mousewheel_any(event):
-            widget = win.winfo_containing(event.x_root, event.y_root)
-            if widget is None:
-                return "break"
-            if widget == canvas or canvas.winfo_containing(event.x_root, event.y_root):
-                if hasattr(event, "delta") and event.delta != 0:
-                    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-                elif getattr(event, "num", None) == 4:
-                    canvas.yview_scroll(-1, "units")
-                elif getattr(event, "num", None) == 5:
-                    canvas.yview_scroll(1, "units")
-                return "break"
+        # SYNC ALTURA CANVAS com o painel externo (quase a altura toda)
+        def sync_canvas_height_cavala(event=None):
+            # altura interna do round-panel
+            h = getattr(painel_canvas, "_round_inner_height", 700)
+            # desconta header (~60-80 px) + paddings
+            altura_util = max(300, h - 100)
+            canvas.config(height=altura_util)
+        painel_canvas.bind("<Configure>", sync_canvas_height_cavala)
+        grade_frame.bind("<Configure>", sync_canvas_height_cavala)
+        win.after(0, sync_canvas_height_cavala)
 
-        win.bind_all("<MouseWheel>", on_mousewheel_any)
-        win.bind_all("<Button-4>", on_mousewheel_any)
-        win.bind_all("<Button-5>", on_mousewheel_any)
+        # Scroll do mouse (cavalas): bind global enquanto o mouse está dentro do canvas
+        def _on_mousewheel(event):
+            if hasattr(event, "delta") and event.delta:
+                canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+                return "break"
+        def _on_button4(event):
+            canvas.yview_scroll(-1, "units")
+            return "break"
+        def _on_button5(event):
+            canvas.yview_scroll(1, "units")
+            return "break"
+        def _bind_wheel(_):
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)
+            canvas.bind_all("<Button-4>", _on_button4)
+            canvas.bind_all("<Button-5>", _on_button5)
+        def _unbind_wheel(_):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
+        canvas.bind("<Enter>", _bind_wheel)
+        canvas.bind("<Leave>", _unbind_wheel)
 
         linha = 0
         coluna = 0
@@ -453,7 +496,6 @@ class UmaApp:
         for col in range(max_colunas):
             frame.grid_columnconfigure(col, weight=1)
 
-        # Atualização do botão da cavala usando o slot (sem mudar posição)
         def atualizar_botao_cavala(texto, largura=220):
             for w in self.slot_cavala.winfo_children():
                 w.destroy()
@@ -502,7 +544,7 @@ class UmaApp:
         win.configure(bg='#606060')
 
         largura = 1245
-        altura = 500
+        altura = 715
 
         self.root.update_idletasks()
         geom = self.root.winfo_geometry()
@@ -531,8 +573,10 @@ class UmaApp:
         # Painel 2: header
         _, header_frame, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10)
 
-        # Painel 3: grade
-        _, conteiner_grade, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=200, pady=(0, 10), padx=10)
+        # Painel 3: grade — 700 px
+        painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
+            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(0, 10), padx=10
+        )
 
         # Contador e confirmar
         selecionadas_atual = lambda: len(self.deck) if limite > 1 else (1 if self.carta_avulsa else 0)
@@ -555,7 +599,6 @@ class UmaApp:
         canvas = tk.Canvas(conteiner_grade, bg='#505050', highlightthickness=0)
         scrollbar = ttk.Scrollbar(conteiner_grade, orient="vertical", command=canvas.yview)
         canvas.configure(yscrollcommand=scrollbar.set)
-
         canvas.pack(side="left", fill="both", expand=True, padx=(6, 6), pady=6)
         scrollbar.pack(side="right", fill="y", pady=6)
 
@@ -570,23 +613,37 @@ class UmaApp:
             canvas.itemconfig(id_janela, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # Wheel na janela inteira, mas só rola se o ponteiro estiver sobre o canvas
-        def on_mousewheel_any(event):
-            widget = win.winfo_containing(event.x_root, event.y_root)
-            if widget is None:
-                return "break"
-            if widget == canvas or canvas.winfo_containing(event.x_root, event.y_root):
-                if hasattr(event, "delta") and event.delta != 0:
-                    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-                elif getattr(event, "num", None) == 4:
-                    canvas.yview_scroll(-1, "units")
-                elif getattr(event, "num", None) == 5:
-                    canvas.yview_scroll(1, "units")
-                return "break"
+        # SYNC ALTURA CANVAS com o painel externo (quase a altura toda)
+        def sync_canvas_height_cartas(event=None):
+            h = getattr(painel_grade_canvas, "_round_inner_height", 700)
+            # Apenas um pequeno offset para paddings internos
+            altura_util = max(300, h - 24)
+            canvas.config(height=altura_util)
+        painel_grade_canvas.bind("<Configure>", sync_canvas_height_cartas)
+        conteiner_grade.bind("<Configure>", sync_canvas_height_cartas)
+        win.after(0, sync_canvas_height_cartas)
 
-        win.bind_all("<MouseWheel>", on_mousewheel_any)
-        win.bind_all("<Button-4>", on_mousewheel_any)
-        win.bind_all("<Button-5>", on_mousewheel_any)
+        # Scroll do mouse (cartas): bind global enquanto o mouse está dentro do canvas
+        def _on_mousewheel(event):
+            if hasattr(event, "delta") and event.delta:
+                canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+                return "break"
+        def _on_button4(event):
+            canvas.yview_scroll(-1, "units")
+            return "break"
+        def _on_button5(event):
+            canvas.yview_scroll(1, "units")
+            return "break"
+        def _bind_wheel(_):
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)
+            canvas.bind_all("<Button-4>", _on_button4)
+            canvas.bind_all("<Button-5>", _on_button5)
+        def _unbind_wheel(_):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
+        canvas.bind("<Enter>", _bind_wheel)
+        canvas.bind("<Leave>", _unbind_wheel)
 
         self.botoes_cartas = {}
 
@@ -603,11 +660,9 @@ class UmaApp:
             for widget in conteudo_frame.winfo_children():
                 widget.destroy()
 
-            # Wrapper ocupa toda a largura do canvas
             inner_grade_wrap = tk.Frame(conteudo_frame, bg=conteudo_frame['bg'])
             inner_grade_wrap.pack(fill='x', pady=4)
 
-            # Grade centralizada dentro do wrapper
             inner_grade = tk.Frame(inner_grade_wrap, bg=conteudo_frame['bg'])
             inner_grade.pack(anchor='center')
 
@@ -958,7 +1013,7 @@ def criar_janela_centrada(largura, altura):
     largura_tela = root.winfo_screenwidth()
     altura_tela = root.winfo_screenheight()
     pos_x = (largura_tela // 2) - (largura // 2)
-    pos_y = (altura_tela // 2) - (altura // 2)
+    pos_y = (largura_tela // 2) - (largura // 2)  # mantém centralizado verticalmente
     root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
     root.configure(bg='#606060')
     return root
@@ -967,6 +1022,6 @@ if __name__ == "__main__":
     cartas = carregar_cartas(os.path.join(BASE, 'cartas'))
     cavalas = carregar_cavalas(os.path.join(BASE, 'cavalas'))
 
-    root = criar_janela_centrada(1245, 850)
+    root = criar_janela_centrada(1245, 715)
     app = UmaApp(root, cartas, cavalas)
     root.mainloop()
