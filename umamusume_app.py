@@ -183,7 +183,7 @@ class UmaApp:
         )
         self.btn_carta_avulsa.pack()
 
-        # Painel principal arredondado (SEM mudanças)
+        # Painel principal arredondado
         self.area_cor = '#505050'
         self.area_border = '#6a6a6a'
         self.area_canvas = tk.Canvas(root, bg='#606060', highlightthickness=0, bd=0)
@@ -204,6 +204,57 @@ class UmaApp:
 
         self.area_canvas.bind("<Configure>", _redesenhar_area)
         self.frame_exibicao.bind("<Configure>", _redesenhar_area)
+
+        # [SEARCH] Barra de pesquisa (abaixo do botão Reset)
+        # Container horizontal com Entry e botão "X" (limpar)
+        self.search_frame = tk.Frame(root, bg='#606060')
+        self.search_frame.pack(fill='x', padx=10, pady=(0, 6))
+
+        self.search_var = tk.StringVar()
+
+        # [SEARCH CENTER] spacers para centralizar
+        left_spacer = tk.Frame(self.search_frame, bg='#606060')
+        left_spacer.pack(side='left', expand=True)
+
+        self.search_entry = tk.Entry(self.search_frame, textvariable=self.search_var, fg='#ffffff', bg='#404040',
+                                     insertbackground='white', relief='flat', width=30)  # ~30 chars
+        self.search_entry.pack(side='left', padx=(0, 6), ipady=4)
+
+        self.btn_clear_search = tk.Button(self.search_frame, text="X", width=6,
+                                          command=lambda: self._limpar_pesquisa(),
+                                          fg='white', bg='#1a1a1a', activebackground='#333333',
+                                          activeforeground='white', bd=0)
+        self.btn_clear_search.pack(side='left')
+
+        right_spacer = tk.Frame(self.search_frame, bg='#606060')
+        right_spacer.pack(side='left', expand=True)
+        # [FIM SEARCH CENTER]
+
+        # Placeholder simples
+        self._search_placeholder = "Pesquisar eventos…"
+        self._search_active = False
+        def _apply_placeholder():
+            if not self.search_var.get():
+                self._search_active = False
+                self.search_entry.config(fg='#bfbfbf')
+                self.search_var.set(self._search_placeholder)
+        def _remove_placeholder(_=None):
+            if not self._search_active:
+                self._search_active = True
+                self.search_entry.config(fg='#ffffff')
+                self.search_var.set("")
+        self.search_entry.bind("<FocusIn>", _remove_placeholder)
+        self.search_entry.bind("<FocusOut>", lambda e: _apply_placeholder())
+
+        # Aplica filtro enquanto digita
+        def _on_type(*_):
+            if not self._search_active:
+                return
+            self._aplicar_filtro_eventos()
+        self.search_var.trace_add("write", lambda *args: _on_type())
+
+        _apply_placeholder()
+        # [FIM SEARCH]
 
         # Botão reset
         self.btn_reset = self.criar_botao_arredondado(
@@ -233,7 +284,7 @@ class UmaApp:
             self.canvas_eventos.itemconfig(self.wrapper_id, width=event.width)
         self.canvas_eventos.bind("<Configure>", on_canvas_configure)
 
-        # [SCROLL MAIN FIX] binds locais + fallback no root
+        # Scroll principal: binds locais + fallback no root
         def on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -247,7 +298,6 @@ class UmaApp:
             self.canvas_eventos.yview_scroll(1, "units")
             return "break"
 
-        # Bind diretamente no canvas e no wrapper (conteúdo)
         self.canvas_eventos.bind("<MouseWheel>", on_mousewheel, add="+")
         self.canvas_eventos.bind("<Button-4>", on_button4, add="+")
         self.canvas_eventos.bind("<Button-5>", on_button5, add="+")
@@ -255,7 +305,6 @@ class UmaApp:
         self.wrapper_eventos.bind("<Button-4>", on_button4, add="+")
         self.wrapper_eventos.bind("<Button-5>", on_button5, add="+")
 
-        # Fallback no root: só rola se ponteiro estiver sobre a área do canvas
         def fallback_root_wheel(event):
             w = self.root.winfo_containing(event.x_root, event.y_root)
             if w and (w == self.canvas_eventos or self.canvas_eventos.winfo_containing(event.x_root, event.y_root)):
@@ -270,8 +319,6 @@ class UmaApp:
         self.root.bind("<MouseWheel>", fallback_root_wheel, add="+")
         self.root.bind("<Button-4>", fallback_root_wheel, add="+")
         self.root.bind("<Button-5>", fallback_root_wheel, add="+")
-
-        # [FIM SCROLL MAIN FIX]
 
         self.imagens_exibidas = {}
         self.evento_expandido_atual = None
@@ -967,9 +1014,15 @@ class UmaApp:
         dados = self.cv.get(self.cavala_selecionada, {})
         eventos_por_cat = dados.get("eventos", {})
 
+        # [SEARCH] aplica filtro
+        filtro = self._texto_filtro()
         for cat, eventos in eventos_por_cat.items():
+            # Filtra eventos pelo título
+            eventos_filtrados = [ev for ev in eventos if self._combina_filtro(ev.get('nome', ''), filtro)]
+            if not eventos_filtrados:
+                continue
             tk.Label(self.frame_eventos, text=f"-- {cat} --", font=('Arial', 10, 'bold'), fg='white', bg='#606060').pack(fill='x', pady=(10, 2))
-            for ev in eventos:
+            for ev in eventos_filtrados:
                 titulo = ev.get('nome', 'Evento')
                 detalhes = ev.get('detalhes', '')
                 ev_expand = EventoExpandivel(self.frame_eventos, titulo, detalhes)
@@ -980,13 +1033,55 @@ class UmaApp:
         if not dados_carta:
             return
 
+        # [SEARCH] aplica filtro
+        filtro = self._texto_filtro()
         for cat, eventos in dados_carta.get("eventos", {}).items():
+            eventos_filtrados = [ev for ev in eventos if self._combina_filtro(ev.get('nome', ''), filtro)]
+            if not eventos_filtrados:
+                continue
             tk.Label(self.frame_eventos, text=f"-- {cat} --", font=('Arial', 10, 'bold'), fg='white', bg='#606060').pack(fill='x', pady=(6, 2))
-            for ev in eventos:
+            for ev in eventos_filtrados:
                 titulo = ev.get('nome', 'Evento')
                 detalhes = ev.get('detalhes', '')
                 ev_expand = EventoExpandivel(self.frame_eventos, titulo, detalhes)
                 ev_expand.pack(fill='x', padx=10, pady=1)
+        # [FIM SEARCH]
+
+    # [SEARCH] utilidades de filtro
+    def _texto_filtro(self):
+        # Retorna o texto do filtro em minúsculas, ignorando placeholder
+        txt = self.search_var.get().strip()
+        if not getattr(self, "_search_active", False) or txt == self._search_placeholder:
+            return ""
+        return txt.lower()
+
+    def _combina_filtro(self, titulo, filtro):
+        if not filtro:
+            return True
+        return str(titulo).lower().startswith(filtro)
+
+    def _aplicar_filtro_eventos(self):
+        # Re-renderiza os eventos do item selecionado aplicando o filtro atual
+        if self.selecionado is None:
+            # nada selecionado -> nada a mostrar
+            for w in self.frame_eventos.winfo_children():
+                w.destroy()
+            return
+        if self.selecionado == 'cavala':
+            self.mostrar_eventos('cavala')
+        else:
+            self.mostrar_eventos(self.selecionado)
+
+    def _limpar_pesquisa(self):
+        self.search_entry.focus_set()
+        self.search_var.set("")
+        # força placeholder
+        self._search_active = False
+        self.search_entry.config(fg='#bfbfbf')
+        self.search_var.set(self._search_placeholder)
+        # re-renderiza tudo
+        self._aplicar_filtro_eventos()
+    # [FIM SEARCH]
 
     def resetar_escolhas(self):
         self.deck = []
@@ -1013,7 +1108,7 @@ def criar_janela_centrada(largura, altura):
     largura_tela = root.winfo_screenwidth()
     altura_tela = root.winfo_screenheight()
     pos_x = (largura_tela // 2) - (largura // 2)
-    pos_y = (largura_tela // 2) - (largura // 2)  # mantém centralizado verticalmente
+    pos_y = (altura_tela // 2) - (altura // 2)
     root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
     root.configure(bg='#606060')
     return root
