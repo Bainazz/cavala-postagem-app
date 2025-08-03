@@ -205,19 +205,18 @@ class UmaApp:
         self.area_canvas.bind("<Configure>", _redesenhar_area)
         self.frame_exibicao.bind("<Configure>", _redesenhar_area)
 
-        # [SEARCH] Barra de pesquisa (abaixo do botão Reset)
-        # Container horizontal com Entry e botão "X" (limpar)
+        # [SEARCH] Barra de pesquisa
         self.search_frame = tk.Frame(root, bg='#606060')
         self.search_frame.pack(fill='x', padx=10, pady=(0, 6))
 
         self.search_var = tk.StringVar()
 
-        # [SEARCH CENTER] spacers para centralizar
+        # centralização com spacers
         left_spacer = tk.Frame(self.search_frame, bg='#606060')
         left_spacer.pack(side='left', expand=True)
 
         self.search_entry = tk.Entry(self.search_frame, textvariable=self.search_var, fg='#ffffff', bg='#404040',
-                                     insertbackground='white', relief='flat', width=30)  # ~30 chars
+                                     insertbackground='white', relief='flat', width=30)
         self.search_entry.pack(side='left', padx=(0, 6), ipady=4)
 
         self.btn_clear_search = tk.Button(self.search_frame, text="X", width=6,
@@ -437,7 +436,6 @@ class UmaApp:
 
         canvas.bind("<Configure>", redraw)
         frame.bind("<Configure>", redraw)
-        # Inicializa valor
         canvas._round_inner_height = min_height
 
         return canvas, frame, redraw
@@ -474,7 +472,6 @@ class UmaApp:
             win.destroy()
         win.protocol("WM_DELETE_WINDOW", fechar)
 
-        # Painel com min_height=700
         painel_canvas, grade_frame, _ = self._criar_painel_arredondado(
             win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(10, 10), padx=10
         )
@@ -499,22 +496,17 @@ class UmaApp:
         frame.bind("<Configure>", on_configure)
 
         def on_canvas_configure(event):
-            # A janela interna acompanha a largura do canvas
             canvas.itemconfig(janela_id, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # SYNC ALTURA CANVAS com o painel externo (quase a altura toda)
         def sync_canvas_height_cavala(event=None):
-            # altura interna do round-panel
             h = getattr(painel_canvas, "_round_inner_height", 700)
-            # desconta header (~60-80 px) + paddings
             altura_util = max(300, h - 100)
             canvas.config(height=altura_util)
         painel_canvas.bind("<Configure>", sync_canvas_height_cavala)
         grade_frame.bind("<Configure>", sync_canvas_height_cavala)
         win.after(0, sync_canvas_height_cavala)
 
-        # Scroll do mouse (cavalas): bind global enquanto o mouse está dentro do canvas
         def _on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -590,10 +582,12 @@ class UmaApp:
         win.title("Selecione suas Cartas")
         win.configure(bg='#606060')
 
-        largura = 1245
-        altura = 715
-
+        # Altura adaptativa com base na tela (largura mantida)
         self.root.update_idletasks()
+        scr_h = self.root.winfo_screenheight()
+        largura = 1245
+        altura = min(715, scr_h - 120)  # margem para não estourar a tela
+
         geom = self.root.winfo_geometry()
         parts = geom.split('+')
         pos = f"+{parts[1]}+{parts[2]}" if len(parts) >= 3 else ""
@@ -613,16 +607,20 @@ class UmaApp:
         win.protocol("WM_DELETE_WINDOW", fechar)
 
         # Painel 1: tipo
-        _, tipo_frame, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(10, 6), padx=10)
+        _, tipo_frame, _ = self._criar_painel_arredondado(
+            win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(10, 6), padx=10
+        )
         inner_tipos = tk.Frame(tipo_frame, bg=tipo_frame['bg'])
         inner_tipos.pack(anchor='center', pady=4)
 
         # Painel 2: header
-        _, header_frame, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10)
+        _, header_frame, _ = self._criar_painel_arredondado(
+            win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10
+        )
 
-        # Painel 3: grade — 700 px
+        # Painel 3: grade — altura flexível (min menor para caber)
         painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
-            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(0, 10), padx=10
+            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=480, pady=(0, 10), padx=10
         )
 
         # Contador e confirmar
@@ -639,7 +637,9 @@ class UmaApp:
                                   fg='white', bg=header_frame['bg'])
         label_contador.grid(row=0, column=1, padx=8, pady=(6, 4))
 
-        btn_confirm = self.criar_botao_arredondado(header_frame, "Confirmar seleção", comando=lambda: (ao_confirmar(), fechar()), min_w=200, min_h=40)
+        btn_confirm = self.criar_botao_arredondado(
+            header_frame, "Confirmar seleção", comando=lambda: (ao_confirmar(), fechar()), min_w=200, min_h=40
+        )
         btn_confirm.grid(row=1, column=1, padx=8, pady=(0, 8))
 
         # Área rolável de cartas
@@ -660,14 +660,14 @@ class UmaApp:
             canvas.itemconfig(id_janela, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # SYNC ALTURA CANVAS com o painel externo (quase a altura toda)
+        # SYNC ALTURA CANVAS com o painel externo
         def sync_canvas_height_cartas(event=None):
-            h = getattr(painel_grade_canvas, "_round_inner_height", 700)
-            # Apenas um pequeno offset para paddings internos
-            altura_util = max(300, h - 24)
+            h = getattr(painel_grade_canvas, "_round_inner_height", 400)
+            altura_util = max(200, h - 24)  # pequeno offset para paddings internos
             canvas.config(height=altura_util)
         painel_grade_canvas.bind("<Configure>", sync_canvas_height_cartas)
         conteiner_grade.bind("<Configure>", sync_canvas_height_cartas)
+        win.bind("<Configure>", sync_canvas_height_cartas)
         win.after(0, sync_canvas_height_cartas)
 
         # Scroll do mouse (cartas): bind global enquanto o mouse está dentro do canvas
@@ -1014,10 +1014,8 @@ class UmaApp:
         dados = self.cv.get(self.cavala_selecionada, {})
         eventos_por_cat = dados.get("eventos", {})
 
-        # [SEARCH] aplica filtro
         filtro = self._texto_filtro()
         for cat, eventos in eventos_por_cat.items():
-            # Filtra eventos pelo título
             eventos_filtrados = [ev for ev in eventos if self._combina_filtro(ev.get('nome', ''), filtro)]
             if not eventos_filtrados:
                 continue
@@ -1033,7 +1031,6 @@ class UmaApp:
         if not dados_carta:
             return
 
-        # [SEARCH] aplica filtro
         filtro = self._texto_filtro()
         for cat, eventos in dados_carta.get("eventos", {}).items():
             eventos_filtrados = [ev for ev in eventos if self._combina_filtro(ev.get('nome', ''), filtro)]
@@ -1045,11 +1042,9 @@ class UmaApp:
                 detalhes = ev.get('detalhes', '')
                 ev_expand = EventoExpandivel(self.frame_eventos, titulo, detalhes)
                 ev_expand.pack(fill='x', padx=10, pady=1)
-        # [FIM SEARCH]
 
     # [SEARCH] utilidades de filtro
     def _texto_filtro(self):
-        # Retorna o texto do filtro em minúsculas, ignorando placeholder
         txt = self.search_var.get().strip()
         if not getattr(self, "_search_active", False) or txt == self._search_placeholder:
             return ""
@@ -1061,9 +1056,7 @@ class UmaApp:
         return str(titulo).lower().startswith(filtro)
 
     def _aplicar_filtro_eventos(self):
-        # Re-renderiza os eventos do item selecionado aplicando o filtro atual
         if self.selecionado is None:
-            # nada selecionado -> nada a mostrar
             for w in self.frame_eventos.winfo_children():
                 w.destroy()
             return
@@ -1075,13 +1068,10 @@ class UmaApp:
     def _limpar_pesquisa(self):
         self.search_entry.focus_set()
         self.search_var.set("")
-        # força placeholder
         self._search_active = False
         self.search_entry.config(fg='#bfbfbf')
         self.search_var.set(self._search_placeholder)
-        # re-renderiza tudo
         self._aplicar_filtro_eventos()
-    # [FIM SEARCH]
 
     def resetar_escolhas(self):
         self.deck = []
@@ -1095,7 +1085,6 @@ class UmaApp:
         self.selecionado = None
         self.cavala_selecionada = None
 
-        # Recria apenas o conteúdo do slot, posição preservada
         for w in self.slot_cavala.winfo_children():
             w.destroy()
         self.btn_cavala = self.criar_botao_arredondado(
