@@ -97,7 +97,6 @@ class EventoExpandivel(tk.Frame):
             re.compile(r"\\033\[1m(.*?)\\033\[0m", re.DOTALL),
         ]
 
-        pos = 0
         applied = False
         for pattern in patterns:
             pos = 0
@@ -151,32 +150,38 @@ class UmaApp:
         root.title("UmaMusume Companion")
         root.configure(bg='#606060')
 
-        btn_style = {
+        # Estilo base de cores
+        self.btn_style = {
             'fg': 'white', 'bg': '#1a1a1a',
-            'activebackground': '#333333', 'activeforeground': 'white', 'bd': 0
+            'activebackground': '#333333', 'activeforeground': 'white'
         }
 
-        # Barra superior
-        top_bar = tk.Frame(root, bg='#606060')
-        top_bar.pack(pady=8)
+        # Barra superior com slots
+        self.top_bar = tk.Frame(root, bg='#606060')
+        self.top_bar.pack(pady=8)
 
-        self.btn_cavala = tk.Button(
-            top_bar, text="Escolha sua cavala", command=self.abrir_seletor_cavala,
-            **btn_style, font=("Arial", 11, "bold"), padx=14, pady=10
-        )
-        self.btn_cavala.pack(side='left', padx=6)
+        self.slot_cavala = tk.Frame(self.top_bar, bg='#606060')
+        self.slot_cavala.pack(side='left', padx=6)
+        self.slot_cartas = tk.Frame(self.top_bar, bg='#606060')
+        self.slot_cartas.pack(side='left', padx=6)
+        self.slot_avulsa = tk.Frame(self.top_bar, bg='#606060')
+        self.slot_avulsa.pack(side='left', padx=6)
 
-        self.btn_cartas = tk.Button(
-            top_bar, text="Escolha suas cartas", command=self.abrir_seletor_cartas,
-            **btn_style, font=("Arial", 11, "bold"), padx=14, pady=10
+        # Botões iniciais
+        self.btn_cavala = self.criar_botao_arredondado(
+            self.slot_cavala, "Escolha sua cavala", comando=self.abrir_seletor_cavala, min_w=180, min_h=40
         )
-        self.btn_cartas.pack(side='left', padx=6)
+        self.btn_cavala.pack()
 
-        self.btn_carta_avulsa = tk.Button(
-            top_bar, text="Carta avulsa", command=self.abrir_seletor_carta_avulsa,
-            **btn_style, font=("Arial", 11, "bold"), padx=14, pady=10
+        self.btn_cartas = self.criar_botao_arredondado(
+            self.slot_cartas, "Escolha suas cartas", comando=self.abrir_seletor_cartas, min_w=190, min_h=40
         )
-        self.btn_carta_avulsa.pack(side='left', padx=6)
+        self.btn_cartas.pack()
+
+        self.btn_carta_avulsa = self.criar_botao_arredondado(
+            self.slot_avulsa, "Carta avulsa", comando=self.abrir_seletor_carta_avulsa, min_w=140, min_h=40
+        )
+        self.btn_carta_avulsa.pack()
 
         # Painel principal arredondado
         self.area_cor = '#505050'
@@ -201,9 +206,8 @@ class UmaApp:
         self.frame_exibicao.bind("<Configure>", _redesenhar_area)
 
         # Botão reset
-        self.btn_reset = tk.Button(
-            root, text="Resetar escolhas", command=self.resetar_escolhas,
-            **btn_style, font=("Arial", 11, "bold"), padx=14, pady=10
+        self.btn_reset = self.criar_botao_arredondado(
+            root, "Resetar escolhas", comando=self.resetar_escolhas, min_w=160, min_h=40
         )
         self.btn_reset.pack(pady=(2, 8))
 
@@ -230,9 +234,9 @@ class UmaApp:
         self.canvas_eventos.bind("<Configure>", on_canvas_configure)
 
         def on_mousewheel(event):
-            if event.delta:
+            if hasattr(event, "delta") and event.delta:
                 self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
-            return "break"
+                return "break"
 
         def on_button4(event):
             self.canvas_eventos.yview_scroll(-1, "units")
@@ -243,14 +247,14 @@ class UmaApp:
             return "break"
 
         def bind_mousewheel(_):
-            self.canvas_eventos.bind_all("<MouseWheel>", on_mousewheel)
-            self.canvas_eventos.bind_all("<Button-4>", on_button4)
-            self.canvas_eventos.bind_all("<Button-5>", on_button5)
+            self.canvas_eventos.bind("<MouseWheel>", on_mousewheel)
+            self.canvas_eventos.bind("<Button-4>", on_button4)
+            self.canvas_eventos.bind("<Button-5>", on_button5)
 
         def unbind_mousewheel(_):
-            self.canvas_eventos.unbind_all("<MouseWheel>")
-            self.canvas_eventos.unbind_all("<Button-4>")
-            self.canvas_eventos.unbind_all("<Button-5>")
+            self.canvas_eventos.unbind("<MouseWheel>")
+            self.canvas_eventos.unbind("<Button-4>")
+            self.canvas_eventos.unbind("<Button-5>")
 
         self.canvas_eventos.bind("<Enter>", bind_mousewheel)
         self.canvas_eventos.bind("<Leave>", unbind_mousewheel)
@@ -268,6 +272,62 @@ class UmaApp:
             messagebox.showwarning("Aviso", "Nenhuma cavala encontrada em 'cavalas/'.")
         if not self.c:
             messagebox.showwarning("Aviso", "Nenhuma carta encontrada em 'cartas/'.")
+
+    # Botão arredondado minimalista (Canvas)
+    def criar_botao_arredondado(self, parent, texto, comando=None, min_w=140, min_h=40, pad_x=16, pad_y=10, radius=14):
+        c = tk.Canvas(parent, bg=parent['bg'], highlightthickness=0, bd=0, cursor="")
+        bg_btn = self.btn_style['bg']
+        active_bg = self.btn_style['activebackground']
+        fg = self.btn_style['fg']
+
+        temp = tk.Label(c, text=texto, font=("Arial", 11, "bold"))
+        temp.update_idletasks()
+        w = max(min_w, temp.winfo_reqwidth() + 2 * pad_x)
+        h = max(min_h, temp.winfo_reqheight() + 2 * pad_y)
+        temp.destroy()
+
+        c.config(width=w, height=h)
+
+        def draw(cor_bg):
+            c.delete("all")
+            x1, y1, x2, y2 = 1, 1, w - 2, h - 2
+            r = max(6, min(radius, (x2 - x1) // 2, (y2 - y1) // 2))
+            c.create_rectangle(x1 + r, y1, x2 - r, y2, fill=cor_bg, outline="")
+            c.create_rectangle(x1, y1 + r, x2, y2 - r, fill=cor_bg, outline="")
+            c.create_arc(x2 - 2 * r, y1, x2, y1 + 2 * r, start=0, extent=90, style="pieslice", fill=cor_bg, outline="")
+            c.create_arc(x1, y1, x1 + 2 * r, y1 + 2 * r, start=90, extent=90, style="pieslice", fill=cor_bg, outline="")
+            c.create_arc(x1, y2 - 2 * r, x1 + 2 * r, y2, start=180, extent=90, style="pieslice", fill=cor_bg, outline="")
+            c.create_arc(x2 - 2 * r, y2 - 2 * r, x2, y2, start=270, extent=90, style="pieslice", fill=cor_bg, outline="")
+            c.create_line(x1 + r, y1, x2 - r, y1, fill="#333333")
+            c.create_line(x2, y1 + r, x2, y2 - r, fill="#333333")
+            c.create_line(x1 + r, y2, x2 - r, y2, fill="#333333")
+            c.create_line(x1, y1 + r, x1, y2 - r, fill="#333333")
+            c.create_text(w // 2, h // 2, text=texto, fill=fg, font=("Arial", 11, "bold"))
+
+        draw(bg_btn)
+
+        c._texto = texto
+
+        if comando:
+            def on_press(_):
+                draw(active_bg)
+
+            def on_release(_):
+                draw(bg_btn)
+                comando()
+
+            def on_enter(_):
+                c.config(cursor="hand2")
+
+            def on_leave(_):
+                c.config(cursor="")
+
+            c.bind("<ButtonPress-1>", on_press)
+            c.bind("<ButtonRelease-1>", on_release)
+            c.bind("<Enter>", on_enter)
+            c.bind("<Leave>", on_leave)
+
+        return c
 
     def _desenhar_roundrect(self, canvas, x1, y1, x2, y2, r, fill="", outline="", width=1):
         canvas.delete("roundpanel")
@@ -343,17 +403,11 @@ class UmaApp:
 
         _, grade_frame, _ = self._criar_painel_arredondado(win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=200, pady=(10, 10), padx=10)
 
-        # Cabeçalho "botão falso" centralizado
-        header_label = tk.Label(
-            grade_frame,
-            text="Selecione sua cavala",
-            fg='white', bg='#1a1a1a',
-            font=("Arial", 11, "bold"),
-            padx=14, pady=8
+        # Cabeçalho arredondado (sem comando)
+        header_btn = self.criar_botao_arredondado(
+            grade_frame, "Selecione sua cavala", comando=None, min_w=220, min_h=40
         )
-        header_label.pack(pady=(10, 0))
-        # Borda sutil para parecer botão
-        header_label.configure(highlightthickness=1, highlightbackground='#333333')
+        header_btn.pack(pady=(10, 0))
 
         # Área rolável de cavalas
         canvas = tk.Canvas(grade_frame, bg='#505050', highlightthickness=0)
@@ -374,7 +428,7 @@ class UmaApp:
             canvas.itemconfig(janela_id, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # Scroll do mouse funcionando sem precisar clicar
+        # Scroll do mouse
         def on_mousewheel_any(event):
             widget = win.winfo_containing(event.x_root, event.y_root)
             if widget is None:
@@ -399,6 +453,15 @@ class UmaApp:
         for col in range(max_colunas):
             frame.grid_columnconfigure(col, weight=1)
 
+        # Atualização do botão da cavala usando o slot (sem mudar posição)
+        def atualizar_botao_cavala(texto, largura=220):
+            for w in self.slot_cavala.winfo_children():
+                w.destroy()
+            self.btn_cavala = self.criar_botao_arredondado(
+                self.slot_cavala, texto, comando=self.abrir_seletor_cavala, min_w=largura, min_h=40
+            )
+            self.btn_cavala.pack()
+
         for nome, dados in self.cv.items():
             caminho_img = os.path.join(BASE, dados.get("imagem", ""))
             try:
@@ -412,7 +475,7 @@ class UmaApp:
 
             def selecionar_cavala(n=nome):
                 self.cavala_selecionada = n
-                self.btn_cavala.config(text=f"Cavala selecionada: {n}")
+                atualizar_botao_cavala(f"Cavala selecionada: {n}", largura=220)
                 self.mostrar()
                 fechar()
 
@@ -485,12 +548,7 @@ class UmaApp:
                                   fg='white', bg=header_frame['bg'])
         label_contador.grid(row=0, column=1, padx=8, pady=(6, 4))
 
-        btn_confirm = tk.Button(
-            header_frame, text="Confirmar seleção",
-            command=lambda: (ao_confirmar(), fechar()),
-            fg='white', bg='#1a1a1a', activebackground='#333333',
-            activeforeground='white', bd=0
-        )
+        btn_confirm = self.criar_botao_arredondado(header_frame, "Confirmar seleção", comando=lambda: (ao_confirmar(), fechar()), min_w=200, min_h=40)
         btn_confirm.grid(row=1, column=1, padx=8, pady=(0, 8))
 
         # Área rolável de cartas
@@ -502,7 +560,6 @@ class UmaApp:
         scrollbar.pack(side="right", fill="y", pady=6)
 
         conteudo_frame = tk.Frame(canvas, bg='#505050')
-        # Janela âncora no canto e largura do conteúdo acompanha o canvas
         id_janela = canvas.create_window((0, 0), window=conteudo_frame, anchor='nw')
 
         def on_configure(event):
@@ -887,7 +944,14 @@ class UmaApp:
         self.img_refs.clear()
         self.selecionado = None
         self.cavala_selecionada = None
-        self.btn_cavala.config(text="Escolha sua cavala")
+
+        # Recria apenas o conteúdo do slot, posição preservada
+        for w in self.slot_cavala.winfo_children():
+            w.destroy()
+        self.btn_cavala = self.criar_botao_arredondado(
+            self.slot_cavala, "Escolha sua cavala", comando=self.abrir_seletor_cavala, min_w=180, min_h=40
+        )
+        self.btn_cavala.pack()
 
 def criar_janela_centrada(largura, altura):
     root = tk.Tk()
