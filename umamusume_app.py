@@ -426,7 +426,7 @@ class UmaApp:
         win.focus_force()
 
         painel_canvas, grade_frame, _ = self._criar_painel_arredondado(
-            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(10, 10), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=670, pady=(10, 10), padx=10
         )
 
         header_btn = self.criar_botao_arredondado(
@@ -576,7 +576,7 @@ class UmaApp:
         )
 
         painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
-            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=480, pady=(0, 10), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=450, pady=(0, 10), padx=10
         )
 
         contador_var = tk.StringVar()
@@ -828,43 +828,40 @@ class UmaApp:
         self.search_entry.bind("<FocusOut>", lambda e: self._on_search_focus_out())
         self.search_entry.focus_set()
 
-        if not self.cavala_selecionada:
-            messagebox.showwarning("Aviso", "Selecione uma cavala primeiro!")
-            return
+        # Removido: bloqueio por não ter cavala selecionada
 
-        dados_cavala = self.cv.get(self.cavala_selecionada)
-        if not dados_cavala:
-            messagebox.showerror("Erro", f"Dados da cavala '{self.cavala_selecionada}' não encontrados.")
-            return
+        # Renderizar cavala se existir uma selecionada
+        if self.cavala_selecionada:
+            dados_cavala = self.cv.get(self.cavala_selecionada)
+            if dados_cavala:
+                caminho_img_cavala = os.path.join(BASE, dados_cavala.get("imagem", ""))
+                try:
+                    pil_img_cavala = Image.open(caminho_img_cavala).convert("RGBA")
+                    pil_img_cavala_res = pil_img_cavala.resize((128, 128), Image.Resampling.LANCZOS)
+                    img_colorida = ImageTk.PhotoImage(pil_img_cavala_res)
+                    img_cinza = ImageTk.PhotoImage(ImageOps.grayscale(pil_img_cavala_res.convert("RGB")))
+                except Exception:
+                    img_colorida = img_cinza = None
 
-        caminho_img_cavala = os.path.join(BASE, dados_cavala.get("imagem", ""))
-        try:
-            pil_img_cavala = Image.open(caminho_img_cavala).convert("RGBA")
-            pil_img_cavala_res = pil_img_cavala.resize((128, 128), Image.Resampling.LANCZOS)
-            img_colorida = ImageTk.PhotoImage(pil_img_cavala_res)
-            img_cinza = ImageTk.PhotoImage(ImageOps.grayscale(pil_img_cavala_res.convert("RGB")))
-        except Exception as e:
-            messagebox.showerror("Erro", f"Não foi possível carregar a imagem da cavala: {e}")
-            return
+                if img_colorida and img_cinza:
+                    frame_cavala = tk.Frame(self.frame_exibicao, bg=self.area_cor)
+                    frame_cavala.pack(side='left', padx=10)
 
-        frame_cavala = tk.Frame(self.frame_exibicao, bg=self.area_cor)
-        frame_cavala.pack(side='left', padx=10)
+                    def on_click_cavala():
+                        self.atualizar_selecao('cavala')
 
-        def on_click_cavala():
-            self.atualizar_selecao('cavala')
+                    btn_img = tk.Button(
+                        frame_cavala, image=img_cinza, borderwidth=0, command=on_click_cavala,
+                        bg=self.area_cor, activebackground=self.area_cor, highlightthickness=0
+                    )
+                    btn_img.image_colorida = img_colorida
+                    btn_img.image_cinza = img_cinza
+                    btn_img.pack()
+                    tk.Label(frame_cavala, text=self.cavala_selecionada, font=("Arial", 12, "bold"), fg='white', bg=self.area_cor).pack()
 
-        btn_img = tk.Button(
-            frame_cavala, image=img_cinza, borderwidth=0, command=on_click_cavala,
-            bg=self.area_cor, activebackground=self.area_cor, highlightthickness=0
-        )
-        btn_img.image_colorida = img_colorida
-        btn_img.image_cinza = img_cinza
-        btn_img.pack()
-        tk.Label(frame_cavala, text=self.cavala_selecionada, font=("Arial", 12, "bold"), fg='white', bg=self.area_cor).pack()
-
-        self.imagens_exibidas['cavala'] = btn_img
-        self.img_refs['cavala_colorida'] = img_colorida
-        self.img_refs['cavala_cinza'] = img_cinza
+                    self.imagens_exibidas['cavala'] = btn_img
+                    self.img_refs['cavala_colorida'] = img_colorida
+                    self.img_refs['cavala_cinza'] = img_cinza
 
         frame_cartas = tk.Frame(self.frame_exibicao, bg=self.area_cor)
         frame_cartas.pack(side='left', padx=20)
@@ -1064,10 +1061,9 @@ class UmaApp:
     def _limpar_pesquisa(self):
         self.search_entry.configure(state='normal')
         self.search_entry.focus_set()
+        self._search_active = True
         self.search_var.set("")
-        self._search_active = False
-        self.search_entry.config(fg='#bfbfbf')
-        self.search_var.set(self._search_placeholder)
+        self.search_entry.config(fg='#ffffff')
         self._aplicar_filtro_eventos()
 
     def resetar_escolhas(self):
