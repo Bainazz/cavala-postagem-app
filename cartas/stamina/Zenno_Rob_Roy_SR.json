@@ -1,0 +1,56 @@
+{
+  "nome": "Zenno Rob Roy SR",
+  "imagem": "icon_cartas/stamina/Zenno_Rob_Roy_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) The Bookworm and the Magical Girl",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Wisdom +5",
+          "Zenno Rob Roy bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Power +10",
+          "Zenno Rob Roy bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Someday, I'll Be the Main Character",
+        "detalhes": [
+          "Stamina +10",
+          "Wisdom +10",
+          "Sharp Gaze hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Book-lover Quirks",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Wisdom +5",
+          "Zenno Rob Roy bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Power +5",
+          "Zenno Rob Roy bond +5"
+        ]
+      },
+      {
+        "nome": "A Tale Entrusted",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Wisdom +10",
+          "Zenno Rob Roy bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Medium Straightaways ○ hint +1",
+          "Zenno Rob Roy bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "nome": "Seiun Sky R",
+  "imagem": "icon_cartas/stamina/Seiun_Sky_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Recruiting Cat Catchers",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Seiun Sky bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +15",
+          "Stamina +5",
+          "Seiun Sky bond +5"
+        ]
+      },
+      {
+        "nome": "Recruiting Advisors",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +15",
+          "Seiun Sky bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Keeping the Lead hint +1",
+          "Seiun Sky bond +5"
+        ]
+      }
+    ]
+  }
+}

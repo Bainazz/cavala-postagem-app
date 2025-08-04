@@ -1,0 +1,33 @@
+{
+  "nome": "Zenno Rob Roy R",
+  "imagem": "icon_cartas/stamina/Zenno_Rob_Roy_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Book-lover Quirks",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Wisdom +5",
+          "Zenno Rob Roy bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Power +5",
+          "Zenno Rob Roy bond +5"
+        ]
+      },
+      {
+        "nome": "A Tale Entrusted",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Wisdom +10",
+          "Zenno Rob Roy bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Medium Straightaways ○ hint +1",
+          "Zenno Rob Roy bond +5"
+        ]
+      }
+    ]
+  }
+}
