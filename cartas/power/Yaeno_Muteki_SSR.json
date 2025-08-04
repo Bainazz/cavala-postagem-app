@@ -1,0 +1,62 @@
+{
+  "nome": "Yaeno Muteki",
+  "imagem": "icon_cartas/power/Yaeno_Muteki_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Yaeno's Off-Site Training",
+        "detalhes": [
+          "Speed +5",
+          "Power +5",
+          "Skill points +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) A Reasonable Diet vs. an Explosive Diet",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Skill points +10",
+          "Yaeno Muteki bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +10",
+          "Skill points +10",
+          "Playtime's Over! hint +3"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Yaeno Muteki's Love Song Nightmare",
+        "detalhes": [
+          "Energy -10",
+          "Speed +5",
+          "(aleatório) Stamina +5",
+          "(aleatório) Power +10",
+          "It's On! hint +1/+3"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Firm and Plain, Yet Close to Virtue",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "The Will to Protect!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Medium Corners ○ hint +1"
+        ]
+      }
+    ]
+  }
+}

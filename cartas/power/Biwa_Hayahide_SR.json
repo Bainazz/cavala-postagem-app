@@ -1,0 +1,57 @@
+{
+  "nome": "Biwa Hayahide SR",
+  "imagem": "icon_cartas/power/Biwa_Hayahide_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) A Big Sister's Job",
+        "detalhes": [
+          "Energy -10",
+          "Power +15"
+        ]
+      },
+      {
+        "nome": "(❯❯) Training in Theory",
+        "detalhes": [
+          "Aleatoriamente, um dos seguintes:", 
+          "Energy -20",
+          "Power +5",
+          "Pressure hint +1" ,
+          "ou ",
+          "Energy -10",
+          "Stamina +5",
+          "Power +15",
+          "Biwa Hayahide bond +5",
+          "Pressure hint +3"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Last-Minute Modal Theory",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +15",
+          "Biwa Hayahide bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Skill points +15",
+          "Biwa Hayahide bond +5"
+        ]
+      },
+      {
+        "nome": "Step-Out-of-Your-Comfort-Zone Theory",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Inside Scoop hint +1",
+          "Biwa Hayahide bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Stamina +10",
+          "Biwa Hayahide bond +5"
+        ]
+      }
+    ]
+  }
+}

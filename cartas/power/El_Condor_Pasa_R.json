@@ -1,0 +1,31 @@
+{
+  "nome": "El Condor Pasa R",
+  "imagem": "icon_cartas/power/El_Condor_Pasa_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Blazing Fire!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "El Condor Pasa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Power +20",
+          "El Condor Pasa bond +5"
+        ]
+      },
+      {
+        "nome": "Secret Notebook!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "El Condor Pasa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Sunny Days' hint +1",
+          "El Condor Pasa bond +5"
+        ]
+      }
+    ]
+  }
+}

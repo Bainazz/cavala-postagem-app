@@ -1,0 +1,58 @@
+{
+  "nome": "Daitaku Helios SR",
+  "imagem": "icon_cartas/power/Daitaku_Helios_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) #BFF #Party!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Daitaku Helios bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) #LOL #Party! #Round2",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "(aleatório) Speed +10",
+          "'Straight Descent' hint +1/+3",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "'Watchful Eye' hint +1",
+          "Daitaku Helios bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Encounter With the Sun ☆",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Ganha o buff 'Hot Topic'",
+          "Daitaku Helios bond +5"
+        ]
+      },
+      {
+        "nome": "Smiles Forever",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Power +10",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Long Shot' hint +1",
+          "Daitaku Helios bond +5"
+        ]
+      }
+    ]
+  }
+}

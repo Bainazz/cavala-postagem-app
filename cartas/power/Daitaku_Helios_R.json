@@ -1,0 +1,31 @@
+{
+  "nome": "Daitaku Helios R",
+  "imagem": "icon_cartas/power/Daitaku_Helios_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Encounter With the Sun ☆",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +10",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Ganha o buff 'Hot Topic'",
+          "Daitaku Helios bond +5"
+        ]
+      },
+      {
+        "nome": "Smiles Forever",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Power +10",
+          "Daitaku Helios bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Long Shot' hint +1",
+          "Daitaku Helios bond +5"
+        ]
+      }
+    ]
+  }
+}

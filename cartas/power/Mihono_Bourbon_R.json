@@ -1,0 +1,34 @@
+{
+  "nome": "Mihono Bourbon R",
+  "imagem": "icon_cartas/power/Mihono_Bourbon_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Do No Harm",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Stamina +5",
+          "Power +15",
+          "Mihono Bourbon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Mihono Bourbon bond +5"
+        ]
+      },
+      {
+        "nome": "Orders Must Be Followed",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Focus' hint +1",
+          "Mihono Bourbon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Skill points +15",
+          "Mihono Bourbon bond +5"
+        ]
+      }
+    ]
+  }
+}

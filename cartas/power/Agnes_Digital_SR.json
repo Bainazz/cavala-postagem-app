@@ -1,0 +1,48 @@
+{
+  "nome": "Agnes Digital SR",
+  "imagem": "icon_cartas/power/Agnes_Digital_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Happy Otaku Life",
+        "detalhes": [
+          "Power +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) My Love for Umamusume is Eternal!",
+        "detalhes": [
+          "Speed +5",
+          "Power +10",
+          "'Frenzied End Closers' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Umamusume Deficiency!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +5",
+          "Speed +5",
+          "Agnes Digital bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Power +5",
+          "Agnes Digital bond +5"
+        ]
+      },
+      {
+        "nome": "Heavy Romance",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Rainy Days' hint +1",
+          "Agnes Digital bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Wet Conditions' hint +1",
+          "Agnes Digital bond +5"
+        ]
+      }
+    ]
+  }
+}

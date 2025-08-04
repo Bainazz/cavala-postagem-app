@@ -1,0 +1,58 @@
+{
+  "nome": "Winning Ticket",
+  "imagem": "icon_cartas/power/Winning_Ticket_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Hot Derby Special!",
+        "detalhes": [
+          "Stamina +5",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Special Rival Training!",
+        "detalhes": [
+          "Energy -10",
+          "Stamina +5",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Dream-Fulfilling Challenge!",
+        "detalhes": [
+          "Energy -30",
+          "Stamina +5",
+          "Power +5",
+          "In Body and Mind hint +2"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Full-Power Muscles!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Skill points +15",
+          "Winning Ticket bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Winning Ticket bond +5"
+        ]
+      },
+      {
+        "nome": "Full-Power Racing!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Late Surger Corners ○ hint +1",
+          "Winning Ticket bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30",
+          "Winning Ticket bond +5"
+        ]
+      }
+    ]
+  }
+}

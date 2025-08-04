@@ -1,0 +1,33 @@
+{
+  "nome": "Biwa Hayahide R",
+  "imagem": "icon_cartas/power/Biwa_Hayahide_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Last-Minute Modal Theory",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +15",
+          "Biwa Hayahide bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Skill points +15",
+          "Biwa Hayahide bond +5"
+        ]
+      },
+      {
+        "nome": "Step-Out-of-Your-Comfort-Zone Theory",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "'Inside Scoop' hint +1",
+          "Biwa Hayahide bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Stamina +10",
+          "Biwa Hayahide bond +5"
+        ]
+      }
+    ]
+  }
+}

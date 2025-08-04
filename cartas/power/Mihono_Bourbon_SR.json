@@ -1,0 +1,59 @@
+{
+  "nome": "Mihono Bourbon SR",
+  "imagem": "icon_cartas/power/Mihono_Bourbon_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) I'm Not a Cyborg",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "Skill points +15",
+          "Mihono Bourbon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "'Corner Recovery' hint +1",
+          "(aleatório) Mihono Bourbon bond -5"
+        ]
+      },
+      {
+        "nome": "(❯❯) New Values Installed",
+        "detalhes": [
+          "Energy -10",
+          "Power +5",
+          "Guts +5",
+          "'Front Runner Straightaways' hint +1",
+          "Mihono Bourbon bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Do No Harm",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Stamina +5",
+          "Power +15",
+          "Mihono Bourbon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Mihono Bourbon bond +5"
+        ]
+      },
+      {
+        "nome": "Orders Must Be Followed",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Focus' hint +1",
+          "Mihono Bourbon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Skill points +15",
+          "Mihono Bourbon bond +5"
+        ]
+      }
+    ]
+  }
+}

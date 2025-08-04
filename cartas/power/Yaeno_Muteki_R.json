@@ -1,0 +1,28 @@
+{
+  "nome": "Yaeno Muteki R",
+  "imagem": "icon_cartas/power/Yaeno_Muteki_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Firm and Plain, Yet Close to Virtue",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Power +5"
+        ]
+      },
+      {
+        "nome": "The Will to Protect!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Power +10",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Medium Corners' hint +1"
+        ]
+      }
+    ]
+  }
+}
