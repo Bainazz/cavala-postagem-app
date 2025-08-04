@@ -1,0 +1,228 @@
+{
+  "nome": "Narita Taishin",
+  "imagem": "Narita_Taishin.png",
+  "Eventos de figurino": [
+    {
+      "titulo": "Strong Just the Way I Am"
+    },
+    {
+      "titulo": "Taishin's SOS"
+    },
+    {
+      "titulo": "Anxious Survival"
+    }
+  ],
+  "Eventos normais": [
+    {
+      "categoria": "Eventos padrão",
+      "eventos": [
+        {
+          "titulo": "Report Submitted",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Speed +10"
+            ],
+            [
+              "Stamina +5",
+              "Power +5"
+            ]
+          ]
+        },
+        {
+          "titulo": "Unknown Music",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Power +10"
+            ],
+            [
+              "Wisdom +10"
+            ]
+          ]
+        },
+        {
+          "titulo": "Distance",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Mood +1",
+              "Guts +10"
+            ],
+            [
+              "Standing By hint +1"
+            ]
+          ]
+        },
+        {
+          "titulo": "Extra Training to Blow Off Steam",
+          "escolhas": [
+            "Top Option",
+            "Middle Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Energy +10"
+            ],
+            [
+              "Energy -10",
+              "Skill points +25"
+            ],
+            [
+              "Randomly either\nEnergy -15\n1 random stat +10\nor\nEnergy -15\nMood +1\n2 random stats +15"
+            ]
+          ]
+        },
+        {
+          "titulo": "Extra Training to De-stress?",
+          "escolhas": [
+            "Top Option",
+            "Middle Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Energy +10"
+            ],
+            [
+              "Energy -10",
+              "Skill points +25"
+            ],
+            [
+              "Randomly either\nEnergy -15\n1 random stat +10\nor\nEnergy -15\nMood +1\n2 random stats +15"
+            ]
+          ]
+        },
+        {
+          "titulo": "Nutritional Food is the Food of Hope?",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Energy +10",
+              "Skill points +5"
+            ],
+            [
+              "Randomly either\nEnergy +30\nSkill points +10\nor\nEnergy +30\nSkill points +10\nSpeed -5\nPower +5\nGet Slow Metabolism status"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Eventos de encontro",
+      "eventos": [
+        {
+          "titulo": "git gud noob",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Stamina +10"
+            ],
+            [
+              "Speed +10"
+            ]
+          ]
+        },
+        {
+          "titulo": "ggez",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Power +10"
+            ],
+            [
+              "Guts +10"
+            ]
+          ]
+        },
+        {
+          "titulo": "ggwp",
+          "escolhas": [
+            "Top Option",
+            "Middle Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Guts +10"
+            ],
+            [
+              "Wisdom +10"
+            ],
+            [
+              "Stamina +10"
+            ]
+          ]
+        },
+        {
+          "titulo": "The Taciturn Two",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Stamina +10"
+            ],
+            [
+              "Speed +10"
+            ]
+          ]
+        },
+        {
+          "titulo": "Open the Cage Door with Your Own Hands",
+          "escolhas": [
+            "Top Option",
+            "Bottom Option"
+          ],
+          "efeitos": [
+            [
+              "Stamina +5",
+              "Guts +5"
+            ],
+            [
+              "Speed +5",
+              "Power +5"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Evento secreto",
+      "eventos": [
+        {
+          "titulo": "After the Nikkei Sho: Here Is Fine",
+          "escolhas": [],
+          "efeitos": [
+            [
+              "※ Se o debuff 'Practice Poor' foi curado\nMood +4\nAll stats +20\nSkill points +70\nGet Practice Perfect ◎ status"
+            ],
+            [
+              "※ Se o debuff 'Practice Poor' não foi curado\nMood +1\nAll stats +15\nSkill points +70\nCura o debuff 'Practice Poor'"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
