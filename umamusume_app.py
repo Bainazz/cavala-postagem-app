@@ -34,7 +34,30 @@ def carregar_jsons(diretorio, recursivo=False, tipo="item"):
     return itens
 
 def carregar_cartas(diretorio):
-    return carregar_jsons(diretorio, recursivo=True, tipo="carta")
+    itens = {}
+    if not os.path.isdir(diretorio):
+        print(f"[AVISO] Diretório não encontrado: {diretorio}")
+        return itens
+    for root, _, files in os.walk(diretorio):
+        for fname in files:
+            if not fname.endswith('.json'):
+                continue
+            path = os.path.join(root, fname)
+            try:
+                with open(path, encoding='utf-8') as f:
+                    dados = json.load(f)
+                nome = dados.get('nome')
+                imagem = dados.get('imagem')
+                if not nome or not imagem:
+                    print(f"[AVISO] carta com 'nome' ou 'imagem' ausente: {path}")
+                    continue
+                key = imagem  # card_id único (inclui tipo/raridade no caminho)
+                if key in itens:
+                    print(f"[AVISO] carta duplicada por imagem '{key}' em {path}")
+                itens[key] = dados
+            except Exception as e:
+                print(f"[ERRO] Falha lendo {path}: {e}")
+    return itens
 
 def carregar_cavalas(diretorio):
     return carregar_jsons(diretorio, recursivo=False, tipo="cavala")
@@ -141,14 +164,19 @@ class EventoExpandivel(tk.Frame):
 
 class UmaApp:
     def __init__(self, root, content, cartas_data, cavalas_data):
+        # Agora self.c é um dict: card_id (imagem) -> dados
         self.c = cartas_data
         self.cv = cavalas_data
-        self.deck = []
-        self.carta_avulsa = None
+        self.deck = []              # guarda card_id
+        self.carta_avulsa = None    # guarda card_id
         self.cavala_selecionada = None
         self.root = root
         self.base = content
         self.base.configure(bg='#606060')
+
+        # Mapas auxiliares (preenchidos ao abrir seletor/renderizar)
+        self.card_by_id = {}   # card_id -> dados
+        self.name_by_id = {}   # card_id -> nome
 
         self.btn_style = {
             'fg': 'white', 'bg': '#1a1a1a',
@@ -576,8 +604,10 @@ class UmaApp:
         )
 
         painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
-            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=450, pady=(0, 10), padx=10
+            win_content, fill='#505050', outline='#6a1a1a', radius=16, pad=10, min_height=450, pady=(0, 10), padx=10
         )
+        # corrigir outline
+        painel_grade_canvas.itemconfig("roundpanel", outline='#6a6a6a')
 
         contador_var = tk.StringVar()
         def atualiza_contador():
@@ -690,17 +720,19 @@ class UmaApp:
             coluna = 0
             max_colunas = 6
 
+            # Agora self.c é mapeado por card_id (imagem)
             cartas_filtradas = [
-                (nome, dados) for nome, dados in self.c.items()
-                if tipo in dados.get("imagem", "")
+                (card_id, dados) for card_id, dados in self.c.items()
+                if tipo in card_id
             ]
             cartas_ordenadas = sorted(
                 cartas_filtradas,
-                key=lambda item: extrair_raridade(item[1].get("imagem", ""))
+                key=lambda item: extrair_raridade(item[0])
             )
 
-            for nome, dados in cartas_ordenadas:
-                img_path = os.path.join(BASE, dados.get("imagem", ""))
+            for card_id, dados in cartas_ordenadas:
+                img_path = os.path.join(BASE, card_id)
+                nome = dados.get("nome", "Carta")
                 try:
                     pil_image = Image.open(img_path).convert("RGBA")
                     bg = Image.new("RGBA", pil_image.size, "#505050")
@@ -712,24 +744,28 @@ class UmaApp:
                     print(f"Erro ao carregar imagem da carta {nome}: {e}")
                     continue
 
-                def alternar_carta_normal(n=nome, btn_ref=None, colorida=None, cinza=None):
-                    if n in self.deck:
-                        self.deck.remove(n)
+                # Atualiza mapas
+                self.card_by_id[card_id] = dados
+                self.name_by_id[card_id] = nome
+
+                def alternar_carta_normal(cid=card_id, btn_ref=None, colorida=None, cinza=None):
+                    if cid in self.deck:
+                        self.deck.remove(cid)
                         btn_ref.config(image=cinza); btn_ref.image = cinza
                     elif len(self.deck) < limite:
-                        self.deck.append(n)
+                        self.deck.append(cid)
                         btn_ref.config(image=colorida); btn_ref.image = colorida
                     atualiza_contador()
                     self.mostrar()
                     if len(self.deck) == limite:
                         win.after(300, lambda: (ao_confirmar(), _close_and_reset()))
 
-                def alternar_carta_avulsa(n=nome, btn_ref=None, colorida=None, cinza=None):
-                    if self.carta_avulsa == n:
+                def alternar_carta_avulsa(cid=card_id, btn_ref=None, colorida=None, cinza=None):
+                    if self.carta_avulsa == cid:
                         self.carta_avulsa = None
                         btn_ref.config(image=cinza); btn_ref.image = cinza
                     else:
-                        self.carta_avulsa = n
+                        self.carta_avulsa = cid
                         btn_ref.config(image=colorida); btn_ref.image = colorida
                     atualiza_contador()
                     self.mostrar()
@@ -739,7 +775,9 @@ class UmaApp:
                 cell = tk.Frame(inner_grade, bg='#505050')
                 cell.grid(row=linha, column=coluna, padx=10, pady=10)
 
-                imagem = img_colorida if ((limite > 1 and nome in self.deck) or (limite == 1 and self.carta_avulsa == nome)) else img_cinza
+                selecionada = ((limite > 1 and card_id in self.deck) or
+                               (limite == 1 and self.carta_avulsa == card_id))
+                imagem = img_colorida if selecionada else img_cinza
 
                 btn = tk.Button(
                     cell, image=imagem, borderwidth=0, highlightthickness=0,
@@ -750,9 +788,9 @@ class UmaApp:
                 tk.Label(cell, text=nome, fg='white', bg='#505050').pack()
 
                 if limite > 1:
-                    btn.config(command=lambda n=nome, b=btn, c=img_colorida, g=img_cinza: alternar_carta_normal(n, b, c, g))
+                    btn.config(command=lambda cid=card_id, b=btn, c=img_colorida, g=img_cinza: alternar_carta_normal(cid, b, c, g))
                 else:
-                    btn.config(command=lambda n=nome, b=btn, c=img_colorida, g=img_cinza: alternar_carta_avulsa(n, b, c, g))
+                    btn.config(command=lambda cid=card_id, b=btn, c=img_colorida, g=img_cinza: alternar_carta_avulsa(cid, b, c, g))
 
                 coluna += 1
                 if coluna >= max_colunas:
@@ -828,8 +866,6 @@ class UmaApp:
         self.search_entry.bind("<FocusOut>", lambda e: self._on_search_focus_out())
         self.search_entry.focus_set()
 
-        # Removido: bloqueio por não ter cavala selecionada
-
         # Renderizar cavala se existir uma selecionada
         if self.cavala_selecionada:
             dados_cavala = self.cv.get(self.cavala_selecionada)
@@ -866,11 +902,13 @@ class UmaApp:
         frame_cartas = tk.Frame(self.frame_exibicao, bg=self.area_cor)
         frame_cartas.pack(side='left', padx=20)
 
-        for nome_carta in self.deck:
-            dados_carta = self.c.get(nome_carta)
+        # Renderizar cartas do deck (deck agora tem card_id)
+        for card_id in self.deck:
+            dados_carta = self.card_by_id.get(card_id) or self.c.get(card_id)
+            nome_carta = self.name_by_id.get(card_id, dados_carta.get("nome", "Carta") if dados_carta else "Carta")
             if not dados_carta:
                 continue
-            caminho_img_carta = os.path.join(BASE, dados_carta.get("imagem", ""))
+            caminho_img_carta = os.path.join(BASE, card_id)
             try:
                 pil_img_carta = Image.open(caminho_img_carta).convert("RGBA")
                 pil_img_carta_res = pil_img_carta.resize((128, 128), Image.Resampling.LANCZOS)
@@ -883,8 +921,8 @@ class UmaApp:
             frame_carta = tk.Frame(frame_cartas, bg=self.area_cor)
             frame_carta.pack(side='left', padx=5)
 
-            def on_click_carta(n=nome_carta):
-                self.atualizar_selecao(n)
+            def on_click_carta(cid=card_id):
+                self.atualizar_selecao(cid)
 
             btn_img_carta = tk.Button(
                 frame_carta, image=img_cinza, borderwidth=0, command=on_click_carta,
@@ -895,9 +933,9 @@ class UmaApp:
             btn_img_carta.pack()
             tk.Label(frame_carta, text=nome_carta, fg='white', bg=self.area_cor).pack()
 
-            self.imagens_exibidas[nome_carta] = btn_img_carta
-            self.img_refs[f'{nome_carta}_colorida'] = img_colorida
-            self.img_refs[f'{nome_carta}_cinza'] = img_cinza
+            self.imagens_exibidas[card_id] = btn_img_carta
+            self.img_refs[f'{card_id}_colorida'] = img_colorida
+            self.img_refs[f'{card_id}_cinza'] = img_cinza
 
         sep = self._criar_separador_vertical(self.frame_exibicao, altura=160, cor='#ffffff')
         sep.pack(side='left', padx=10)
@@ -906,20 +944,21 @@ class UmaApp:
         avulsa_frame.pack(side='left', padx=10)
 
         if self.carta_avulsa:
-            dados_carta = self.c.get(self.carta_avulsa)
+            dados_carta = self.card_by_id.get(self.carta_avulsa) or self.c.get(self.carta_avulsa)
+            nome_carta = self.name_by_id.get(self.carta_avulsa, dados_carta.get("nome", "Carta") if dados_carta else "Carta")
             if dados_carta:
-                caminho_img_carta = os.path.join(BASE, dados_carta.get("imagem", ""))
+                caminho_img_carta = os.path.join(BASE, self.carta_avulsa)
                 try:
                     pil_img_carta = Image.open(caminho_img_carta).convert("RGBA")
                     pil_img_carta_res = pil_img_carta.resize((128, 128), Image.Resampling.LANCZOS)
                     img_colorida = ImageTk.PhotoImage(pil_img_carta_res)
                     img_cinza = ImageTk.PhotoImage(ImageOps.grayscale(pil_img_carta_res.convert("RGB")))
                 except Exception as e:
-                    print(f"Erro ao carregar imagem da carta avulsa {self.carta_avulsa}: {e}")
+                    print(f"Erro ao carregar imagem da carta avulsa {nome_carta}: {e}")
                     img_colorida = img_cinza = None
 
-                def on_click_avulsa(n=self.carta_avulsa):
-                    self.atualizar_selecao(f"avulsa:{n}")
+                def on_click_avulsa(cid=self.carta_avulsa):
+                    self.atualizar_selecao(f"avulsa:{cid}")
 
                 if img_colorida and img_cinza:
                     frame_carta = tk.Frame(avulsa_frame, bg=self.area_cor)
@@ -932,7 +971,7 @@ class UmaApp:
                     btn_img_carta.image_colorida = img_colorida
                     btn_img_carta.image_cinza = img_cinza
                     btn_img_carta.pack()
-                    tk.Label(frame_carta, text=self.carta_avulsa + " (avulsa)", fg='white', bg=self.area_cor).pack()
+                    tk.Label(frame_carta, text=nome_carta + " (avulsa)", fg='white', bg=self.area_cor).pack()
 
                     self.imagens_exibidas[f"avulsa:{self.carta_avulsa}"] = btn_img_carta
                     self.img_refs[f"avulsa:{self.carta_avulsa}_colorida"] = img_colorida
@@ -964,6 +1003,7 @@ class UmaApp:
             self.search_var.set(self._search_placeholder)
 
     def atualizar_selecao(self, selecionado):
+        # selecionado pode ser 'cavala', card_id (deck), ou 'avulsa:{card_id}'
         if self.selecionado == selecionado:
             btn = self.imagens_exibidas.get(selecionado)
             if btn:
@@ -985,8 +1025,8 @@ class UmaApp:
             btn_novo.image = btn_novo.image_colorida
             self.selecionado = selecionado
             if isinstance(selecionado, str) and selecionado.startswith("avulsa:"):
-                nome = selecionado.split(":", 1)[1]
-                self.mostrar_eventos(nome)
+                cid = selecionado.split(":", 1)[1]
+                self.mostrar_eventos(cid)
             else:
                 self.mostrar_eventos(selecionado)
 
@@ -1002,6 +1042,7 @@ class UmaApp:
         if selecionado == 'cavala':
             self.mostrar_eventos_cavala()
         else:
+            # selecionado é card_id
             self.mostrar_eventos_carta(selecionado)
 
     def mostrar_eventos_cavala(self):
@@ -1020,8 +1061,8 @@ class UmaApp:
                 ev_expand = EventoExpandivel(self.frame_eventos, titulo, detalhes)
                 ev_expand.pack(fill='x', padx=10, pady=2)
 
-    def mostrar_eventos_carta(self, nome_carta):
-        dados_carta = self.c.get(nome_carta)
+    def mostrar_eventos_carta(self, card_id):
+        dados_carta = self.card_by_id.get(card_id) or self.c.get(card_id)
         if not dados_carta:
             return
 
