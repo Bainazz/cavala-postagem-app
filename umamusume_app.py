@@ -140,24 +140,22 @@ class EventoExpandivel(tk.Frame):
 
 
 class UmaApp:
-    def __init__(self, root, cartas_data, cavalas_data):
+    def __init__(self, root, content, cartas_data, cavalas_data):
         self.c = cartas_data
         self.cv = cavalas_data
         self.deck = []
         self.carta_avulsa = None
         self.cavala_selecionada = None
         self.root = root
-        root.title("UmaMusume Companion")
-        root.configure(bg='#606060')
+        self.base = content
+        self.base.configure(bg='#606060')
 
-        # Estilo base de cores
         self.btn_style = {
             'fg': 'white', 'bg': '#1a1a1a',
             'activebackground': '#333333', 'activeforeground': 'white'
         }
 
-        # Barra superior com slots
-        self.top_bar = tk.Frame(root, bg='#606060')
+        self.top_bar = tk.Frame(self.base, bg='#606060')
         self.top_bar.pack(pady=8)
 
         self.slot_cavala = tk.Frame(self.top_bar, bg='#606060')
@@ -167,7 +165,6 @@ class UmaApp:
         self.slot_avulsa = tk.Frame(self.top_bar, bg='#606060')
         self.slot_avulsa.pack(side='left', padx=6)
 
-        # Botões iniciais
         self.btn_cavala = self.criar_botao_arredondado(
             self.slot_cavala, "Escolha sua cavala", comando=self.abrir_seletor_cavala, min_w=180, min_h=40
         )
@@ -183,10 +180,9 @@ class UmaApp:
         )
         self.btn_carta_avulsa.pack()
 
-        # Painel principal arredondado
         self.area_cor = '#505050'
         self.area_border = '#6a6a6a'
-        self.area_canvas = tk.Canvas(root, bg='#606060', highlightthickness=0, bd=0)
+        self.area_canvas = tk.Canvas(self.base, bg='#606060', highlightthickness=0, bd=0)
         self.area_canvas.pack(padx=10, pady=(6, 14), fill='x')
         self.area_radius = 18
         self.area_pad = 8
@@ -205,13 +201,11 @@ class UmaApp:
         self.area_canvas.bind("<Configure>", _redesenhar_area)
         self.frame_exibicao.bind("<Configure>", _redesenhar_area)
 
-        # [SEARCH] Barra de pesquisa
-        self.search_frame = tk.Frame(root, bg='#606060')
+        self.search_frame = tk.Frame(self.base, bg='#606060')
         self.search_frame.pack(fill='x', padx=10, pady=(0, 6))
 
         self.search_var = tk.StringVar()
 
-        # centralização com spacers
         left_spacer = tk.Frame(self.search_frame, bg='#606060')
         left_spacer.pack(side='left', expand=True)
 
@@ -227,25 +221,25 @@ class UmaApp:
 
         right_spacer = tk.Frame(self.search_frame, bg='#606060')
         right_spacer.pack(side='left', expand=True)
-        # [FIM SEARCH CENTER]
 
-        # Placeholder simples
         self._search_placeholder = "Pesquisar eventos…"
         self._search_active = False
+
         def _apply_placeholder():
             if not self.search_var.get():
                 self._search_active = False
                 self.search_entry.config(fg='#bfbfbf')
                 self.search_var.set(self._search_placeholder)
+
         def _remove_placeholder(_=None):
             if not self._search_active:
                 self._search_active = True
                 self.search_entry.config(fg='#ffffff')
                 self.search_var.set("")
+
         self.search_entry.bind("<FocusIn>", _remove_placeholder)
         self.search_entry.bind("<FocusOut>", lambda e: _apply_placeholder())
 
-        # Aplica filtro enquanto digita
         def _on_type(*_):
             if not self._search_active:
                 return
@@ -253,17 +247,14 @@ class UmaApp:
         self.search_var.trace_add("write", lambda *args: _on_type())
 
         _apply_placeholder()
-        # [FIM SEARCH]
 
-        # Botão reset
         self.btn_reset = self.criar_botao_arredondado(
-            root, "Resetar escolhas", comando=self.resetar_escolhas, min_w=160, min_h=40
+            self.base, "Resetar escolhas", comando=self.resetar_escolhas, min_w=160, min_h=40
         )
         self.btn_reset.pack(pady=(2, 8))
 
-        # Eventos + scrollbar
-        self.canvas_eventos = tk.Canvas(root, height=300, bg='#606060', highlightthickness=0)
-        self.scroll_eventos = ttk.Scrollbar(root, orient='vertical', command=self.canvas_eventos.yview)
+        self.canvas_eventos = tk.Canvas(self.base, height=300, bg='#606060', highlightthickness=0)
+        self.scroll_eventos = ttk.Scrollbar(self.base, orient='vertical', command=self.canvas_eventos.yview)
         self.canvas_eventos.configure(yscrollcommand=self.scroll_eventos.set)
 
         self.canvas_eventos.pack(side='left', fill='both', expand=True, padx=(10, 0))
@@ -283,16 +274,13 @@ class UmaApp:
             self.canvas_eventos.itemconfig(self.wrapper_id, width=event.width)
         self.canvas_eventos.bind("<Configure>", on_canvas_configure)
 
-        # Scroll principal: binds locais + fallback no root
         def on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
                 return "break"
-
         def on_button4(event):
             self.canvas_eventos.yview_scroll(-1, "units")
             return "break"
-
         def on_button5(event):
             self.canvas_eventos.yview_scroll(1, "units")
             return "break"
@@ -300,24 +288,13 @@ class UmaApp:
         self.canvas_eventos.bind("<MouseWheel>", on_mousewheel, add="+")
         self.canvas_eventos.bind("<Button-4>", on_button4, add="+")
         self.canvas_eventos.bind("<Button-5>", on_button5, add="+")
+
         self.wrapper_eventos.bind("<MouseWheel>", on_mousewheel, add="+")
         self.wrapper_eventos.bind("<Button-4>", on_button4, add="+")
         self.wrapper_eventos.bind("<Button-5>", on_button5, add="+")
-
-        def fallback_root_wheel(event):
-            w = self.root.winfo_containing(event.x_root, event.y_root)
-            if w and (w == self.canvas_eventos or self.canvas_eventos.winfo_containing(event.x_root, event.y_root)):
-                if hasattr(event, "delta") and event.delta:
-                    self.canvas_eventos.yview_scroll(int(-1 * (event.delta / 120)), "units")
-                elif getattr(event, "num", None) == 4:
-                    self.canvas_eventos.yview_scroll(-1, "units")
-                elif getattr(event, "num", None) == 5:
-                    self.canvas_eventos.yview_scroll(1, "units")
-                return "break"
-
-        self.root.bind("<MouseWheel>", fallback_root_wheel, add="+")
-        self.root.bind("<Button-4>", fallback_root_wheel, add="+")
-        self.root.bind("<Button-5>", fallback_root_wheel, add="+")
+        self.root.bind("<MouseWheel>", on_mousewheel, add="+")
+        self.root.bind("<Button-4>", on_button4, add="+")
+        self.root.bind("<Button-5>", on_button5, add="+")
 
         self.imagens_exibidas = {}
         self.evento_expandido_atual = None
@@ -333,7 +310,6 @@ class UmaApp:
         if not self.c:
             messagebox.showwarning("Aviso", "Nenhuma carta encontrada em 'cartas/'.")
 
-    # Botão arredondado minimalista (Canvas)
     def criar_botao_arredondado(self, parent, texto, comando=None, min_w=140, min_h=40, pad_x=16, pad_y=10, radius=14):
         c = tk.Canvas(parent, bg=parent['bg'], highlightthickness=0, bd=0, cursor="")
         bg_btn = self.btn_style['bg']
@@ -371,17 +347,13 @@ class UmaApp:
         if comando:
             def on_press(_):
                 draw(active_bg)
-
             def on_release(_):
                 draw(bg_btn)
                 comando()
-
             def on_enter(_):
                 c.config(cursor="hand2")
-
             def on_leave(_):
                 c.config(cursor="")
-
             c.bind("<ButtonPress-1>", on_press)
             c.bind("<ButtonRelease-1>", on_release)
             c.bind("<Enter>", on_enter)
@@ -414,7 +386,6 @@ class UmaApp:
         else:
             canvas.pack(padx=padx, pady=pady)
 
-        # Guardar valores no canvas para consulta
         canvas._round_pad = pad
         canvas._round_fill = fill
         canvas._round_outline = outline
@@ -431,7 +402,6 @@ class UmaApp:
             canvas.coords(win, w // 2, pad)
             canvas.itemconfig(win, width=w - 2 * pad)
             self._desenhar_roundrect(canvas, 1, 1, w - 2, h - 2, radius, fill=fill, outline=outline, width=1)
-            # Expor a altura útil interna (sem bordas) para filhos
             canvas._round_inner_height = h
 
         canvas.bind("<Configure>", redraw)
@@ -445,35 +415,18 @@ class UmaApp:
             return
         self.janela_cavala_aberta = True
 
-        win = tk.Toplevel(self.root)
-        win.title("Selecione sua Cavala")
-        win.configure(bg='#606060')
-
         largura = 1245
         altura = 715
-
-        self.root.update_idletasks()
-        geom = self.root.winfo_geometry()
-        parts = geom.split('+')
-        pos = f"+{parts[1]}+{parts[2]}" if len(parts) >= 3 else ""
-        win.geometry(f"{largura}x{altura}{pos}")
+        win, win_content, _fechar = criar_toplevel_custom(
+            self.root, largura, altura, "Selecione sua Cavala",
+            on_close=lambda: setattr(self, "janela_cavala_aberta", False)
+        )
         win.transient(self.root)
         win.grab_set()
         win.focus_force()
 
-        def fechar():
-            try:
-                win.unbind_all("<MouseWheel>")
-                win.unbind_all("<Button-4>")
-                win.unbind_all("<Button-5>")
-            except Exception:
-                pass
-            self.janela_cavala_aberta = False
-            win.destroy()
-        win.protocol("WM_DELETE_WINDOW", fechar)
-
         painel_canvas, grade_frame, _ = self._criar_painel_arredondado(
-            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(10, 10), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=700, pady=(10, 10), padx=10
         )
 
         header_btn = self.criar_botao_arredondado(
@@ -509,12 +462,24 @@ class UmaApp:
 
         def _on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
+                up = event.delta > 0
+                top, bottom = canvas.yview()
+                if up and top <= 0.0:
+                    return "break"
+                if not up and bottom >= 1.0:
+                    return "break"
                 canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
                 return "break"
         def _on_button4(event):
+            top, _ = canvas.yview()
+            if top <= 0.0:
+                return "break"
             canvas.yview_scroll(-1, "units")
             return "break"
         def _on_button5(event):
+            _, bottom = canvas.yview()
+            if bottom >= 1.0:
+                return "break"
             canvas.yview_scroll(1, "units")
             return "break"
         def _bind_wheel(_):
@@ -558,7 +523,10 @@ class UmaApp:
                 self.cavala_selecionada = n
                 atualizar_botao_cavala(f"Cavala selecionada: {n}", largura=220)
                 self.mostrar()
-                fechar()
+                try:
+                    win.destroy()
+                finally:
+                    self.janela_cavala_aberta = False
 
             frame_interno = tk.Frame(frame, bg='#505050')
             frame_interno.grid(row=linha, column=coluna, padx=10, pady=10)
@@ -578,55 +546,44 @@ class UmaApp:
                 linha += 1
 
     def _abrir_seletor_cartas_base(self, limite, ao_confirmar):
-        win = tk.Toplevel(self.root)
-        win.title("Selecione suas Cartas")
-        win.configure(bg='#606060')
-
-        # Altura adaptativa com base na tela (largura mantida)
         self.root.update_idletasks()
         scr_h = self.root.winfo_screenheight()
         largura = 1245
-        altura = min(715, scr_h - 120)  # margem para não estourar a tela
+        altura = min(715, scr_h - 120)
 
-        geom = self.root.winfo_geometry()
-        parts = geom.split('+')
-        pos = f"+{parts[1]}+{parts[2]}" if len(parts) >= 3 else ""
-        win.geometry(f"{largura}x{altura}{pos}")
+        def _on_close_flag():
+            if limite > 1:
+                self.janela_cartas_aberta = False
+            else:
+                self.janela_avulsa_aberta = False
+
+        win, win_content, fechar = criar_toplevel_custom(
+            self.root, largura, altura, "Selecione suas Cartas",
+            on_close=_on_close_flag
+        )
         win.transient(self.root)
         win.grab_set()
         win.focus_force()
 
-        def fechar():
-            try:
-                win.unbind_all("<MouseWheel>")
-                win.unbind_all("<Button-4>")
-                win.unbind_all("<Button-5>")
-            except Exception:
-                pass
-            win.destroy()
-        win.protocol("WM_DELETE_WINDOW", fechar)
-
-        # Painel 1: tipo
         _, tipo_frame, _ = self._criar_painel_arredondado(
-            win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(10, 6), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(10, 6), padx=10
         )
         inner_tipos = tk.Frame(tipo_frame, bg=tipo_frame['bg'])
         inner_tipos.pack(anchor='center', pady=4)
 
-        # Painel 2: header
         _, header_frame, _ = self._criar_painel_arredondado(
-            win, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10
         )
 
-        # Painel 3: grade — altura flexível (min menor para caber)
         painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
-            win, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=480, pady=(0, 10), padx=10
+            win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=480, pady=(0, 10), padx=10
         )
 
-        # Contador e confirmar
-        selecionadas_atual = lambda: len(self.deck) if limite > 1 else (1 if self.carta_avulsa else 0)
         contador_var = tk.StringVar()
-        contador_var.set(f"{selecionadas_atual()}/{limite} cartas selecionadas")
+        def atualiza_contador():
+            val = len(self.deck) if limite > 1 else (1 if self.carta_avulsa else 0)
+            contador_var.set(f"{val}/{limite} cartas selecionadas")
+        atualiza_contador()
 
         for w in header_frame.winfo_children():
             w.destroy()
@@ -637,12 +594,18 @@ class UmaApp:
                                   fg='white', bg=header_frame['bg'])
         label_contador.grid(row=0, column=1, padx=8, pady=(6, 4))
 
+        def _close_and_reset():
+            _on_close_flag()
+            try:
+                win.destroy()
+            except Exception:
+                pass
+
         btn_confirm = self.criar_botao_arredondado(
-            header_frame, "Confirmar seleção", comando=lambda: (ao_confirmar(), fechar()), min_w=200, min_h=40
+            header_frame, "Confirmar seleção", comando=lambda: (ao_confirmar(), _close_and_reset()), min_w=200, min_h=40
         )
         btn_confirm.grid(row=1, column=1, padx=8, pady=(0, 8))
 
-        # Área rolável de cartas
         canvas = tk.Canvas(conteiner_grade, bg='#505050', highlightthickness=0)
         scrollbar = ttk.Scrollbar(conteiner_grade, orient="vertical", command=canvas.yview)
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -660,25 +623,35 @@ class UmaApp:
             canvas.itemconfig(id_janela, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
-        # SYNC ALTURA CANVAS com o painel externo
         def sync_canvas_height_cartas(event=None):
             h = getattr(painel_grade_canvas, "_round_inner_height", 400)
-            altura_util = max(200, h - 24)  # pequeno offset para paddings internos
+            altura_util = max(200, h - 24)
             canvas.config(height=altura_util)
         painel_grade_canvas.bind("<Configure>", sync_canvas_height_cartas)
         conteiner_grade.bind("<Configure>", sync_canvas_height_cartas)
         win.bind("<Configure>", sync_canvas_height_cartas)
         win.after(0, sync_canvas_height_cartas)
 
-        # Scroll do mouse (cartas): bind global enquanto o mouse está dentro do canvas
         def _on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
+                up = event.delta > 0
+                top, bottom = canvas.yview()
+                if up and top <= 0.0:
+                    return "break"
+                if not up and bottom >= 1.0:
+                    return "break"
                 canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
                 return "break"
         def _on_button4(event):
+            top, _ = canvas.yview()
+            if top <= 0.0:
+                return "break"
             canvas.yview_scroll(-1, "units")
             return "break"
         def _on_button5(event):
+            _, bottom = canvas.yview()
+            if bottom >= 1.0:
+                return "break"
             canvas.yview_scroll(1, "units")
             return "break"
         def _bind_wheel(_):
@@ -746,10 +719,10 @@ class UmaApp:
                     elif len(self.deck) < limite:
                         self.deck.append(n)
                         btn_ref.config(image=colorida); btn_ref.image = colorida
-                    contador_var.set(f"{len(self.deck)}/{limite} cartas selecionadas")
+                    atualiza_contador()
                     self.mostrar()
                     if len(self.deck) == limite:
-                        win.after(300, lambda: (ao_confirmar(), fechar()))
+                        win.after(300, lambda: (ao_confirmar(), _close_and_reset()))
 
                 def alternar_carta_avulsa(n=nome, btn_ref=None, colorida=None, cinza=None):
                     if self.carta_avulsa == n:
@@ -758,10 +731,10 @@ class UmaApp:
                     else:
                         self.carta_avulsa = n
                         btn_ref.config(image=colorida); btn_ref.image = colorida
-                    contador_var.set(f"{1 if self.carta_avulsa else 0}/{limite} cartas selecionadas")
+                    atualiza_contador()
                     self.mostrar()
                     if self.carta_avulsa:
-                        win.after(300, lambda: (ao_confirmar(), fechar()))
+                        win.after(300, lambda: (ao_confirmar(), _close_and_reset()))
 
                 cell = tk.Frame(inner_grade, bg='#505050')
                 cell.grid(row=linha, column=coluna, padx=10, pady=10)
@@ -786,7 +759,6 @@ class UmaApp:
                     coluna = 0
                     linha += 1
 
-            # Resetar rolagem ao topo ao trocar de tipo
             canvas.update_idletasks()
             canvas.yview_moveto(0)
 
@@ -805,6 +777,11 @@ class UmaApp:
                 print(f"Erro ao carregar ícone do tipo {tipo}: {e}")
 
         mostrar_cartas_por_tipo('speed')
+
+        # Fechamento garantindo reset de flags (✕, ESC, WM_DELETE_WINDOW, confirmar)
+        win.protocol("WM_DELETE_WINDOW", _close_and_reset)
+        win.bind("<Escape>", lambda e: _close_and_reset())
+
         return win
 
     def abrir_seletor_cartas(self):
@@ -815,11 +792,7 @@ class UmaApp:
         def ao_confirmar():
             self.janela_cartas_aberta = False
 
-        win = self._abrir_seletor_cartas_base(limite=6, ao_confirmar=ao_confirmar)
-        def on_close():
-            self.janela_cartas_aberta = False
-            win.destroy()
-        win.protocol("WM_DELETE_WINDOW", on_close)
+        self._abrir_seletor_cartas_base(limite=6, ao_confirmar=ao_confirmar)
 
     def abrir_seletor_carta_avulsa(self):
         if self.janela_avulsa_aberta:
@@ -829,11 +802,7 @@ class UmaApp:
         def ao_confirmar():
             self.janela_avulsa_aberta = False
 
-        win = self._abrir_seletor_cartas_base(limite=1, ao_confirmar=ao_confirmar)
-        def on_close():
-            self.janela_avulsa_aberta = False
-            win.destroy()
-        win.protocol("WM_DELETE_WINDOW", on_close)
+        self._abrir_seletor_cartas_base(limite=1, ao_confirmar=ao_confirmar)
 
     def _criar_separador_vertical(self, parent, altura=140, cor='#ffffff'):
         canvas = tk.Canvas(parent, width=10, height=altura, bg=parent['bg'], highlightthickness=0)
@@ -848,6 +817,16 @@ class UmaApp:
         self.imagens_exibidas.clear()
         self.img_refs.clear()
         self.selecionado = None
+
+        # Reativar busca após atualizar a área
+        if not self._search_active or self.search_var.get() == self._search_placeholder:
+            self._search_active = False
+            self.search_entry.config(fg='#bfbfbf')
+            self.search_var.set(self._search_placeholder)
+        self.search_entry.configure(state='normal')
+        self.search_entry.bind("<FocusIn>", lambda e: self._on_search_focus_in())
+        self.search_entry.bind("<FocusOut>", lambda e: self._on_search_focus_out())
+        self.search_entry.focus_set()
 
         if not self.cavala_selecionada:
             messagebox.showwarning("Aviso", "Selecione uma cavala primeiro!")
@@ -973,6 +952,20 @@ class UmaApp:
         self.selecionado = None
         self.mostrar_eventos(None)
 
+    # Helpers para focus da busca
+    def _on_search_focus_in(self):
+        if not self._search_active:
+            self._search_active = True
+            self.search_entry.config(fg='#ffffff')
+            if self.search_var.get() == self._search_placeholder:
+                self.search_var.set("")
+
+    def _on_search_focus_out(self):
+        if not self.search_var.get():
+            self._search_active = False
+            self.search_entry.config(fg='#bfbfbf')
+            self.search_var.set(self._search_placeholder)
+
     def atualizar_selecao(self, selecionado):
         if self.selecionado == selecionado:
             btn = self.imagens_exibidas.get(selecionado)
@@ -994,7 +987,7 @@ class UmaApp:
             btn_novo.config(image=btn_novo.image_colorida)
             btn_novo.image = btn_novo.image_colorida
             self.selecionado = selecionado
-            if selecionado.startswith("avulsa:"):
+            if isinstance(selecionado, str) and selecionado.startswith("avulsa:"):
                 nome = selecionado.split(":", 1)[1]
                 self.mostrar_eventos(nome)
             else:
@@ -1047,7 +1040,6 @@ class UmaApp:
                 ev_expand = EventoExpandivel(self.frame_eventos, titulo, detalhes)
                 ev_expand.pack(fill='x', padx=10, pady=1)
 
-    # [SEARCH] utilidades de filtro
     def _texto_filtro(self):
         txt = self.search_var.get().strip()
         if not getattr(self, "_search_active", False) or txt == self._search_placeholder:
@@ -1070,6 +1062,7 @@ class UmaApp:
             self.mostrar_eventos(self.selecionado)
 
     def _limpar_pesquisa(self):
+        self.search_entry.configure(state='normal')
         self.search_entry.focus_set()
         self.search_var.set("")
         self._search_active = False
@@ -1096,20 +1089,160 @@ class UmaApp:
         )
         self.btn_cavala.pack()
 
-def criar_janela_centrada(largura, altura):
+
+def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     root = tk.Tk()
+
     largura_tela = root.winfo_screenwidth()
     altura_tela = root.winfo_screenheight()
     pos_x = (largura_tela // 2) - (largura // 2)
     pos_y = (altura_tela // 2) - (altura // 2)
+
+    root.overrideredirect(True)
     root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
-    root.configure(bg='#606060')
-    return root
+    root.configure(bg='#404040')
+
+    cont = tk.Frame(root, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
+    cont.pack(fill='both', expand=True)
+
+    titlebar = tk.Frame(cont, bg='#303030')
+    titlebar.pack(fill='x', side='top')
+
+    def start_move(e):
+        root._ox, root._oy = e.x_root, e.y_root
+    def do_move(e):
+        dx = e.x_root - root._ox
+        dy = e.y_root - root._oy
+        x = root.winfo_x() + dx
+        y = root.winfo_y() + dy
+        root.geometry(f"+{x}+{y}")
+        root._ox, root._oy = e.x_root, e.y_root
+    titlebar.bind("<Button-1>", start_move)
+    titlebar.bind("<B1-Motion>", do_move)
+
+    btn_fg = '#ffffff'
+    btn_bg = '#303030'
+    btn_bg_hover = '#444444'
+    def make_title_btn(text, cmd):
+        b = tk.Label(titlebar, text=text, fg=btn_fg, bg=btn_bg, width=3)
+        b.bind("<Enter>", lambda e: b.config(bg=btn_bg_hover))
+        b.bind("<Leave>", lambda e: b.config(bg=btn_bg))
+        b.bind("<Button-1>", lambda e: cmd())
+        return b
+
+    def close_app():
+        root.destroy()
+    def minimize_app():
+        root.overrideredirect(False)
+        root.iconify()
+        def restore_overrideredirect(_):
+            root.overrideredirect(True)
+        root.bind("<Map>", restore_overrideredirect, add="+")
+
+    btn_close = make_title_btn("✕", close_app)
+    btn_close.pack(side='right', padx=(0, 6), pady=1)
+    btn_min = make_title_btn("—", minimize_app)
+    btn_min.pack(side='right', padx=(0, 2), pady=1)
+
+    lbl_title = tk.Label(titlebar, text=titulo, fg='#ffffff', bg='#303030', font=("Arial", 11, "bold"))
+    lbl_title.pack(side='top', pady=4)
+
+    content = tk.Frame(cont, bg='#606060')
+    content.pack(fill='both', expand=True)
+
+    root.bind("<Escape>", lambda e: root.destroy())
+
+    return root, content
+
+def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=None):
+    win = tk.Toplevel(parent)
+    win.overrideredirect(True)
+    win.configure(bg='#404040')
+
+    parent.update_idletasks()
+    try:
+        geom = parent.winfo_geometry()
+        parts = geom.split('+')
+        pos = f"+{parts[1]}+{parts[2]}" if len(parts) >= 3 else ""
+    except Exception:
+        pos = ""
+    win.geometry(f"{largura}x{altura}{pos}")
+
+    cont = tk.Frame(win, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
+    cont.pack(fill='both', expand=True)
+
+    titlebar = tk.Frame(cont, bg='#303030')
+    titlebar.pack(fill='x', side='top')
+
+    def start_move(e):
+        win._ox, win._oy = e.x_root, e.y_root
+    def do_move(e):
+        dx = e.x_root - win._ox
+        dy = e.y_root - win._oy
+        x = win.winfo_x() + dx
+        y = win.winfo_y() + dy
+        win.geometry(f"+{x}+{y}")
+        win._ox, win._oy = e.x_root, e.y_root
+    titlebar.bind("<Button-1>", start_move)
+    titlebar.bind("<B1-Motion>", do_move)
+
+    def close_win():
+        if on_close:
+            try:
+                on_close()
+            except Exception:
+                pass
+        try:
+            win.destroy()
+        except Exception:
+            pass
+
+    def minimize_win():
+        win.overrideredirect(False)
+        win.iconify()
+        def restore(_):
+            win.overrideredirect(True)
+        win.bind("<Map>", restore, add="+")
+
+    btn_fg = '#ffffff'
+    btn_bg = '#303030'
+    btn_bg_hover = '#444444'
+    def make_title_btn(text, cmd):
+        b = tk.Label(titlebar, text=text, fg=btn_fg, bg=btn_bg, width=3)
+        b.bind("<Enter>", lambda e: b.config(bg=btn_bg_hover))
+        b.bind("<Leave>", lambda e: b.config(bg=btn_bg))
+        b.bind("<Button-1>", lambda e: cmd())
+        return b
+
+    btn_close = make_title_btn("✕", close_win)
+    btn_close.pack(side='right', padx=(0, 6), pady=1)
+    btn_min = make_title_btn("—", minimize_win)
+    btn_min.pack(side='right', padx=(0, 2), pady=1)
+
+    lbl_title = tk.Label(titlebar, text=titulo, fg='#ffffff', bg='#303030', font=("Arial", 11, "bold"))
+    lbl_title.pack(side='top', pady=4)
+
+    content = tk.Frame(cont, bg='#606060')
+    content.pack(fill='both', expand=True)
+
+    win.bind("<Escape>", lambda e: close_win())
+
+    def fechar():
+        try:
+            win.unbind_all("<MouseWheel>")
+            win.unbind_all("<Button-4>")
+            win.unbind_all("<Button-5>")
+        except Exception:
+            pass
+        close_win()
+
+    return win, content, fechar
+
 
 if __name__ == "__main__":
     cartas = carregar_cartas(os.path.join(BASE, 'cartas'))
     cavalas = carregar_cavalas(os.path.join(BASE, 'cavalas'))
 
-    root = criar_janela_centrada(1245, 715)
-    app = UmaApp(root, cartas, cavalas)
+    root, content = criar_janela_centrada_custom(1245, 715, "CAVALA Trainer")
+    app = UmaApp(root, content, cartas, cavalas)
     root.mainloop()
