@@ -6,7 +6,7 @@ from PIL import Image, ImageTk, ImageOps
 from tkinter.font import Font
 import re
 
-# [HORIZON] imports usados apenas pelo splash (som, escolha aleatória, etc.)
+# imports usados apenas pelo splash (som, escolha aleatória, etc.)
 import random
 import threading
 import time
@@ -82,6 +82,7 @@ def carregar_cartas(diretorio):
                 key = imagem
                 if key in itens:
                     # se duas cartas apontarem para a mesma imagem, tem aviso no terminal
+                    # já aconteceu entao botei pra evitar eu mesmo de ser mais burro que o de costume
                     print(f"[AVISO] carta duplicada por imagem '{key}' em {path}")
 
                 itens[key] = dados
@@ -102,8 +103,8 @@ def carregar_cavalas(diretorio):
 # -----------------------------------
 class EventoExpandivel(tk.Frame):
     # -----------------------------------
-    # Um painel simples com título clicável que expande/colapsa para mostrar detalhes.
-    # Suporta marcações simples de negrito em ANSI (\033[1m ... \033[0m).
+    # painel simples com título clicável que expande/colapsa para mostrar detalhes
+    # suporta marcações simples de negrito em ANSI (\033[1m ... \033[0m)
     # -----------------------------------
     def __init__(self, master, titulo, detalhes, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
@@ -384,6 +385,7 @@ class UmaApp:
         self.canvas_eventos.bind("<Configure>", on_canvas_configure)
 
         # handlers de scroll com checagem de limites (trava no topo/fundo)
+        # necessario pra evitar que nos eventos das cartas dê pra "subir a tela" quando nao deveria ser possivel
         def on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 up = event.delta > 0
@@ -419,17 +421,17 @@ class UmaApp:
         self.root.bind("<Button-4>", on_button4, add="+")
         self.root.bind("<Button-5>", on_button5, add="+")
 
-        # estruturas de controle
-        self.imagens_exibidas = {}
+        # estruturas de controle para exibição de imagens e estado da seleção
+        self.imagens_exibidas = {}              # chave: 'cavala' | card_id | 'avulsa:{card_id}' -> botão (para trocar img)
         self.evento_expandido_atual = None
-        self.img_refs = {}
-        self.selecionado = None
+        self.img_refs = {}                      # referências para evitar dar ruim no do Tinker
+        self.selecionado = None                 # quem tá selecionado no momento
 
-        # dica
+        # flag e widget pra dica
         self._dica_visivel = False
         self._dica_widget = None
 
-        # flags de seletor
+        # flags para evitar abrir múltiplas janelas do seletor ao mesmo tempo
         self.janela_cavala_aberta = False
         self.janela_cartas_aberta = False
         self.janela_avulsa_aberta = False
@@ -440,8 +442,14 @@ class UmaApp:
             messagebox.showwarning("Aviso", "Nenhuma carta encontrada em 'cartas/'.")
 
 
-    # ----------- utilitarios -----------
+    # -----------
+    # utilitarios
+    # -----------
     def criar_botao_arredondado(self, parent, texto, comando=None, min_w=140, min_h=40, pad_x=16, pad_y=10, radius=14):
+        # -------------------------
+        # cria um "botão" custom desenhado com cantos arredondados (Canvas)
+        # retorna o canvas com binds para clique/hover (sem hover ainda)
+        # -------------------------
         c = tk.Canvas(parent, bg=parent['bg'], highlightthickness=0, bd=0, cursor="")
         bg_btn = self.btn_style['bg']
         active_bg = self.btn_style['activebackground']
@@ -458,16 +466,20 @@ class UmaApp:
             c.delete("all")
             x1, y1, x2, y2 = 1, 1, w - 2, h - 2
             r = max(6, min(radius, (x2 - x1) // 2, (y2 - y1) // 2))
+            # corpo
             c.create_rectangle(x1 + r, y1, x2 - r, y2, fill=cor_bg, outline="")
             c.create_rectangle(x1, y1 + r, x2, y2 - r, fill=cor_bg, outline="")
+            # cantos
             c.create_arc(x2 - 2 * r, y1, x2, y1 + 2 * r, start=0, extent=90, style="pieslice", fill=cor_bg, outline="")
             c.create_arc(x1, y1, x1 + 2 * r, y1 + 2 * r, start=90, extent=90, style="pieslice", fill=cor_bg, outline="")
             c.create_arc(x1, y2 - 2 * r, x1 + 2 * r, y2, start=180, extent=90, style="pieslice", fill=cor_bg, outline="")
             c.create_arc(x2 - 2 * r, y2 - 2 * r, x2, y2, start=270, extent=90, style="pieslice", fill=cor_bg, outline="")
+            # linhas finas de borda (estética)
             c.create_line(x1 + r, y1, x2 - r, y1, fill="#333333")
             c.create_line(x2, y1 + r, x2, y2 - r, fill="#333333")
             c.create_line(x1 + r, y2, x2 - r, y2, fill="#333333")
             c.create_line(x1, y1 + r, x1, y2 - r, fill="#333333")
+            # texto
             c.create_text(w // 2, h // 2, text=texto, fill=fg, font=("Arial", 11, "bold"))
 
         draw(bg_btn)
@@ -486,14 +498,21 @@ class UmaApp:
         return c
 
     def _desenhar_roundrect(self, canvas, x1, y1, x2, y2, r, fill="", outline="", width=1):
+        # -------------------------
+        # desenha um retângulo com cantos arredondados no canvas 'Canvas'.
+        # usa shapes básicos para simular um efeito de arredondado (compatível com tinker).
+        # -------------------------
         canvas.delete("roundpanel")
         r = max(0, min(r, (x2 - x1) // 2, (y2 - y1) // 2))
+        # corpo
         canvas.create_rectangle(x1 + r, y1, x2 - r, y2, fill=fill, outline="", tags="roundpanel")
         canvas.create_rectangle(x1, y1 + r, x2, y2 - r, fill=fill, outline="", tags="roundpanel")
+        # cantos
         canvas.create_arc(x2 - 2 * r, y1, x2, y1 + 2 * r, start=0, extent=90, style="pieslice", fill=fill, outline="", tags="roundpanel")
         canvas.create_arc(x1, y1, x1 + 2 * r, y1 + 2 * r, start=90, extent=90, style="pieslice", fill=fill, outline="", tags="roundpanel")
         canvas.create_arc(x1, y2 - 2 * r, x1 + 2 * r, y2, start=180, extent=90, style="pieslice", fill=fill, outline="", tags="roundpanel")
         canvas.create_arc(x2 - 2 * r, y2 - 2 * r, x2, y2, start=270, extent=90, style="pieslice", fill=fill, outline="", tags="roundpanel")
+        # contorno
         if outline and width > 0:
             canvas.create_line(x1 + r, y1, x2 - r, y1, fill=outline, width=width, tags="roundpanel")
             canvas.create_line(x2, y1 + r, x2, y2 - r, fill=outline, width=width, tags="roundpanel")
@@ -503,6 +522,10 @@ class UmaApp:
             canvas.create_arc(x1, y1, x1 + 2 * r, y1 + 2 * r, start=90, extent=90, style="arc", outline=outline, width=width, tags="roundpanel")
 
     def _criar_painel_arredondado(self, parent, fill='#505050', outline='#6a6a6a', radius=14, pad=8, min_height=80, fill_parent_x=True, pady=(6, 6), padx=10):
+        # -------------------------
+        # cria um Canvas com conteúdo dentro (frame) e desenha um painel arredondado ao fundo
+        # retorna (canvas, frame_interno, callback_redraw)
+        # -------------------------
         canvas = tk.Canvas(parent, bg=parent['bg'], highlightthickness=0, bd=0)
         if fill_parent_x:
             canvas.pack(fill='x', padx=padx, pady=pady)
@@ -529,10 +552,15 @@ class UmaApp:
     # seletor (cavala/cartas)
     # -------------------------
     def abrir_seletor_cavala(self):
+
+        # abre seletor de cavala em janela personalizada
+        # evita múltiplas instâncias com flag
+
         if self.janela_cavala_aberta:
             return
         self.janela_cavala_aberta = True
 
+        # tamanho seletor cavalas
         largura = 1245
         altura = 715
         win, win_content, _fechar = criar_toplevel_custom(
@@ -550,6 +578,7 @@ class UmaApp:
         header_btn = self.criar_botao_arredondado(grade_frame, "Cavalas disponíveis:", comando=None, min_w=220, min_h=40)
         header_btn.pack(pady=(10, 0))
 
+        # canvas com scroll vertical
         canvas = tk.Canvas(grade_frame, bg='#505050', highlightthickness=0)
         scrollbar = ttk.Scrollbar(grade_frame, orient='vertical', command=canvas.yview)
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -567,6 +596,7 @@ class UmaApp:
             canvas.itemconfig(janela_id, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
+        # ajuste de altura útil do canvas de acordo com o painel
         def sync_canvas_height_cavala(event=None):
             h = getattr(painel_canvas, "_round_inner_height", 700)
             altura_util = max(300, h - 100)
@@ -575,6 +605,7 @@ class UmaApp:
         grade_frame.bind("<Configure>", sync_canvas_height_cavala)
         win.after(0, sync_canvas_height_cavala)
 
+        # bind de scroll quando o mouse entra no canvas
         def _on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 up = event.delta > 0
@@ -608,6 +639,7 @@ class UmaApp:
         canvas.bind("<Enter>", _bind_wheel)
         canvas.bind("<Leave>", _unbind_wheel)
 
+        # grade de imagens de cavalas pra deixar bonito na tela
         linha = 0
         coluna = 0
         max_colunas = 7
@@ -615,6 +647,7 @@ class UmaApp:
             frame.grid_columnconfigure(col, weight=1)
 
         def atualizar_botao_cavala(texto, largura=220):
+            # atualiza o botão principal na barra superior com o nome da cavala selecionada
             for w in self.slot_cavala.winfo_children():
                 w.destroy()
             self.btn_cavala = self.criar_botao_arredondado(
@@ -659,12 +692,19 @@ class UmaApp:
                 linha += 1
 
     def _abrir_seletor_cartas_base(self, limite, ao_confirmar):
+        # -------------------------
+        # abre seletor de cartas com ícones de tipos (speed, power, etc.)
+        # 'limite' define se é deck (6) ou avulsa (1)
+        # ao confirmar ou atingir limite, chama 'ao_confirmar'
+        # assim, se quiser so colocar menos cartas, pode tambem 
+        # -------------------------
         self.root.update_idletasks()
         scr_h = self.root.winfo_screenheight()
         largura = 1245
         altura = min(715, scr_h - 120)
 
         def _on_close_flag():
+            # fecha a janela e libera a flag de "aberto"
             if limite > 1:
                 self.janela_cartas_aberta = False
             else:
@@ -677,26 +717,31 @@ class UmaApp:
         win.grab_set()
         win.focus_force()
 
+        # painel com botões de tipo
         _, tipo_frame, _ = self._criar_painel_arredondado(
             win_content, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(10, 6), padx=10
         )
         inner_tipos = tk.Frame(tipo_frame, bg=tipo_frame['bg'])
         inner_tipos.pack(anchor='center', pady=4)
 
+        # painel de header (contador + confirmar)
         _, header_frame, _ = self._criar_painel_arredondado(
             win_content, fill='#505050', outline='#6a6a6a', radius=14, pad=10, min_height=60, pady=(0, 6), padx=10
         )
 
+        # painel da grade de cartas (com scroll)
         painel_grade_canvas, conteiner_grade, _ = self._criar_painel_arredondado(
             win_content, fill='#505050', outline='#6a6a6a', radius=16, pad=10, min_height=450, pady=(0, 10), padx=10
         )
 
+        # contador dinâmico de cartas selecionadas
         contador_var = tk.StringVar()
         def atualiza_contador():
             val = len(self.deck) if limite > 1 else (1 if self.carta_avulsa else 0)
             contador_var.set(f"{val}/{limite} cartas selecionadas")
         atualiza_contador()
 
+        # header com contador centralizado e botão pra confirmar
         for w in header_frame.winfo_children():
             w.destroy()
         header_frame.grid_columnconfigure(0, weight=1)
@@ -718,6 +763,7 @@ class UmaApp:
         )
         btn_confirm.grid(row=1, column=1, padx=8, pady=(0, 8))
 
+        # canvas com scroll e frame interno
         canvas = tk.Canvas(conteiner_grade, bg='#505050', highlightthickness=0)
         scrollbar = ttk.Scrollbar(conteiner_grade, orient="vertical", command=canvas.yview)
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -735,6 +781,7 @@ class UmaApp:
             canvas.itemconfig(id_janela, width=event.width)
         canvas.bind("<Configure>", on_canvas_configure)
 
+        # ajuste de altura útil do canvas da grade
         def sync_canvas_height_cartas(event=None):
             h = getattr(painel_grade_canvas, "_round_inner_height", 400)
             altura_util = max(200, h - 24)
@@ -744,6 +791,7 @@ class UmaApp:
         win.bind("<Configure>", sync_canvas_height_cartas)
         win.after(0, sync_canvas_height_cartas)
 
+        # bind de scroll quando o mouse entra no canvas
         def _on_mousewheel(event):
             if hasattr(event, "delta") and event.delta:
                 up = event.delta > 0
@@ -777,8 +825,11 @@ class UmaApp:
         canvas.bind("<Enter>", _bind_wheel)
         canvas.bind("<Leave>", _unbind_wheel)
 
+        # armazena referências de botões das cartas (se precisar)
         self.botoes_cartas = {}
 
+        # função para ordenar pela raridade que fica no final do nome do arquivo das cartas
+        # faz aparecer primeiro as SSR, dps as SR e por fim as R
         def extrair_raridade(nome_arquivo):
             if nome_arquivo.endswith("_SSR.png"):
                 return 0
@@ -788,7 +839,12 @@ class UmaApp:
                 return 2
             return 3
 
+        # -------------------------
+        # renderiza as cartas de um 'tipo' na grade, respeitando o limite
+        # usa card_id (imagem) como chave única.
+        # -------------------------
         def mostrar_cartas_por_tipo(tipo):
+            # limpa conteúdo atual
             for widget in conteudo_frame.winfo_children():
                 widget.destroy()
 
@@ -798,10 +854,12 @@ class UmaApp:
             inner_grade = tk.Frame(inner_grade_wrap, bg=conteudo_frame['bg'])
             inner_grade.pack(anchor='center')
 
+            # limite de quantas cartas por linha
             linha = 0
             coluna = 0
             max_colunas = 6
 
+            # self.c: card_id -> dados
             cartas_filtradas = [
                 (card_id, dados) for card_id, dados in self.c.items()
                 if tipo in card_id
@@ -822,10 +880,12 @@ class UmaApp:
                     print(f"Erro ao carregar imagem da carta {nome}: {e}")
                     continue
 
+                # atualiza mapas auxiliares
                 self.card_by_id[card_id] = dados
                 self.name_by_id[card_id] = nome
 
                 def alternar_carta_normal(cid=card_id, btn_ref=None, colorida=None, cinza=None):
+                    # alterna presença no deck (até 'limite')
                     if cid in self.deck:
                         self.deck.remove(cid)
                         btn_ref.config(image=cinza); btn_ref.image = cinza
@@ -836,9 +896,11 @@ class UmaApp:
                     self.mostrar()
                     atualiza_contador()
                     if len(self.deck) == limite:
+                        # auto-confirm após atingir limite
                         win.after(300, lambda: (ao_confirmar(), _close_and_reset()))
 
                 def alternar_carta_avulsa(cid=card_id, btn_ref=None, colorida=None, cinza=None):
+                    # alterna carta avulsa (única)
                     if self.carta_avulsa == cid:
                         self.carta_avulsa = None
                         btn_ref.config(image=cinza); btn_ref.image = cinza
@@ -849,6 +911,7 @@ class UmaApp:
                     self.mostrar()
                     atualiza_contador()
                     if self.carta_avulsa:
+                        # auto-confirm quando setar a avulsa
                         win.after(300, lambda: (ao_confirmar(), _close_and_reset()))
 
                 cell = tk.Frame(inner_grade, bg='#505050')
@@ -879,6 +942,7 @@ class UmaApp:
             canvas.update_idletasks()
             canvas.yview_moveto(0)
 
+        # botões com ícones de tipos pras cartas
         tipos = ['speed', 'wisdom', 'power', 'stamina', 'guts', 'pal']
         for tipo in tipos:
             try:
@@ -893,12 +957,18 @@ class UmaApp:
             except Exception as e:
                 print(f"Erro ao carregar ícone do tipo {tipo}: {e}")
 
+        # abre inicialmente no tipo 'speed'
+        # abre no speed por que sim, eu só gosto do speed
         mostrar_cartas_por_tipo('speed')
+        # fechamento (WM_DELETE_WINDOW, ESC, confirmar)
         win.protocol("WM_DELETE_WINDOW", _close_and_reset)
         win.bind("<Escape>", lambda e: _close_and_reset())
         return win
 
     def abrir_seletor_cartas(self):
+        # -------------------------
+        # seletor para o deck (6 cartas)
+        # -------------------------
         if self.janela_cartas_aberta:
             return
         self.janela_cartas_aberta = True
@@ -907,6 +977,9 @@ class UmaApp:
         self._abrir_seletor_cartas_base(limite=6, ao_confirmar=ao_confirmar)
 
     def abrir_seletor_carta_avulsa(self):
+        # -------------------------
+        # seletor para a carta avulsa (1 carta).
+        # -------------------------
         if self.janela_avulsa_aberta:
             return
         self.janela_avulsa_aberta = True
@@ -914,17 +987,27 @@ class UmaApp:
             self.janela_avulsa_aberta = False
         self._abrir_seletor_cartas_base(limite=1, ao_confirmar=ao_confirmar)
 
-    # -------------------- renderização principal --------------------
+    # --------------------
+    # renderização principal
+    # --------------------
     def _criar_separador_vertical(self, parent, altura=140, cor='#ffffff'):
+        # -------------------------
+        # desenha um separador vertical simples - a linha reta que separa as cartas da carta unica/avulsa
+        # -------------------------
         canvas = tk.Canvas(parent, width=10, height=altura, bg=parent['bg'], highlightthickness=0)
         canvas.create_line(5, 10, 5, altura - 10, fill=cor, width=2)
         return canvas
 
+    # dica em painel arredondado
     def _mostrar_dica_inicial(self):
         if self._dica_visivel:
             return
+        
+        # limpa a área de eventos apenas para a dica
         for w in self.frame_eventos.winfo_children():
             w.destroy()
+
+        # painel arredondado para a dica, dentro do wrapper do canvas de eventos
         dica_canvas, dica_frame, _ = self._criar_painel_arredondado(
             self.wrapper_eventos,
             fill='#505050',
@@ -936,6 +1019,8 @@ class UmaApp:
             pady=(8, 8),
             padx=16
         )
+
+        # conteudo da dica
         self._dica_widget = tk.Label(
             dica_frame,
             text="Confuso sobre como usar? Começe escolhendo uma cavala e selecione suas cartas (ou uma carta avulsa)\n Em seguida, clique na cavala ou na carta para ver os eventos dela.",
@@ -963,6 +1048,11 @@ class UmaApp:
             self._dica_visivel = False
             self._dica_widget = None
 
+
+    # -------------------------
+    # reconstroi a área superior (cavala + deck + avulsa) e limpa/repõe área de eventos
+    # também reativa a busca (placeholder/estado) toda vez (feito pra evita a busca de bugar)
+    # -------------------------
     def mostrar(self):
         for widget in self.frame_exibicao.winfo_children():
             widget.destroy()
@@ -974,6 +1064,7 @@ class UmaApp:
         self.img_refs.clear()
         self.selecionado = None
 
+        # estado da busca
         if not self._search_active or self.search_var.get() == self._search_placeholder:
             self._search_active = False
             self.search_entry.config(fg='#bfbfbf')
@@ -983,6 +1074,7 @@ class UmaApp:
         self.search_entry.bind("<FocusOut>", lambda e: self._on_search_focus_out())
         self.search_entry.focus_set()
 
+        # renderiza cavala (se tiver alguma)
         if self.cavala_selecionada:
             dados_cavala = self.cv.get(self.cavala_selecionada)
             if dados_cavala:
@@ -1000,6 +1092,7 @@ class UmaApp:
                     frame_cavala.pack(side='left', padx=10)
 
                     def on_click_cavala():
+                        # seleciona cavala para mostrar eventos dela
                         self._remover_dica_inicial()
                         self.atualizar_selecao('cavala')
 
@@ -1016,6 +1109,7 @@ class UmaApp:
                     self.img_refs['cavala_colorida'] = img_colorida
                     self.img_refs['cavala_cinza'] = img_cinza
 
+        # renderiza cartas do deck
         frame_cartas = tk.Frame(self.frame_exibicao, bg=self.area_cor)
         frame_cartas.pack(side='left', padx=20)
 
@@ -1037,6 +1131,7 @@ class UmaApp:
             frame_carta = tk.Frame(frame_cartas, bg=self.area_cor)
             frame_carta.pack(side='left', padx=5)
 
+            # seleciona carta para mostrar eventos dela
             def on_click_carta(cid=card_id):
                 self._remover_dica_inicial()
                 self.atualizar_selecao(cid)
@@ -1054,9 +1149,12 @@ class UmaApp:
             self.img_refs[f'{card_id}_colorida'] = img_colorida
             self.img_refs[f'{card_id}_cinza'] = img_cinza
 
+        # separador vertical entre deck e avulsa
+        # aqui ele spawna, antes foi so desenhado
         sep = self._criar_separador_vertical(self.frame_exibicao, altura=160, cor='#ffffff')
         sep.pack(side='left', padx=10)
 
+        # renderiza carta avulsa (se tiver)
         avulsa_frame = tk.Frame(self.frame_exibicao, bg=self.area_cor)
         avulsa_frame.pack(side='left', padx=10)
 
@@ -1074,6 +1172,7 @@ class UmaApp:
                     print(f"Erro ao carregar imagem da carta avulsa {nome_carta}: {e}")
                     img_colorida = img_cinza = None
 
+                # 'avulsa:{card_id}' é uma chave separada para armazenar o botão e imagens
                 def on_click_avulsa(cid=self.carta_avulsa):
                     self._remover_dica_inicial()
                     self.atualizar_selecao(f"avulsa:{cid}")
@@ -1095,13 +1194,17 @@ class UmaApp:
                     self.img_refs[f"avulsa:{self.carta_avulsa}_colorida"] = img_colorida
                     self.img_refs[f"avulsa:{self.carta_avulsa}_cinza"] = img_cinza
 
+        # dica inicial na área de eventos (se nada tiver sido selecionado)
         if not self.cavala_selecionada and not self.deck and not self.carta_avulsa:
             self._mostrar_dica_inicial()
         else:
             self._remover_dica_inicial()
             self.mostrar_eventos(None)
 
-    # ------------- busca -------------
+
+    # -------------
+    # busca (filtro)
+    # -------------
     def _on_search_focus_in(self):
         if not self._search_active:
             self._search_active = True
@@ -1115,8 +1218,20 @@ class UmaApp:
             self.search_entry.config(fg='#bfbfbf')
             self.search_var.set(self._search_placeholder)
 
+
+    # -----------------
     # seleção e eventos
+    # -----------------
     def atualizar_selecao(self, selecionado):
+        # -----------------
+        # atualiza quem que tá selecionado:
+        # 'cavala'
+        # card_id (carta do deck)
+        # 'avulsa:{card_id}'
+        # e no fim atualiza a imagem (colorida/cinza) e a lista de eventos mostrada
+        # -----------------
+
+        # clicar em que já tá selecionado = desmarcar 
         if self.selecionado == selecionado:
             btn = self.imagens_exibidas.get(selecionado)
             if btn:
@@ -1126,12 +1241,14 @@ class UmaApp:
             self.mostrar_eventos(None)
             return
 
+        # volta o anterior para cinza
         if self.selecionado is not None:
             btn_antigo = self.imagens_exibidas.get(self.selecionado)
             if btn_antigo:
                 btn_antigo.config(image=btn_antigo.image_cinza)
                 btn_antigo.image = btn_antigo.image_cinza
 
+        # marca o novo como colorido e mostra eventos
         btn_novo = self.imagens_exibidas.get(selecionado)
         if btn_novo:
             btn_novo.config(image=btn_novo.image_colorida)
@@ -1139,25 +1256,39 @@ class UmaApp:
             self.selecionado = selecionado
             if isinstance(selecionado, str) and selecionado.startswith("avulsa:"):
                 cid = selecionado.split(":", 1)[1]
-                self.mostrar_eventos(cid)
+                self.mostrar_eventos(cid)           # passa card_id da avulsa
             else:
                 self.mostrar_eventos(selecionado)
 
+
+    # -----------------
+    # renderiza a lista de eventos no painel inferior conforme 'selecionado'.
+    # -----------------
     def mostrar_eventos(self, selecionado):
+
+        # mantém dica se nada selecionado e dica ativa
         if self._dica_visivel and selecionado is None and not (self.cavala_selecionada or self.deck or self.carta_avulsa):
             return
         for w in self.frame_eventos.winfo_children():
             w.destroy()
         self._remover_dica_inicial()
+
+        # reseta scroll para topo a cada troca
+        # evita que dps de scrollar ate muito embaixo, bugue quando trocar da cavala pra uma carta
         self.canvas_eventos.yview_moveto(0)
         if selecionado is None:
             return
         if selecionado == 'cavala':
             self.mostrar_eventos_cavala()
         else:
+            # selecionado é card_id de carta
             self.mostrar_eventos_carta(selecionado)
 
     def mostrar_eventos_cavala(self):
+        # -----------------
+        # mostra eventos da cavala selecionada, agrupados por categoria
+        # aplica filtro por prefixo no título do evento (se tiver texto na busca)
+        # -----------------
         dados = self.cv.get(self.cavala_selecionada, {})
         filtro = self._texto_filtro()
         for cat, eventos in dados.get("eventos", {}).items():
@@ -1172,6 +1303,10 @@ class UmaApp:
                 ev_expand.pack(fill='x', padx=10, pady=2)
 
     def mostrar_eventos_carta(self, card_id):
+        # -----------------
+        # mostra eventos da carta (por card_id), agrupados por categoria
+        # aplica filtro por prefixo no título do evento (se tiver texto na busca)
+        # -----------------
         dados_carta = self.card_by_id.get(card_id) or self.c.get(card_id)
         if not dados_carta:
             return
@@ -1188,17 +1323,27 @@ class UmaApp:
                 ev_expand.pack(fill='x', padx=10, pady=1)
 
     def _texto_filtro(self):
+        # -----------------
+        # retorna o texto do filtro de busca em minúsculas mas só se ativo /// senão, string vazia
+        # -----------------
         txt = self.search_var.get().strip()
         if not getattr(self, "_search_active", False) or txt == self._search_placeholder:
             return ""
         return txt.lower()
 
     def _combina_filtro(self, titulo, filtro):
+        # -----------------
+        # critério de filtro: título do evento começa com 'filtro' (case-insensitive)
+        # trocar para 'in' se quiser conter em vez de prefixo
+        # -----------------
         if not filtro:
             return True
         return str(titulo).lower().startswith(filtro)
 
     def _aplicar_filtro_eventos(self):
+        # -----------------
+        # reaplica o filtro na lista atual de eventos
+        # -----------------
         if self.selecionado is None:
             for w in self.frame_eventos.winfo_children():
                 w.destroy()
@@ -1210,6 +1355,9 @@ class UmaApp:
             self.mostrar_eventos(self.selecionado)
 
     def _limpar_pesquisa(self):
+        # -----------------
+        # limpa campo de busca e reaplica filtro
+        # -----------------
         self.search_entry.configure(state='normal')
         self.search_entry.focus_set()
         self._search_active = True
@@ -1218,6 +1366,10 @@ class UmaApp:
         self._aplicar_filtro_eventos()
 
     def resetar_escolhas(self):
+        # -----------------
+        # reseta toda a seleção (deck, avulsa, cavala) e limpa painéis
+        # manda o app de volta pro inicio
+        # -----------------
         self.deck = []
         self.carta_avulsa = None
         for widget in self.frame_exibicao.winfo_children():
@@ -1228,12 +1380,17 @@ class UmaApp:
         self.img_refs.clear()
         self.selecionado = None
         self.cavala_selecionada = None
+
+        # restaura botão de cavala padrão na top bar
+        # necessario pois as vezes bugava ao limpar o app
         for w in self.slot_cavala.winfo_children():
             w.destroy()
         self.btn_cavala = self.criar_botao_arredondado(
             self.slot_cavala, "Escolha sua cavala", comando=self.abrir_seletor_cavala, min_w=180, min_h=40
         )
         self.btn_cavala.pack()
+
+        # volta a mostrar a dica
         self._mostrar_dica_inicial()
 
 
@@ -1241,6 +1398,12 @@ class UmaApp:
 # janelas custom
 # ------------------------
 def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
+    # -----------------
+    # cria janela principal sem bordas padrão (overrideredirect) com barra de título custom
+    # centralizada na tela, com botões de fechar/minimizar
+    # retorna (root, content_frame)
+    # puramente estetico pq sou frescurento 
+    # -----------------
     root = tk.Tk()
     largura_tela = root.winfo_screenwidth()
     altura_tela = root.winfo_screenheight()
@@ -1253,6 +1416,7 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     cont = tk.Frame(root, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
     cont.pack(fill='both', expand=True)
 
+    # barra de título custom (arrastar janela)
     titlebar = tk.Frame(cont, bg='#303030')
     titlebar.pack(fill='x', side='top')
 
@@ -1268,6 +1432,7 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     titlebar.bind("<Button-1>", start_move)
     titlebar.bind("<B1-Motion>", do_move)
 
+    # botões da barra
     btn_fg = '#ffffff'
     btn_bg = '#303030'
     btn_bg_hover = '#444444'
@@ -1298,10 +1463,16 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     content = tk.Frame(cont, bg='#606060')
     content.pack(fill='both', expand=True)
 
+    # atalho ESC para fechar app
     root.bind("<Escape>", lambda e: root.destroy())
     return root, content
 
 def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=None):
+    # -----------------
+    # cria Toplevel sem bordas padrão (overrideredirect) com barra de título custom,
+    # posicionado próximo da janela pai, com fechar/minimizar
+    # retorna (win, content_frame, fechar_callback)
+    # -----------------
     win = tk.Toplevel(parent)
     win.overrideredirect(True)
     win.configure(bg='#404040')
@@ -1318,6 +1489,7 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
     cont = tk.Frame(win, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
     cont.pack(fill='both', expand=True)
 
+    # barra de título custom (arrastar janela)
     titlebar = tk.Frame(cont, bg='#303030')
     titlebar.pack(fill='x', side='top')
 
@@ -1333,6 +1505,7 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
     titlebar.bind("<Button-1>", start_move)
     titlebar.bind("<B1-Motion>", do_move)
 
+    # funcao pra fechar janela pelo 'X' custom
     def close_win():
         if on_close:
             try:
@@ -1344,6 +1517,7 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
         except Exception:
             pass
     
+    # funcao pra minimizar janela pelo '-' custom
     def minimize_win():
         win.overrideredirect(False)
         win.iconify()
@@ -1375,6 +1549,9 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
     win.bind("<Escape>", lambda e: close_win())
 
     def fechar():
+        # -----------------
+        # por via das duvidas codigo "seguro" para fechar e limpar binds globais do mouse
+        # -----------------
         try:
             win.unbind_all("<MouseWheel>")
             win.unbind_all("<Button-4>")
@@ -1387,12 +1564,12 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
 
 
 # ------------------------
-# [HORIZON] Splash screen custom
-# - Janela independente (tk.Tk) com overrideredirect, não interfere nos Toplevels do app.
-# - Título, logo .ico renderizado como imagem e ícone, rodapé com duas linhas.
-# - Som aleatório da pasta 'sounds' (com 'cavalo_raro.wav' mais raro).
-# - Duração fixa (5s). Anima "Carregando..." e cancela ao fechar para evitar erro "invalid command name anim".
-# - Ao fechar o splash, chama callback para abrir a janela principal imediatamente.
+# splash screen custom (tela de carregamento antes do app iniciar)
+# janela independente (tk.Tk) com overrideredirect, não interfere nos Toplevels do app
+# título, logo .ico renderizado como imagem e ícone, rodapé com duas linhas
+# som aleatório da pasta 'sounds' (com 'cavalo_raro.wav' mais raro afinal sou eu relinchando)
+# duração fixa (5s). Anima "Carregando..." e cancela ao fechar para evitar erro "invalid command name anim" (tava dando mt esse erro)
+# ao fechar o splash, chama callback para abrir a janela principal imediatamente
 # ------------------------
 def _carregar_e_tocar_wav(caminho):
     try:
@@ -1424,10 +1601,10 @@ def mostrar_splash_custom(
     rodape_linha2="Oferecimento: Uma Musume Pretty Derby - Cavalapostagem (facebook)",
     logo_ico_path=None,       # BASE/icon_geral/uma_icon.ico
     sounds_dir=None,          # BASE/sounds
-    duracao_ms=5000,          # 5s
+    duracao_ms=5000,          # 5 segundos
     largura=560,
     altura=360,
-    on_close=None             # [HORIZON] callback chamado ao fechar o splash
+    on_close=None             # callback chamado ao fechar o splash
 ):
     splash = tk.Tk()
     splash.overrideredirect(True)
@@ -1497,7 +1674,7 @@ def mostrar_splash_custom(
             splash.destroy()
         except Exception:
             pass
-        # [HORIZON] Encadeia abertura do app logo após fechar o splash
+        # encadeia abertura do app logo após fechar o splash
         if callable(on_close):
             try:
                 on_close()
@@ -1511,8 +1688,9 @@ def mostrar_splash_custom(
 # ----------
 # ----------
 if __name__ == "__main__":
-    # [HORIZON] Splash antes do app principal:
-    # - Duração fixa 5s. Carrega dados em paralelo. Ao fechar, abre o app principal.
+    # splash antes do app principal
+    # duração fixa 5 segundos
+    # carrega dados em paralelo e abre o app em seguida
     logo_path = os.path.join(BASE, "icon_geral", "uma_icon.ico")
     sounds_path = os.path.join(BASE, "sounds")
 
@@ -1527,7 +1705,8 @@ if __name__ == "__main__":
     threading.Thread(target=carregar_dados, daemon=True).start()
 
     def abrir_app_principal():
-        # [HORIZON] É chamado após o splash fechar (sequência garantida)
+        # é chamado após o splash fechar 
+        # garante que depois do splash acabar, o app sempre vai abrir 
         root, content = criar_janela_centrada_custom(1245, 715, "CAVALA Trainer")
         app = UmaApp(root, content, estado["cartas"], estado["cavalas"])
         app.mostrar()
@@ -1544,7 +1723,7 @@ if __name__ == "__main__":
         duracao_ms=5000,
         largura=560,
         altura=360,
-        on_close=abrir_app_principal  # [HORIZON] abre app ao fechar splash
+        on_close=abrir_app_principal  # abre app ao fechar splash
     )
 
     splash.mainloop()
