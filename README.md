@@ -53,4 +53,4 @@ Vem comigo que vou evitar sua cavala de virar cola o/
 - As imagens e arquivos `.json` das cavalas e cartas presentes podem sofrer alteração.
 - O app utiliza imagens em `.png` para exibição visual redimensionadas em 128x128.
 - Caso queira você mesmo adicionar novas cavalas/ cartas, cada uma deve seguir o modelo de estrutura JSON definido.
-- Futuramente será convertido em app, fique no aguardo! 
+- BETA DO APP JÁ DISPONÍVEL! 
