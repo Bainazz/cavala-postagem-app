@@ -1,0 +1,52 @@
+{
+  "nome": "Ikuno Dictus",
+  "imagem": "icon_cartas/wisdom/Ikuno_Dictus_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Ikuno-Style Friendship",
+        "detalhes": [
+          "Wisdom +10",
+          "Skill points +20"
+        ]
+      },
+      {
+        "nome": "(❯❯) Ikuno-Style Support",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +15",
+          "'Frenzied Front Runners' hint +3",
+          "Ikuno Dictus bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +15",
+          "'Frenzied End Closers' hint +3",
+          "Ikuno Dictus bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Ikuno-Style Flawless Method",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "Ikuno Dictus bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30",
+          "Ikuno Dictus bond +5"
+        ]
+      },
+      {
+        "nome": "Ikuno-Style Management",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +20",
+          "Ikuno Dictus bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Trick (Rear)' hint +1",
+          "Ikuno Dictus bond +5"
+        ]
+      }
+    ]
+  }
+}

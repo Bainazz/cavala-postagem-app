@@ -1,23 +1,8 @@
 {
   "nome": "Daiwa Scarlet",
-  "imagem": "icon_cartas/wisdom/Daiwa_Scarlet_SR.png",
+  "imagem": "icon_cartas/wisdom/Daiwa_Scarlet_R.png",
   "eventos": {
     "Eventos únicos": [
-      {
-        "nome": "(❯) I Won't Lose to Anyone!",
-        "detalhes": [
-          "Energy +15",
-          "Wisdom +5",
-          "Daiwa Scarlet SR bond +5"
-        ]
-      },
-      {
-        "nome": "(❯❯) I Can Clean Better than Anyone!",
-        "detalhes": [
-          "Wisdom +10",
-          "'Tactical Tweak' hint +1"
-        ]
-      }
     ],
     "Eventos aleatórios": [
       {

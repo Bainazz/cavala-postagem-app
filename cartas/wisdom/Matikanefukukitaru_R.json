@@ -1,0 +1,34 @@
+{
+  "nome": "Matikanefukukitaru",
+  "imagem": "icon_cartas/wisdom/Matikanefukukitaru_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Maximum Spirituality",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +5",
+          "Skill points +15",
+          "Matikanefukukitaru bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +5",
+          "Stamina +5",
+          "Power +5",
+          "Matikanefukukitaru bond +5"
+        ]
+      },
+      {
+        "nome": "When Piety and Kindness Intersect",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +30",
+          "Matikanefukukitaru bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Matikanefukukitaru bond +5"
+        ]
+      }
+    ]
+  }
+}

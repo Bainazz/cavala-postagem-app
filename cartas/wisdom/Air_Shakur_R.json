@@ -1,0 +1,34 @@
+{
+  "nome": "Air Shakur",
+  "imagem": "icon_cartas/wisdom/Air_Shakur_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "//Verification Required",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Guts +5",
+          "Air Shakur bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Stamina +5",
+          "Guts +10",
+          "Air Shakur bond +5"
+        ]
+      },
+      {
+        "nome": "//Absolute Desire",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Pace Strategy' hint +1",
+          "Air Shakur bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Maximum Energy +4",
+          "Guts +5",
+          "Air Shakur bond +5"
+        ]
+      }
+    ]
+  }
+}

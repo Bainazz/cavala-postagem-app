@@ -1,0 +1,35 @@
+{
+  "nome": "Fine Motion",
+  "imagem": "icon_cartas/wisdom/Fine_Motion_R.png",
+  "eventos": {
+    "Eventos únicos": [
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Wonderful New Shoes",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +5",
+          "Skill points +10",
+          "Fine Motion bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Stamina +5",
+          "Skill points +20",
+          "Fine Motion bond +5"
+        ]
+      },
+      {
+        "nome": "Reminiscent Clover",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Corner Adept' hint +1",
+          "Fine Motion bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +15",
+          "Fine Motion bond +5"
+        ]
+      }
+    ]
+  }
+}

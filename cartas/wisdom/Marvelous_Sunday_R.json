@@ -1,23 +1,7 @@
 {
   "nome": "Marvelous Sunday",
-  "imagem": "icon_cartas/wisdom/Marvelous_Sunday_SR.png",
+  "imagem": "icon_cartas/wisdom/Marvelous_Sunday_R.png",
   "eventos": {
-    "Eventos únicos": [
-      {
-        "nome": "(❯) Marvelous World Plan ☆",
-        "detalhes": [
-          "Guts +5",
-          "Wisdom +5"
-        ]
-      },
-      {
-        "nome": "(❯❯) Marvelously Marvelous ☆",
-        "detalhes": [
-          "Guts +15",
-          "Wisdom +15"
-        ]
-      }
-    ],
     "Eventos aleatórios": [
       {
         "nome": "Marvelous, No Question ☆",
@@ -25,6 +9,7 @@
           "\\033[1mOpção de cima\\033[0m",
           "Energy +10",
           "Speed +5",
+          "Marvelous Sunday bond +5",
           "\\033[1mOpção de baixo\\033[0m",
           "Mood +1",
           "Speed +5",

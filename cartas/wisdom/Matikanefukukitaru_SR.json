@@ -1,0 +1,63 @@
+{
+  "nome": "Matikanefukukitaru",
+  "imagem": "icon_cartas/wisdom/Matikanefukukitaru_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Spirits' Lost and Found",
+        "detalhes": [
+          "Energy +5",
+          "Mood +1",
+          "Skill points +15",
+          "Matikanefukukitaru bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Guidance and Friends",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +45",
+          "Matikanefukukitaru bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Aleatoriamente entre:",
+          "Energy +10",
+          "Mood +1",
+          "'Right-Handed' hint +3",
+          "Matikanefukukitaru bond +5",
+          "ou",
+          "Energy -20",
+          "'Right-Handed' hint +1",
+          "Matikanefukukitaru bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Maximum Spirituality",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +5",
+          "Skill points +15",
+          "Matikanefukukitaru bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Speed +5",
+          "Stamina +5",
+          "Power +5",
+          "Matikanefukukitaru bond +5"
+        ]
+      },
+      {
+        "nome": "When Piety and Kindness Intersect",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +30",
+          "Matikanefukukitaru bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Matikanefukukitaru bond +5"
+        ]
+      }
+    ]
+  }
+}

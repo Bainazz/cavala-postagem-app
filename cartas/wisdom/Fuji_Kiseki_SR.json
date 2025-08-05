@@ -1,0 +1,48 @@
+{
+  "nome": "Fuji Kiseki",
+  "imagem": "icon_cartas/wisdom/Fuji_Kiseki_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Abracadabra",
+        "detalhes": [
+          "Wisdom +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Out of This World",
+        "detalhes": [
+          "Wisdom +10",
+          "Skill points +15",
+          "'Flustered End Closers' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Sleight of Hand",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +5",
+          "Skill points +15",
+          "Fuji Kiseki bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Skill points +15",
+          "Fuji Kiseki bond +5"
+        ]
+      },
+      {
+        "nome": "Misdirection",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Prepared to Pass' hint +1",
+          "Fuji Kiseki bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30",
+          "Fuji Kiseki bond +5"
+        ]
+      }
+    ]
+  }
+}

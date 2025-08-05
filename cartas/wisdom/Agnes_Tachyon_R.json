@@ -1,0 +1,60 @@
+{
+  "nome": "Agnes Tachyon",
+  "imagem": "icon_cartas/wisdom/Agnes_Tachyon_R.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Report: Potential of Specialized Training",
+        "detalhes": [
+          "Wisdom +5",
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "(❯❯) Report: N/A (On Break)",
+        "detalhes": [
+          "Wisdom +10",
+          "Skill points +15",
+          "'Subdued Front Runners' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "The Correlation between Sleep and Efficiency",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +5",
+          "Wisdom +5",
+          "Agnes Tachyon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +10",
+          "Agnes Tachyon bond +5"
+        ]
+      },
+      {
+        "nome": "Happenstance Introduced Through Intervention",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Late Surger Savvy' hint +1",
+          "Agnes Tachyon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +10",
+          "Agnes Tachyon bond +5"
+        ]
+      },
+      {
+        "nome": "(Delicious) Burden",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Ramp Up' hint +1",
+          "Agnes Tachyon bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Maximum Energy +4",
+          "Agnes Tachyon bond +5"
+        ]
+      }
+    ]
+  }
+}

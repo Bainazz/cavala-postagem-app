@@ -1,0 +1,52 @@
+{
+  "nome": "Mejiro Dober",
+  "imagem": "icon_cartas/wisdom/Mejiro_Dober_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Don't Need to Be Complimented",
+        "detalhes": [
+          "Energy +10",
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Don't Need to Be Seen",
+        "detalhes": [
+          "Aleatoriamente entre:",
+          "Energy +5",
+          "Stamina +5",
+          "or",
+          "Energy +20",
+          "Stamina +15",
+          "'Slick Surge' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Give It a Try",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Mejiro Dober bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Mejiro Dober bond +5"
+        ]
+      },
+      {
+        "nome": "Hope She'll Like It...",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +45",
+          "Mejiro Dober bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Unyielding Spirit' hint +1",
+          "Mejiro Dober bond +5"
+        ]
+      }
+    ]
+  }
+}
