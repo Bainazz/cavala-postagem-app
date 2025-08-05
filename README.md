@@ -25,6 +25,7 @@ Vem comigo que vou evitar sua cavala de virar cola o/
 ├── icon_geral/                 # icones gerais em formato .ico
 ├── icon_tipos/                 # icones dos tipos das cartas em formato .png
 ├── sounds/                     # sons de inicializacao em formato .wav
+├── CAVALA_Trainer.exe          # aplicação em fase beta
 ├── README.md                   # este belo arquivo mal formatado
 ├── requirements.txt            # dependencias a serem instaladas para rodar a aplicação
 └── umamusume_app.py            # código base
