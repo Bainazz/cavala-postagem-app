@@ -1,0 +1,57 @@
+{
+  "nome": "Haru Urara",
+  "imagem": "icon_cartas/guts/Haru_Urara_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Trying Hard with Rice!",
+        "detalhes": [
+          "Energy +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Trying Hard with King!",
+        "detalhes": [
+          "Mood +1",
+          "Haru Urara bond +5",
+          "Energy +10"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Trying Hard with Everyone's Support!",
+        "detalhes": [
+          "Energy +15",
+          "Haru Urara bond +5",
+          "'Unruffled' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Urara's ☆ Study Review",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Haru Urara bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Wisdom +5",
+          "Haru Urara bond +5"
+        ]
+      },
+      {
+        "nome": "Urara's ☆ Long Shot Dash!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Long Shot' hint +1",
+          "Haru Urara bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Energy +10",
+          "Haru Urara bond +5"
+        ]
+      }
+    ]
+  }
+}

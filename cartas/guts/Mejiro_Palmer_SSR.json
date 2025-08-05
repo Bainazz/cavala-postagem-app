@@ -1,0 +1,77 @@
+{
+  "nome": "Mejiro Palmer",
+  "imagem": "icon_cartas/guts/Mejiro_Palmer_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Run Away to First Base",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "Stamina +10",
+          "Guts +10",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -15",
+          "Guts +10",
+          "Wisdom +10",
+          "Mejiro Palmer bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Runaway Romance",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Guts +5",
+          "Wisdom +5",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "'Front Runner Savvy' hint +1",
+          "Mejiro Palmer bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Optimistic Escapism: Never Give Up!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -20",
+          "Stamina +5",
+          "Guts +5",
+          "'Vanguard Spirit' hint +3 ou 'Keeping the Lead' hint +1/+3",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "'Lone Wolf' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "An Inescapable Choice?",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "Guts +20",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Skill points +15",
+          "Mejiro Palmer bond +5"
+        ]
+      },
+      {
+        "nome": "Optimistic Escapism",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +15",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Wet Conditions' hint +1",
+          "Mejiro Palmer bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "nome": "Meisho Doto",
+  "imagem": "icon_cartas/guts/Meisho_Doto_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) What I'm Destined For...",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Guts +5",
+          "Meisho Doto bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Aleatoriamente, um dos seguintes:",
+          "Energy -10",
+          "Wisdom +5",
+          "ou",
+          "Maximum Energy +4",
+          "Mood +1",
+          "Guts +5",
+          "Wisdom +5",
+          "Meisho Doto bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) What I'm Looking For...",
+        "detalhes": [
+          "Energy +10",
+          "Mood +1",
+          "Skill points +15",
+          "'Prepared to Pass' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "I... Will Change",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Meisho Doto bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +15",
+          "Meisho Doto bond +5"
+        ]
+      },
+      {
+        "nome": "Please... Buy Some Carrots",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Meisho Doto bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Pace Chaser Corners' hint +1",
+          "Meisho Doto bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "nome": "Winning Ticket",
+  "imagem": "icon_cartas/guts/Winning_Ticket_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Username: W&T",
+        "detalhes": [
+          "Guts +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Everyone Was Sore for Days!",
+        "detalhes": [
+          "Stamina +5",
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) We Are BNW!",
+        "detalhes": [
+          "Guts +10",
+          "'On Your Left!' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Full-Power Muscles!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Skill points +15",
+          "Winning Ticket bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Winning Ticket bond +5"
+        ]
+      },
+      {
+        "nome": "Full-Power Racing!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Late Surger Corners' hint +1",
+          "Winning Ticket bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +30",
+          "Winning Ticket bond +5"
+        ]
+      }
+    ]
+  }
+}

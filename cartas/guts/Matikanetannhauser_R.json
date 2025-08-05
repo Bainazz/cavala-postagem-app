@@ -1,0 +1,31 @@
+{
+  "nome": "Matikanetannhauser",
+  "imagem": "icon_cartas/guts/Matikanetannhauser_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Just Your Typical Hard Work!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +10",
+          "Matikanetannhauser bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +10",
+          "Matikanetannhauser bond +5"
+        ]
+      },
+      {
+        "nome": "Just A Typical Accident?!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +5",
+          "Guts +10",
+          "Matikanetannhauser bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Subdued Front Runners' hint +1",
+          "Matikanetannhauser bond +5"
+        ]
+      }
+    ]
+  }
+}

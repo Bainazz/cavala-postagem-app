@@ -1,0 +1,32 @@
+{
+  "nome": "Nice Nature",
+  "imagem": "icon_cartas/guts/Nice_Nature_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Not like Meow",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +20",
+          "Nice Nature bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Nice Nature bond +5"
+        ]
+      },
+      {
+        "nome": "(Delicious) Burden",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Ramp Up' hint +1",
+          "Nice Nature bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Maximum Energy +4",
+          "Nice Nature bond +5"
+        ]
+      }
+    ]
+  }
+}

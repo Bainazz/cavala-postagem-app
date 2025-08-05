@@ -1,0 +1,77 @@
+{
+  "nome": "Special Week",
+  "imagem": "icon_cartas/guts/Special_Week_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Dance in Cleats!",
+        "detalhes": [
+          "Speed +5",
+          "Stamina +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) A Roller Coaster of Feelings!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Speed +5",
+          "Stamina +5",
+          "Guts +10",
+          "Special Week bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +20",
+          "Wisdom +10",
+          "Special Week bond +5",
+          "Encerra os eventos únicos"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Our Audience",
+        "detalhes": [
+          "Aleatoriamente, um dos seguintes:",
+          "Energy -10",
+          "Speed +5",
+          "Stamina +5",
+          "Guts +5",
+          "'Homestretch Haste' hint +1",
+          "Special Week bond +5",
+          "ou",
+          "Energy -10",
+          "Speed +15",
+          "Stamina +15",
+          "Guts +15",
+          "'In Body and Mind' hint +3",
+          "Special Week bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Watch Where You're Going!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Extra Tank' hint +1",
+          "Special Week bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +15",
+          "Special Week bond +5"
+        ]
+      },
+      {
+        "nome": "So Many Options!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Special Week bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "Stamina +15",
+          "Skill points +15",
+          "Special Week bond +5"
+        ]
+      }
+    ]
+  }
+}

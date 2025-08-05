@@ -1,0 +1,81 @@
+{
+  "nome": "Grass Wonder",
+  "imagem": "icon_cartas/guts/Grass_Wonder_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Quiet Passion",
+        "detalhes": [
+          "Energy +10",
+          "Wisdom +5",
+          "Skill points +15",
+          "Grass Wonder bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) A Moment's Respite",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Grass Wonder bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Aleatoriamente, um dos seguintes:",
+          "Energy -10",
+          "Power +5",
+          "Guts +5",
+          "Wisdom +5",
+          "Grass Wonder bond +5",
+          "ou",
+          "Power +5",
+          "Guts +5",
+          "Wisdom +10",
+          "Grass Wonder bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Hidden Petals",
+        "detalhes": [
+          "Aleatoriamente, um dos seguintes:",
+          "Energy -10",
+          "Speed +5",
+          "Guts +5",
+          "Wisdom +5",
+          "'Updrafters' hint +1",
+          "Grass Wonder bond +5",
+          "ou",
+          "Energy -10",
+          "Speed +5",
+          "Guts +10",
+          "Wisdom +5",
+          "'Furious Feat' hint +3",
+          "Grass Wonder bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Library Vexation",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "Grass Wonder bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +5",
+          "Wisdom +5",
+          "Grass Wonder bond +5"
+        ]
+      },
+      {
+        "nome": "A Friendly Daytime Discussion",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Frenzied Pace Chasers' hint +1",
+          "Grass Wonder bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Target in Sight' hint +1",
+          "Grass Wonder bond +5"
+        ]
+      }
+    ]
+  }
+}

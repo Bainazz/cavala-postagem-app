@@ -1,0 +1,65 @@
+{
+  "nome": "Ines Fujin",
+  "imagem": "icon_cartas/guts/Ines_Fujin_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) The Power of a Big Sister",
+        "detalhes": [
+          "Energy -10",
+          "Speed +5",
+          "Stamina +5",
+          "Guts +10"
+        ]
+      },
+      {
+        "nome": "(❯❯) Take a Step",
+        "detalhes": [
+          "Energy -10",
+          "Guts +10",
+          "Skill points +30",
+          "Ines Fujin bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Aim for That Sparkling Moment!",
+        "detalhes": [
+          "Aleatoriamente, um dos seguintes:",
+          "Energy -10",
+          "Guts +10",
+          "'Restless hint' +1 ou 'Moxie' hint +1",
+          "ou",
+          "Energy -10",
+          "Guts +20",
+          "Wisdom +5",
+          "'Restless' hint +3"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "It's a Game of Tag!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Speed +5",
+          "Ines Fujin bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Fast-Paced' hint +1",
+          "Ines Fujin bond +5"
+        ]
+      },
+      {
+        "nome": "Ten Minutes Left!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +15",
+          "Ines Fujin bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Wisdom +15",
+          "Ines Fujin bond +5"
+        ]
+      }
+    ]
+  }
+}

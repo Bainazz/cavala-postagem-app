@@ -1,0 +1,31 @@
+{
+  "nome": "Grass Wonder",
+  "imagem": "icon_cartas/guts/Grass_Wonder_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Library Vexation",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +10",
+          "Grass Wonder bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +5",
+          "Wisdom +5",
+          "Grass Wonder bond +5"
+        ]
+      },
+      {
+        "nome": "A Friendly Daytime Discussion",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Frenzied Pace Chasers' hint +1",
+          "Grass Wonder bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Target in Sight' hint +1",
+          "Grass Wonder bond +5"
+        ]
+      }
+    ]
+  }
+}

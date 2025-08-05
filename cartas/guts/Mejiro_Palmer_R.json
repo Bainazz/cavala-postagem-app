@@ -1,0 +1,32 @@
+{
+  "nome": "Mejiro Palmer",
+  "imagem": "icon_cartas/guts/Mejiro_Palmer_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "An Inescapable Choice?",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -15",
+          "Guts +20",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Skill points +15",
+          "Mejiro Palmer bond +5"
+        ]
+      },
+      {
+        "nome": "Optimistic Escapism",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +15",
+          "Mejiro Palmer bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Wet Conditions' hint +1",
+          "Mejiro Palmer bond +5"
+        ]
+      }
+    ]
+  }
+}

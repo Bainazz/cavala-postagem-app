@@ -1,0 +1,31 @@
+{
+  "nome": "Air Groove",
+  "imagem": "icon_cartas/guts/Air_Groove_R.png",
+  "eventos": {
+    "Eventos aleatórios": [
+      {
+        "nome": "Strict but Gracious",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "'Go with the Flow' hint +1",
+          "Air Groove bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Wisdom +10"
+        ]
+      },
+      {
+        "nome": "Agile but Strong",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Power +15",
+          "Air Groove bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +10",
+          "Stamina +5",
+          "Air Groove bond +5"
+        ]
+      }
+    ]
+  }
+}
