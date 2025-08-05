@@ -8,9 +8,12 @@ Vem comigo que vou evitar sua cavala de virar cola o/
 ## 🖼️ Funcionalidades
 - Seleção de cavala com imagens;
 - Escolha de até 6 cartas de suporte, organizadas por tipo (Speed, Power, Wisdom etc.);
+- O jogo te deu uma carta que você não escolheu? Escolha uma carta avulsa sem problemas;
 - Exibição dos eventos da cavala e das cartas selecionadas, com botões expansíveis;
 - Interface visual com tema escuro, textos brancos, scroll funcional;
-- Aplicação extremamente leve (soma-se menos de 5mb no momento);
+- Filtro para procurar evento pelo nome e ganhar tempo;
+- Aplicação extremamente leve (.exe pesa menos de 30mb);
+- Tela de inicio personalizada demonstrando o quão insano eu sou (você tem 1% de chances de me ouvir relinchar ao iniciar o app);
 - Eventos separados por categoria, com detalhes formatados para melhor visualização e experiência. 
 
 ## 📁 Estrutura de Pastas
