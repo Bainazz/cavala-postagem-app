@@ -1,0 +1,138 @@
+{
+  "nome": "Tazuna Hayakawa",
+  "imagem": "icon_cartas/pal/Tazuna_Hayakawa_R.png",
+  "eventos": {
+    "Eventos de encontro": [
+      {
+        "nome": "(❯) Milk with a Chance of Apples",
+        "detalhes": [
+          "Energy +25",
+          "Speed +5",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Inexplicable Speed",
+        "detalhes": [
+          "Energy +25",
+          "Tazuna Hayakawa bond +5",
+          "Cura um debuff"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Memories of Cinema",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +25",
+          "Stamina +5",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +10",
+          "Guts +10",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯❯) A Sigh and a Bandage",
+        "detalhes": [
+          "Energy +35",
+          "Wisdom +5",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5",
+          "Cura um debuff"
+        ]
+      },
+      {
+        "nome": "(❯❯❯❯❯) A Surprise Breather",
+        "detalhes": [
+          "Energy +35",
+          "Skill points +15",
+          "Mood +2",
+          "Tazuna Hayakawa bond +5",
+          "'Focus hint' +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "My Chosen Way of Life",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Wisdom +5",
+          "Tazuna Hayakawa bond +5"
+        ]
+      },
+      {
+        "nome": "Enthusiastic Pair",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Wisdom +5",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5",
+          "Pode começar os eventos de encontro",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood -1",
+          "Tazuna Hayakawa bond -5",
+          "Watchful Eye hint +1",
+          "Encerra os eventos aleatórios"
+        ]
+      }
+    ],
+    "Eventos especiais": [
+      {
+        "nome": "Tazuna, the Director's Secretary",
+        "detalhes": [
+          "Depois do primeiro treino:",
+          "Skill points +15",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5"
+        ]
+      },
+      {
+        "nome": "Good Job! ♪",
+        "detalhes": [
+          "Pode acontecer de forma aleatória depois de treinar (pode repetir)",
+          "(aleatório) Mood +1",
+          "Speed +3",
+          "Tazuna Hayakawa bond +5"
+        ]
+      },
+      {
+        "nome": "From Just a Little Closer",
+        "detalhes": [
+          "Depois do Finals (bond no máximo):",
+          "Todos os status +6",
+          "Skill points +30"
+        ]
+      },
+      {
+        "nome": "The Usual, Please!",
+        "detalhes": [
+          "Depois do Finals (bond não chegou no máximo):",
+          "Todos os status +5",
+          "Skill points +20"
+        ]
+      },
+      {
+        "nome": "A Bond with Tazuna: Aspirations Entrusted",
+        "detalhes": [
+          "Se ativou o encontro antes do primeiro ano novo:",
+          "Energy +10",
+          "Speed +15",
+          "Mood +1",
+          "Tazuna Hayakawa bond +5",
+          "'Tail Held High' hint +3"
+        ]
+      }
+    ]
+  }
+}

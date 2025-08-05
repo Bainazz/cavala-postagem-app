@@ -1,0 +1,155 @@
+{
+  "nome": "Aoi Kiryuin",
+  "imagem": "icon_cartas/pal/Aoi_Kiryuin_SR.png",
+  "eventos": {
+    "Eventos de encontro": [
+      {
+        "nome": "(❯) Studying with Your Body!",
+        "detalhes": [
+          "Energy +25",
+          "Skill points +30",
+          "Mood +2",
+          "Aoi Kiryuin bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) How I Play at the Park",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +25",
+          "Wisdom +5",
+          "Aoi Kiryuin bond +5",
+          "(aleatório) Mood +1",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Aleatóriamente entre:",
+          "Skill points +15",
+          "Aoi Kiryuin bond +5",
+          "ou",
+          "Speed +5",
+          "Skill points +45",
+          "Mood +1",
+          "Aoi Kiryuin bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Reckless Training",
+        "detalhes": [
+          "Energy +20",
+          "Skill points +30",
+          "Mood +1",
+          "Aoi Kiryuin bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯❯) The Joy of Respect",
+        "detalhes": [
+          "Power +10",
+          "Skill points +45",
+          "Mood +1",
+          "Aoi Kiryuin bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯❯❯) Chasing Dreams",
+        "detalhes": [
+          "Aleatóriamente entre:",
+          "Stamina +5",
+          "Skill points +15",
+          "(aleatório) 'Subdued Front Runners' hint +1",
+          "Aoi Kiryuin bond +5",
+          "ou",
+          "Stamina +5",
+          "Power +5",
+          "Guts +5",
+          "Skill points +45",
+          "Mood +1",
+          "'Subdued Front Runners' hint +3",
+          "Aoi Kiryuin bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Trainer Tip: Always Improve Your Coaching",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Skill points +15",
+          "Aoi Kiryuin bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Wisdom +5",
+          "Aoi Kiryuin bond +5"
+        ]
+      },
+      {
+        "nome": "The Search for a Hobby",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +20",
+          "Skill points +15",
+          "Mood +1",
+          "Aoi Kiryuin bond +5",
+          "Pode começar os eventos de encontro",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood -1",
+          "'Maverick' hint +1",
+          "Aoi Kiryuin bond -5",
+          "Encerra os eventos aleatórios"
+        ]
+      }
+    ],
+    "Eventos especiais": [
+      {
+        "nome": "Fellow Trainer Aoi Kiryuin",
+        "detalhes": [
+          "Depois do primeiro treino:",
+          "Skill points +15",
+          "Mood +1",
+          "Aoi Kiryuin bond +5",
+          "※ Link de cenário: esse evento vai dar maiores recompensas se a carreira que tiver jogando for o URA Finals."
+        ]
+      },
+      {
+        "nome": "Good Job!",
+        "detalhes": [
+          "Pode acontecer de forma aleatória depois de treinar (pode repetir)",
+          "(aleatório) Mood +1",
+          "Wisdom +3",
+          "Aoi Kiryuin bond +5",
+          "※ Link de cenário: esse evento vai dar maiores recompensas se a carreira que tiver jogando for o URA Finals."
+        ]
+      },
+      {
+        "nome": "Gift of Words",
+        "detalhes": [
+          "Depois do Finals (bond no máximo)",
+          "Todos os status +5",
+          "'Hesitant End Closers' hint +1/+3",
+          "'Lay Low hint' +3",
+          "※ Link de cenário: esse evento vai dar maiores recompensas se a carreira que tiver jogando for o URA Finals."
+        ]
+      },
+      {
+        "nome": "The Perfect Place for a Party",
+        "detalhes": [
+          "Depois do Finals (bond não chegou no máximo)",
+          "3 status aleatórios +5",
+          "※ Link de cenário: esse evento vai dar maiores recompensas se a carreira que tiver jogando for o URA Finals."
+        ]
+      },
+      {
+        "nome": "A Bond with Aoi: Being a Good Mentor",
+        "detalhes": [
+          "Se ativou o encontro antes do primeiro ano novo:",
+          "Wisdom +15",
+          "Skill points +15",
+          "Mood +1",
+          "'Shake It Out' hint +1/+3",
+          "Aoi Kiryuin bond +5",
+          "※ Link de cenário: esse evento vai dar maiores recompensas se a carreira que tiver jogando for o URA Finals."
+        ]
+      }
+    ]
+  }
+}
