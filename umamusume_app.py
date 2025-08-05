@@ -13,6 +13,72 @@ import time
 import wave
 import sys
 
+# --- Windows: utilitários Win32 para estilos/Alt+Tab/Taskbar ---
+if sys.platform.startswith("win"):
+    import ctypes
+    from ctypes import wintypes
+
+    user32 = ctypes.windll.user32
+    shell32 = ctypes.windll.shell32
+
+    GWL_STYLE = -16
+    GWL_EXSTYLE = -20
+
+    WS_CAPTION = 0x00C00000
+    WS_THICKFRAME = 0x00040000
+    WS_MINIMIZEBOX = 0x00020000
+    WS_MAXIMIZEBOX = 0x00010000
+    WS_SYSMENU = 0x00080000
+
+    WS_EX_TOOLWINDOW = 0x00000080
+    WS_EX_APPWINDOW = 0x00040000
+
+    SWP_NOSIZE = 0x0001
+    SWP_NOMOVE = 0x0002
+    SWP_NOZORDER = 0x0004
+    SWP_FRAMECHANGED = 0x0020
+
+    HWND_TOP = 0
+
+    GetWindowLongW = user32.GetWindowLongW
+    SetWindowLongW = user32.SetWindowLongW
+    SetWindowPos = user32.SetWindowPos
+
+    GetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int]
+    GetWindowLongW.restype = ctypes.c_long
+    SetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_long]
+    SetWindowLongW.restype = ctypes.c_long
+    SetWindowPos.argtypes = [wintypes.HWND, wintypes.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_uint]
+    SetWindowPos.restype = wintypes.BOOL
+
+    SetCurrentProcessExplicitAppUserModelID = shell32.SetCurrentProcessExplicitAppUserModelID
+    SetCurrentProcessExplicitAppUserModelID.argtypes = [wintypes.LPCWSTR]
+    SetCurrentProcessExplicitAppUserModelID.restype = ctypes.HRESULT
+
+    def _get_hwnd(widget):
+        try:
+            return wintypes.HWND(widget.winfo_id())
+        except Exception:
+            return None
+
+    def force_appwindow_root(widget, appid="CAVALA.Trainer.Main"):
+        # aplica AppUserModelID, WS_EX_APPWINDOW e FRAMECHANGED
+        try:
+            SetCurrentProcessExplicitAppUserModelID(appid)
+        except Exception:
+            pass
+        try:
+            hwnd = _get_hwnd(widget)
+            if not hwnd:
+                return
+            ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+            ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
+            SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
+            SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+                         SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
+        except Exception:
+            pass
+
 # puxa diretorio base do projeto (onde este script tá)
 BASE = os.path.dirname(os.path.abspath(__file__))
 
@@ -816,8 +882,8 @@ class UmaApp:
             return "break"
         def _bind_wheel(_):
             canvas.bind_all("<MouseWheel>", _on_mousewheel)
-            canvas.bind_all("<Button-4>", _on_button4)
-            canvas.bind_all("<Button-5>", _on_button5)
+            canvas.bind_all("<Button-4>")
+            canvas.bind_all("<Button-5>")
         def _unbind_wheel(_):
             canvas.unbind_all("<MouseWheel>")
             canvas.unbind_all("<Button-4>")
@@ -1399,7 +1465,7 @@ class UmaApp:
 # ------------------------
 def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     # -----------------
-    # cria janela principal sem bordas padrão (overrideredirect) com barra de título custom
+    # cria janela principal sem bordas visíveis (borda nativa removida por WinAPI), com barra de título custom
     # centralizada na tela, com botões de fechar/minimizar
     # retorna (root, content_frame)
     # puramente estetico pq sou frescurento 
@@ -1409,9 +1475,12 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     altura_tela = root.winfo_screenheight()
     pos_x = (largura_tela // 2) - (largura // 2)
     pos_y = (altura_tela // 2) - (altura // 2)
-    root.overrideredirect(True)
     root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
     root.configure(bg='#404040')
+    try:
+        root.title(titulo)
+    except Exception:
+        pass
 
     cont = tk.Frame(root, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
     cont.pack(fill='both', expand=True)
@@ -1446,11 +1515,11 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     def close_app():
         root.destroy()
     def minimize_app():
-        root.overrideredirect(False)
-        root.iconify()
-        def restore_overrideredirect(_):
-            root.overrideredirect(True)
-        root.bind("<Map>", restore_overrideredirect, add="+")
+        # com WM manager ativo, iconify funciona
+        try:
+            root.iconify()
+        except Exception:
+            pass
 
     btn_close = make_title_btn("✕", close_app)
     btn_close.pack(side='right', padx=(0, 6), pady=1)
@@ -1462,6 +1531,32 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
 
     content = tk.Frame(cont, bg='#606060')
     content.pack(fill='both', expand=True)
+
+    # Remoção de borda/título nativos e garantia Alt+Tab/Taskbar
+    if sys.platform.startswith("win"):
+        try:
+            hwnd = _get_hwnd(root)
+            if hwnd:
+                style = GetWindowLongW(hwnd, GWL_STYLE)
+                # Remove moldura e título, mas mantém minimizar/menu do sistema para o shell gerenciar janela
+                style &= ~(WS_CAPTION | WS_THICKFRAME | WS_MAXIMIZEBOX)
+                style |= (WS_SYSMENU | WS_MINIMIZEBOX)
+                SetWindowLongW(hwnd, GWL_STYLE, style)
+
+                ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+                ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
+                SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
+
+                SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+                             SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
+
+                # AppID para agrupar na barra
+                try:
+                    SetCurrentProcessExplicitAppUserModelID("CAVALA.Trainer.Main")
+                except Exception:
+                    pass
+        except Exception as e:
+            print(f"[AVISO] Ajuste de janela (WinAPI) falhou: {e}")
 
     # atalho ESC para fechar app
     root.bind("<Escape>", lambda e: root.destroy())
@@ -1519,11 +1614,11 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
     
     # funcao pra minimizar janela pelo '-' custom
     def minimize_win():
-        win.overrideredirect(False)
-        win.iconify()
-        def restore(_):
-            win.overrideredirect(True)
-        win.bind("<Map>", restore, add="+")
+        # overrideredirect(True) não iconifica — então vamos só withdraw (sumir) como minimizar visual
+        try:
+            win.withdraw()
+        except Exception:
+            pass
 
     btn_fg = '#ffffff'
     btn_bg = '#303030'
