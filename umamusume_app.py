@@ -13,71 +13,144 @@ import time
 import wave
 import sys
 
-# --- Windows: utilitários Win32 para estilos/Alt+Tab/Taskbar ---
-if sys.platform.startswith("win"):
-    import ctypes
-    from ctypes import wintypes
+import sys, ctypes
+from ctypes import wintypes
 
-    user32 = ctypes.windll.user32
+# ——— WinAPI base ———
+user32 = ctypes.windll.user32
+kernel32 = ctypes.windll.kernel32
+try:
     shell32 = ctypes.windll.shell32
-
-    GWL_STYLE = -16
-    GWL_EXSTYLE = -20
-
-    WS_CAPTION = 0x00C00000
-    WS_THICKFRAME = 0x00040000
-    WS_MINIMIZEBOX = 0x00020000
-    WS_MAXIMIZEBOX = 0x00010000
-    WS_SYSMENU = 0x00080000
-
-    WS_EX_TOOLWINDOW = 0x00000080
-    WS_EX_APPWINDOW = 0x00040000
-
-    SWP_NOSIZE = 0x0001
-    SWP_NOMOVE = 0x0002
-    SWP_NOZORDER = 0x0004
-    SWP_FRAMECHANGED = 0x0020
-
-    HWND_TOP = 0
-
-    GetWindowLongW = user32.GetWindowLongW
-    SetWindowLongW = user32.SetWindowLongW
-    SetWindowPos = user32.SetWindowPos
-
-    GetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int]
-    GetWindowLongW.restype = ctypes.c_long
-    SetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_long]
-    SetWindowLongW.restype = ctypes.c_long
-    SetWindowPos.argtypes = [wintypes.HWND, wintypes.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_uint]
-    SetWindowPos.restype = wintypes.BOOL
-
     SetCurrentProcessExplicitAppUserModelID = shell32.SetCurrentProcessExplicitAppUserModelID
     SetCurrentProcessExplicitAppUserModelID.argtypes = [wintypes.LPCWSTR]
-    SetCurrentProcessExplicitAppUserModelID.restype = ctypes.HRESULT
+    SetCurrentProcessExplicitAppUserModelID.restype  = wintypes.HRESULT
+except Exception:
+    SetCurrentProcessExplicitAppUserModelID = None
 
-    def _get_hwnd(widget):
-        try:
-            return wintypes.HWND(widget.winfo_id())
-        except Exception:
+# estilos janela
+GWL_STYLE   = -16
+GWL_EXSTYLE = -20
+GWL_WNDPROC = -4
+
+WS_CAPTION      = 0x00C00000
+WS_THICKFRAME   = 0x00040000
+WS_SYSMENU      = 0x00080000
+WS_MINIMIZEBOX  = 0x00020000
+WS_MAXIMIZEBOX  = 0x00010000
+
+WS_EX_APPWINDOW = 0x00040000
+WS_EX_TOOLWINDOW= 0x00000080
+
+HWND_TOP = 0
+SWP_NOMOVE        = 0x0002
+SWP_NOSIZE        = 0x0001
+SWP_NOZORDER      = 0x0004
+SWP_FRAMECHANGED  = 0x0020
+
+# mensagens e hit-tests
+WM_NCHITTEST   = 0x0084
+HTCLIENT       = 1
+HTCAPTION      = 2
+HTLEFT         = 10
+HTRIGHT        = 11
+HTTOP          = 12
+HTTOPLEFT      = 13
+HTTOPRIGHT     = 14
+HTBOTTOM       = 15
+HTBOTTOMLEFT   = 16
+HTBOTTOMRIGHT  = 17
+
+# prototypes
+GetWindowLongW  = user32.GetWindowLongW
+SetWindowLongW  = user32.SetWindowLongW
+SetWindowPos    = user32.SetWindowPos
+
+GetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int]
+GetWindowLongW.restype  = ctypes.c_long
+SetWindowLongW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_long]
+SetWindowLongW.restype  = ctypes.c_long
+SetWindowPos.argtypes   = [wintypes.HWND, wintypes.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_uint]
+SetWindowPos.restype    = wintypes.BOOL
+
+# LongPtr para subclass
+GetWindowLongPtrW = user32.GetWindowLongPtrW
+SetWindowLongPtrW = user32.SetWindowLongPtrW
+CallWindowProcW   = user32.CallWindowProcW
+GetWindowLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int]
+GetWindowLongPtrW.restype  = ctypes.c_void_p
+SetWindowLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_void_p]
+SetWindowLongPtrW.restype  = ctypes.c_void_p
+CallWindowProcW.argtypes   = [ctypes.c_void_p, wintypes.HWND, ctypes.c_uint, wintypes.WPARAM, wintypes.LPARAM]
+CallWindowProcW.restype    = ctypes.c_ssize_t
+
+# cursor pos
+GetCursorPos = user32.GetCursorPos
+GetCursorPos.argtypes = [ctypes.POINTER(wintypes.POINT)]
+GetCursorPos.restype  = wintypes.BOOL
+
+# helper para pegar HWND do Tk root
+def _get_hwnd(root):
+    try:
+        root.update_idletasks()
+        root.update()
+    except Exception:
+        pass
+    try:
+        hwnd_val = root.winfo_id()
+        if not hwnd_val:
             return None
+        hwnd = wintypes.HWND(hwnd_val)
 
-    def force_appwindow_root(widget, appid="CAVALA.Trainer.Main"):
-        # aplica AppUserModelID, WS_EX_APPWINDOW e FRAMECHANGED
-        try:
-            SetCurrentProcessExplicitAppUserModelID(appid)
-        except Exception:
-            pass
-        try:
-            hwnd = _get_hwnd(widget)
-            if not hwnd:
-                return
-            ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
-            ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
-            SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
-            SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
-                         SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
-        except Exception:
-            pass
+        # Sobe para o verdadeiro toplevel "TkTopLevel"
+        GetParent = user32.GetParent
+        GetParent.argtypes = [wintypes.HWND]
+        GetParent.restype = wintypes.HWND
+
+        GetClassNameW = user32.GetClassNameW
+        GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+        GetClassNameW.restype  = ctypes.c_int
+
+        buf = ctypes.create_unicode_buffer(256)
+        cur = hwnd
+        for _ in range(5):  # limitado por segurança
+            buf.value = ""
+            GetClassNameW(cur, buf, 256)
+            if buf.value == "TkTopLevel":
+                return cur
+            parent = GetParent(cur)
+            if not parent:
+                break
+            cur = parent
+
+        # fallback: retorna o original
+        return hwnd
+    except Exception:
+        return None
+    
+    
+
+def force_appwindow_root(widget, appid="CAVALA.Trainer.Main"):
+    # aplica AppUserModelID, WS_EX_APPWINDOW e FRAMECHANGED
+    try:
+        SetCurrentProcessExplicitAppUserModelID(appid)
+    except Exception:
+        pass
+    try:
+        hwnd = _get_hwnd(widget)
+        if not hwnd:
+            return
+        ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+        ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
+        SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
+        SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
+        
+        s2 = GetWindowLongW(hwnd, GWL_STYLE)
+        ex2 = GetWindowLongW(hwnd, GWL_EXSTYLE)
+        print(f"DEBUG: estilos depois -> STYLE=0x{s2:08X} EXSTYLE=0x{ex2:08X}")
+
+    except Exception:
+        pass
 
 # puxa diretorio base do projeto (onde este script tá)
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -304,6 +377,7 @@ class UmaApp:
         self.cavala_selecionada = None
 
         self.root = root
+        
         self.base = content
         self.base.configure(bg='#606060')
 
@@ -501,6 +575,9 @@ class UmaApp:
         self.janela_cavala_aberta = False
         self.janela_cartas_aberta = False
         self.janela_avulsa_aberta = False
+
+        # cache de estado dos eventos (evita rebuild ao restaurar a janela/ganhar foco)
+        self._estado_eventos_cache = {"selecionado": None, "filtro": ""}
 
         if not self.cv:
             messagebox.showwarning("Aviso", "Nenhuma cavala encontrada em 'cavalas/'.")
@@ -1331,23 +1408,38 @@ class UmaApp:
     # renderiza a lista de eventos no painel inferior conforme 'selecionado'.
     # -----------------
     def mostrar_eventos(self, selecionado):
-
         # mantém dica se nada selecionado e dica ativa
         if self._dica_visivel and selecionado is None and not (self.cavala_selecionada or self.deck or self.carta_avulsa):
             return
+
+        # estado atual do filtro
+        filtro = self._texto_filtro()
+
+        # CURTO-CIRCUITO: se estado igual ao último, apenas atualiza leve e sai
+        if (self._estado_eventos_cache.get("selecionado") == selecionado and
+            self._estado_eventos_cache.get("filtro") == filtro):
+            try:
+                self.canvas_eventos.update_idletasks()
+            except Exception:
+                pass
+            return
+
+        # atualiza cache
+        self._estado_eventos_cache["selecionado"] = selecionado
+        self._estado_eventos_cache["filtro"] = filtro
+
+        # rebuild somente quando realmente mudou
         for w in self.frame_eventos.winfo_children():
             w.destroy()
         self._remover_dica_inicial()
 
-        # reseta scroll para topo a cada troca
-        # evita que dps de scrollar ate muito embaixo, bugue quando trocar da cavala pra uma carta
+        # reseta scroll para topo a cada troca real
         self.canvas_eventos.yview_moveto(0)
         if selecionado is None:
             return
         if selecionado == 'cavala':
             self.mostrar_eventos_cavala()
         else:
-            # selecionado é card_id de carta
             self.mostrar_eventos_carta(selecionado)
 
     def mostrar_eventos_cavala(self):
@@ -1471,11 +1563,9 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     # puramente estetico pq sou frescurento 
     # -----------------
     root = tk.Tk()
-    largura_tela = root.winfo_screenwidth()
-    altura_tela = root.winfo_screenheight()
-    pos_x = (largura_tela // 2) - (largura // 2)
-    pos_y = (altura_tela // 2) - (altura // 2)
-    root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
+    sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
+    x, y = (sw // 2) - (largura // 2), (sh // 2) - (altura // 2)
+    root.geometry(f"{largura}x{altura}+{x}+{y}")
     root.configure(bg='#404040')
     try:
         root.title(titulo)
@@ -1485,23 +1575,23 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     cont = tk.Frame(root, bg='#606060', bd=1, highlightthickness=1, highlightbackground='#303030')
     cont.pack(fill='both', expand=True)
 
-    # barra de título custom (arrastar janela)
+    # barra de título custom (drag via HTCAPTION; Snap/Win+Setas ok)
     titlebar = tk.Frame(cont, bg='#303030')
     titlebar.pack(fill='x', side='top')
 
-    def start_move(e):
-        root._ox, root._oy = e.x_root, e.y_root
-    def do_move(e):
-        dx = e.x_root - root._ox
-        dy = e.y_root - root._oy
-        x = root.winfo_x() + dx
-        y = root.winfo_y() + dy
-        root.geometry(f"+{x}+{y}")
-        root._ox, root._oy = e.x_root, e.y_root
-    titlebar.bind("<Button-1>", start_move)
-    titlebar.bind("<B1-Motion>", do_move)
+    if sys.platform.startswith("win"):
+        WM_NCLBUTTONDOWN = 0x00A1
+        HTCAPTION = 2
+        def _start_drag(_evt=None):
+            try:
+                hwnd = _get_hwnd(root)
+                if hwnd:
+                    user32.ReleaseCapture()
+                    user32.SendMessageW(hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0)
+            except Exception:
+                pass
+        titlebar.bind("<Button-1>", _start_drag)
 
-    # botões da barra
     btn_fg = '#ffffff'
     btn_bg = '#303030'
     btn_bg_hover = '#444444'
@@ -1513,13 +1603,12 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
         return b
 
     def close_app():
-        root.destroy()
+        try: root.destroy()
+        except Exception: pass
+
     def minimize_app():
-        # com WM manager ativo, iconify funciona
-        try:
-            root.iconify()
-        except Exception:
-            pass
+        try: root.iconify()
+        except Exception: pass
 
     btn_close = make_title_btn("✕", close_app)
     btn_close.pack(side='right', padx=(0, 6), pady=1)
@@ -1532,34 +1621,149 @@ def criar_janela_centrada_custom(largura, altura, titulo="CAVALA Trainer"):
     content = tk.Frame(cont, bg='#606060')
     content.pack(fill='both', expand=True)
 
-    # Remoção de borda/título nativos e garantia Alt+Tab/Taskbar
     if sys.platform.startswith("win"):
-        try:
-            hwnd = _get_hwnd(root)
-            if hwnd:
-                style = GetWindowLongW(hwnd, GWL_STYLE)
-                # Remove moldura e título, mas mantém minimizar/menu do sistema para o shell gerenciar janela
-                style &= ~(WS_CAPTION | WS_THICKFRAME | WS_MAXIMIZEBOX)
-                style |= (WS_SYSMENU | WS_MINIMIZEBOX)
-                SetWindowLongW(hwnd, GWL_STYLE, style)
+        def _aplicar_estilo(hwnd):
+            style = GetWindowLongW(hwnd, GWL_STYLE)
+            style &= ~(WS_CAPTION | WS_THICKFRAME | WS_MAXIMIZEBOX)
+            style |= (WS_SYSMENU | WS_MINIMIZEBOX)
+            SetWindowLongW(hwnd, GWL_STYLE, style)
 
-                ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
-                ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
-                SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
+            ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+            ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
+            SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
 
-                SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
-                             SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
+            SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
 
-                # AppID para agrupar na barra
-                try:
-                    SetCurrentProcessExplicitAppUserModelID("CAVALA.Trainer.Main")
-                except Exception:
-                    pass
-        except Exception as e:
-            print(f"[AVISO] Ajuste de janela (WinAPI) falhou: {e}")
+            # DEBUG opcional
+            s2 = GetWindowLongW(hwnd, GWL_STYLE)
+            ex2 = GetWindowLongW(hwnd, GWL_EXSTYLE)
+            print(f"DEBUG: estilos depois -> STYLE=0x{s2:08X} EXSTYLE=0x{ex2:08X}")
 
-    # atalho ESC para fechar app
+            # Garantir Alt+Tab/Taskbar
+            ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+            ex = (ex | WS_EX_APPWINDOW) & ~WS_EX_TOOLWINDOW
+            SetWindowLongW(hwnd, GWL_EXSTYLE, ex)
+
+            # Aplicar imediatamente
+            SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0,
+                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED)
+
+        def _instalar_winapi():
+            
+            try:
+
+                print("DEBUG: entrando _instalar_winapi")
+                hwnd = _get_hwnd(root)
+                print("DEBUG: hwnd =", hwnd)
+
+                if hwnd:
+                    s = GetWindowLongW(hwnd, GWL_STYLE)
+                    ex = GetWindowLongW(hwnd, GWL_EXSTYLE)
+                    print(f"DEBUG: estilos antes -> STYLE=0x{s:08X} EXSTYLE=0x{ex:08X}")
+
+                    # obter o nome da classe da janela
+                    GetClassNameW = user32.GetClassNameW
+                    GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+                    GetClassNameW.restype  = ctypes.c_int
+                    buf = ctypes.create_unicode_buffer(256)
+                    GetClassNameW(hwnd, buf, 256)
+                    print("DEBUG: class name =", buf.value)
+                else:
+                    print("DEBUG: hwnd None")
+                    return
+                
+                hwnd = _get_hwnd(root)
+                if not hwnd:
+                    return
+                # 1) aplicar estilo
+                _aplicar_estilo(hwnd)
+
+                # 2) AppID (agrupamento)
+                if SetCurrentProcessExplicitAppUserModelID:
+                    try:
+                        SetCurrentProcessExplicitAppUserModelID("CAVALA.Trainer.Main")
+                    except Exception:
+                        pass
+
+                # 3) Subclass para NCHITTEST (drag/snap/resize)
+                LRESULT = ctypes.c_ssize_t
+                WNDPROC = ctypes.WINFUNCTYPE(LRESULT, wintypes.HWND, ctypes.c_uint, wintypes.WPARAM, wintypes.LPARAM)
+
+                original_proc = ctypes.c_void_p(GetWindowLongPtrW(hwnd, GWL_WNDPROC))
+                if not hasattr(root, "_wnd_subclass_refs"):
+                    root._wnd_subclass_refs = {}
+                refs = root._wnd_subclass_refs
+                refs["original_proc"] = original_proc
+
+                def _hit_test_safe(screen_x, screen_y, border=6):
+                    try:
+                        rx, ry = root.winfo_rootx(), root.winfo_rooty()
+                        w, h = max(1, root.winfo_width()), max(1, root.winfo_height())
+                        rel_x, rel_y = screen_x - rx, screen_y - ry
+
+                        if rel_x < border and rel_y < border: return HTTOPLEFT
+                        if rel_x >= w - border and rel_y < border: return HTTOPRIGHT
+                        if rel_x < border and rel_y >= h - border: return HTBOTTOMLEFT
+                        if rel_x >= w - border and rel_y >= h - border: return HTBOTTOMRIGHT
+                        if rel_x < border: return HTLEFT
+                        if rel_x >= w - border: return HTRIGHT
+                        if rel_y < border: return HTTOP
+                        if rel_y >= h - border: return HTBOTTOM
+
+                        title_h = max(30, titlebar.winfo_height() or 40)
+                        if 0 <= rel_y <= title_h:
+                            bx1 = btn_min.winfo_rootx() - rx if btn_min.winfo_ismapped() else w + 1
+                            bx2 = (btn_close.winfo_rootx() - rx + (btn_close.winfo_width() or 0)) if btn_close.winfo_ismapped() else -1
+                            if not (bx1 <= rel_x <= bx2):
+                                return HTCAPTION
+
+                        return HTCLIENT
+                    except Exception:
+                        return HTCLIENT
+
+                @WNDPROC
+                def _wndproc(h, msg, wparam, lparam):
+                    try:
+                        if msg == WM_NCHITTEST:
+                            pt = wintypes.POINT()
+                            if GetCursorPos(ctypes.byref(pt)):
+                                return LRESULT(_hit_test_safe(pt.x, pt.y, border=6))
+                    except Exception:
+                        pass
+                    return CallWindowProcW(refs["original_proc"].value, h, msg, wparam, lparam)
+
+                if "proc" not in refs:
+                    SetWindowLongPtrW(hwnd, GWL_WNDPROC, ctypes.cast(_wndproc, ctypes.c_void_p))
+                    refs["proc"] = _wndproc
+
+                # 4) reaplicar estilo após mapear completamente (workaround)
+                root.after(50, lambda: _aplicar_estilo(hwnd))
+            except Exception as e:
+                print(f"[AVISO] Ajuste de janela (WinAPI) falhou: {e}")
+
+        # Instalar após a janela aparecer
+        root.after(0, _instalar_winapi)
+
     root.bind("<Escape>", lambda e: root.destroy())
+
+    def _on_map(_=None):
+        try:
+            if sys.platform.startswith("win"):
+                hwnd = _get_hwnd(root)
+                if hwnd:
+                    try:
+                        _aplicar_estilo(hwnd)
+                    except Exception:
+                        pass
+            # refresh leve apenas
+            root.update_idletasks()
+        except Exception:
+            pass
+
+    root.bind("<Map>", _on_map)
+    root.bind("<Visibility>", _on_map)
+
     return root, content
 
 def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=None):
@@ -1660,11 +1864,6 @@ def criar_toplevel_custom(parent, largura, altura, titulo="Janela", on_close=Non
 
 # ------------------------
 # splash screen custom (tela de carregamento antes do app iniciar)
-# janela independente (tk.Tk) com overrideredirect, não interfere nos Toplevels do app
-# título, logo .ico renderizado como imagem e ícone, rodapé com duas linhas
-# som aleatório da pasta 'sounds' (com 'cavalo_raro.wav' mais raro afinal sou eu relinchando)
-# duração fixa (5s). Anima "Carregando..." e cancela ao fechar para evitar erro "invalid command name anim" (tava dando mt esse erro)
-# ao fechar o splash, chama callback para abrir a janela principal imediatamente
 # ------------------------
 def _carregar_e_tocar_wav(caminho):
     try:
@@ -1694,12 +1893,12 @@ def mostrar_splash_custom(
     titulo="CAVALA Trainer",
     rodape_linha1="Feito por Braian Mezalira",
     rodape_linha2="Oferecimento: Uma Musume Pretty Derby - Cavalapostagem (facebook)",
-    logo_ico_path=None,       # BASE/icon_geral/uma_icon.ico
-    sounds_dir=None,          # BASE/sounds
-    duracao_ms=5000,          # 5 segundos
+    logo_ico_path=None,
+    sounds_dir=None,
+    duracao_ms=5000,
     largura=560,
     altura=360,
-    on_close=None             # callback chamado ao fechar o splash
+    on_close=None
 ):
     splash = tk.Tk()
     splash.overrideredirect(True)
@@ -1769,7 +1968,6 @@ def mostrar_splash_custom(
             splash.destroy()
         except Exception:
             pass
-        # encadeia abertura do app logo após fechar o splash
         if callable(on_close):
             try:
                 on_close()
@@ -1784,8 +1982,6 @@ def mostrar_splash_custom(
 # ----------
 if __name__ == "__main__":
     # splash antes do app principal
-    # duração fixa 5 segundos
-    # carrega dados em paralelo e abre o app em seguida
     logo_path = os.path.join(BASE, "icon_geral", "uma_icon.ico")
     sounds_path = os.path.join(BASE, "sounds")
 
@@ -1800,8 +1996,6 @@ if __name__ == "__main__":
     threading.Thread(target=carregar_dados, daemon=True).start()
 
     def abrir_app_principal():
-        # é chamado após o splash fechar 
-        # garante que depois do splash acabar, o app sempre vai abrir 
         root, content = criar_janela_centrada_custom(1245, 715, "CAVALA Trainer")
         app = UmaApp(root, content, estado["cartas"], estado["cavalas"])
         app.mostrar()
@@ -1818,7 +2012,7 @@ if __name__ == "__main__":
         duracao_ms=5000,
         largura=560,
         altura=360,
-        on_close=abrir_app_principal  # abre app ao fechar splash
+        on_close=abrir_app_principal
     )
 
     splash.mainloop()
