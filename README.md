@@ -1,4 +1,4 @@
-# CAVALA Trainer
+# CAVALA postagem App
 
 Uma aplicação interativa desenvolvida em Python com Tkinter para auxiliar jogadores de **Uma Musume: Pretty Derby**.<br>
 O app permite selecionar uma **cavala** e até **6 cartas de suporte**, exibindo seus respectivos **eventos** de forma interativa e organizada.
