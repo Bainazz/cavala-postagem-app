@@ -300,6 +300,36 @@
         ]
       },
       {
+        "nome": "Victory! (G2/G3) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Energy -15",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Energy -5/-20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Victory! (Pre/OP) (1º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Energy -15",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +5",
+          "Skill points +30",
+          "Energy -5/-20",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
         "nome": "Solid Showing (G1) (2º-5º lugar)",
         "detalhes": [
           "\\033[1mOpção de cima\\033[0m",
@@ -310,6 +340,21 @@
           "\\033[1mOpção de baixo\\033[0m",
           "1 status aleatório +8",
           "Skill points +45",
+          "Energy -10/-30",
+          "(aleatório) Hint para uma skill relacionada à corrida"
+        ]
+      },
+      {
+        "nome": "Solid Showing (Pre/OP) (2º-5º lugar)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +30",
+          "Energy -20",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "\\033[1mOpção de baixo\\033[0m",
+          "1 status aleatório +3",
+          "Skill points +30",
           "Energy -10/-30",
           "(aleatório) Hint para uma skill relacionada à corrida"
         ]
@@ -330,71 +375,6 @@
         ]
       },
       {
-        "nome": "Etsuko's Elated Coverage (G1)",
-        "detalhes": [
-          "Energy -15",
-          "Mood +1",
-          "1 status aleatório +10",
-          "Skill points +45",
-          "Fans +500",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "Etsuko Otonashi bond +15"
-        ]
-      },
-            {
-        "nome": "Etsuko's Exhaustive Coverage (G1)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "Aleatoriamente entre:",
-          "Energy -25",
-          "Mood -1",
-          "1 status aleatório +4",
-          "Skill points +25",
-          "Etsuko Otonashi bond -10",
-          "ou",
-          "Energy -15",
-          "Mood -1",
-          "1 status aleatório +4",
-          "Skill points +25",
-          "Etsuko Otonashi bond +10",
-          "\\033[1mOpção de baixo\\033[0m",
-          "Energy -20",
-          "1 status aleatório +4",
-          "Skill points +25",
-          "Etsuko Otonashi bond +15"
-        ]
-      },
-      {
-        "nome": "Victory! (G2/G3) (1º lugar)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "1 status aleatório +8",
-          "Skill points +35",
-          "Energy -15",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "\\033[1mOpção de baixo\\033[0m",
-          "1 status aleatório +8",
-          "Skill points +35",
-          "Energy -5/-20",
-          "(aleatório) Hint para uma skill relacionada à corrida"
-        ]
-      },
-      {
-        "nome": "Solid Showing (G2/G3) (2º-5º lugar)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "1 status aleatório +5",
-          "Skill points +35",
-          "Energy -20",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "\\033[1mOpção de baixo\\033[0m",
-          "1 status aleatório +5",
-          "Skill points +35",
-          "Energy -10/-30",
-          "(aleatório) Hint para uma skill relacionada à corrida"
-        ]
-      },
-      {
         "nome": "Defeat (G2/G3) (6º lugar ou pior)",
         "detalhes": [
           "\\033[1mOpção de cima\\033[0m",
@@ -406,71 +386,6 @@
           "1 status aleatório +3",
           "Skill points +20",
           "Energy -15/-35",
-          "(aleatório) Hint para uma skill relacionada à corrida"
-        ]
-      },
-            {
-        "nome": "Etsuko's Elated Coverage (G2/G3)",
-        "detalhes": [
-          "Energy -15",
-          "Mood +1",
-          "1 status aleatório +8",
-          "Skill points +35",
-          "Fans +500",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "Etsuko Otonashi bond +15"
-        ]
-      },
-      {
-        "nome": "Etsuko's Exhaustive Coverage (G2/G3)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "Aleatoriamente entre:",
-          "Energy -25",
-          "Mood -1",
-          "1 status aleatório +3",
-          "Skill points +20",
-          "Etsuko Otonashi bond -10",
-          "ou",
-          "Energy -15",
-          "Mood -1",
-          "1 status aleatório +3",
-          "Skill points +20",
-          "Etsuko Otonashi bond +15",
-          "\\033[1mOpção de baixo\\033[0m",
-          "Energy -20",
-          "1 status aleatório +3",
-          "Skill points +20",
-          "Etsuko Otonashi bond +10"
-        ]
-      },
-      {
-        "nome": "Victory! (Pre/OP) (1º lugar)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "1 status aleatório +5",
-          "Skill points +30",
-          "Energy -15",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "\\033[1mOpção de baixo\\033[0m",
-          "1 status aleatório +5",
-          "Skill points +30",
-          "Energy -5/-20",
-          "(aleatório) Hint para uma skill relacionada à corrida"
-        ]
-      },
-      {
-        "nome": "Solid Showing (Pre/OP) (2º-5º lugar)",
-        "detalhes": [
-          "\\033[1mOpção de cima\\033[0m",
-          "1 status aleatório +3",
-          "Skill points +30",
-          "Energy -20",
-          "(aleatório) Hint para uma skill relacionada à corrida",
-          "\\033[1mOpção de baixo\\033[0m",
-          "1 status aleatório +3",
-          "Skill points +30",
-          "Energy -10/-30",
           "(aleatório) Hint para uma skill relacionada à corrida"
         ]
       },
@@ -488,6 +403,30 @@
         ]
       },
       {
+        "nome": "Etsuko's Elated Coverage (G1)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +10",
+          "Skill points +45",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
+        "nome": "Etsuko's Elated Coverage (G2/G3)",
+        "detalhes": [
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +8",
+          "Skill points +35",
+          "Fans +500",
+          "(aleatório) Hint para uma skill relacionada à corrida",
+          "Etsuko Otonashi bond +15"
+        ]
+      },
+      {
         "nome": "Etsuko's Elated Coverage (Pre/OP)",
         "detalhes": [
           "Energy -15",
@@ -499,18 +438,64 @@
           "Etsuko Otonashi bond +15"
         ]
       },
-            {
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G1)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +4",
+          "Skill points +25",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
+        "nome": "Etsuko's Exhaustive Coverage (G2/G3)",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "aleatório",
+          "Energy -25",
+          "Mood -1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond -10",
+          "ou",
+          "Energy -15",
+          "Mood +1",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +15",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -20",
+          "1 status aleatório +3",
+          "Skill points +20",
+          "Etsuko Otonashi bond +10"
+        ]
+      },
+      {
         "nome": "Etsuko's Exhaustive Coverage (Pre/OP)",
         "detalhes": [
           "\\033[1mOpção de cima\\033[0m",
-          "Aleatoriamente entre:",
+          "aleatório",
           "Energy -25",
           "Mood -1",
           "Skill points +10",
           "Etsuko Otonashi bond -10",
           "ou",
           "Energy -15",
-          "Mood -1",
+          "Mood +1",
           "Skill points +10",
           "Etsuko Otonashi bond +15",
           "\\033[1mOpção de baixo\\033[0m",
