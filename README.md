@@ -47,7 +47,7 @@ Vem comigo que vou evitar sua cavala de virar cola o/
 
 4. Execute o app:
    ```bash
-   python umamusume_app.py
+   python launcher.py
    ```
 
 ## 🛠️ Requisitos
