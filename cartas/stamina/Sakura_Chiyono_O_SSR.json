@@ -1,0 +1,83 @@
+{
+  "nome": "Sakura Chiyono O",
+  "imagem": "icon_cartas/stamina/Sakura_Chiyono_O_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) One Step toward Blooming!",
+        "detalhes": [
+          "Skill points +15"
+        ]
+      },
+      {
+        "nome": "(❯❯) Blooming Hope!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre:",
+          "Stamina +15",
+          "Cura um debuff",
+          "Sakura Chiyono O bond +5",
+          "ou",
+          "Energy -10",
+          "Guts +15",
+          "Sakura Chiyono O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Sakura Chiyono O bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Someday, I'll Bloom!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Aleatoriamente entre:",
+          "Energy -15",
+          "Stamina +20",
+          "Skill points +10",
+          "'Speed Star' hint +3",
+          "Sakura Chiyono O bond +5",
+          "ou",
+          "Energy -15",
+          "Stamina +10",
+          "Skill points +5",
+          "'Prepared to Pass' hint +3",
+          "Sakura Chiyono O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Speed +5",
+          "Stamina +10",
+          "Power +5",
+          "Skill points +30",
+          "Sakura Chiyono O bond +5"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Today's Words of Wisdom!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Power +20",
+          "Sakura Chiyono O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +5",
+          "Skill points +10",
+          "Sakura Chiyono O bond +5"
+        ]
+      },
+      {
+        "nome": "Until I Bloom...",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +5",
+          "Stamina +5",
+          "Sakura Chiyono O bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Spring Runner' hint +1",
+          "Sakura Chiyono O bond +5"
+        ]
+      }
+    ]
+  }
+}
