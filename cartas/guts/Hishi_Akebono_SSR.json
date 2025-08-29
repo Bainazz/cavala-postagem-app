@@ -1,0 +1,64 @@
+{
+  "nome": "Hishi Akebono",
+  "imagem": "icon_cartas/guts/Hishi_Akebono_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) I'm Buono Just the Way I Am ♪",
+        "detalhes": [
+          "Maximum Energy +4",
+          "Guts +5",
+          "Hishi Akebono bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Here we go... Bono☆",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +30",
+          "Guts +5",
+          "Hishi Akebono bond +5",
+          "(aleatório) Ganha o debuff 'Slow Metabolism'",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Stamina +5",
+          "Power +5",
+          "Hishi Akebono bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Buono For You, Buono For Me ☆",
+        "detalhes": [
+          "Stamina +5",
+          "Guts +10",
+          "'Sixth Sense' hint +3 ou 'Dodging Danger' hint +3"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Eat Up ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Hishi Akebono bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -5",
+          "Power +15",
+          "Hishi Akebono bond +5"
+        ]
+      },
+      {
+        "nome": "Leave It to Me ♪",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Stamina +10",
+          "Hishi Akebono bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -15",
+          "'Sprinting Gear' hint +2",
+          "Hishi Akebono bond +5"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "nome": "Seeking the Pearl",
+  "imagem": "icon_cartas/guts/Seeking_the_Pearl_SR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) No More Words ♪ Use Body Language!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "'Lucky Seven' hint +1",
+          "Seeking the Pearl bond +5",
+          "\\033[1mOpção do meio\\033[0m",
+          "Power +10",
+          "Guts +10",
+          "Seeking the Pearl bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +30"
+        ]
+      },
+      {
+        "nome": "(❯❯) Never Give Up! Endless Possibilities!",
+        "detalhes": [
+          "Power +5",
+          "Guts +5",
+          "'Shifting Gears' hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Full-Power Passion!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Mood +1",
+          "Seeking the Pearl bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Power +5",
+          "Guts +5",
+          "Seeking the Pearl bond +5"
+        ]
+      },
+      {
+        "nome": "Full-Power Thinking!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Wisdom +20",
+          "Seeking the Pearl bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy -10",
+          "'Uma Stan' hint +3",
+          "Seeking the Pearl bond +5"
+        ]
+      }
+    ]
+  }
+}
