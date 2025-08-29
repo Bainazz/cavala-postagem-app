@@ -1,0 +1,63 @@
+{
+  "nome": "Mejiro Dober",
+  "imagem": "icon_cartas/wisdom/Mejiro_Dober_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) One Step Forward",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy -10",
+          "Skill points +15/+45",
+          "Mejiro Dober bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Guts +5",
+          "Wisdom +5",
+          "Mejiro Dober bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Two Steps Up",
+        "detalhes": [
+          "Guts +3",
+          "Wisdom +3",
+          "Skill points +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Three Steps Forward, Two Steps Back",
+        "detalhes": [
+          "Energy -10",
+          "Guts +5",
+          "Wisdom +5",
+          "The Bigger Picture hint +1"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Give It a Try",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +15",
+          "Mejiro Dober bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Skill points +15",
+          "Mejiro Dober bond +5"
+        ]
+      },
+      {
+        "nome": "Hope She'll Like It...",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Skill points +45",
+          "Mejiro Dober bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Unyielding Spirit hint +1",
+          "Mejiro Dober bond +5"
+        ]
+      }
+    ]
+  }
+}
