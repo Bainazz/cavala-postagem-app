@@ -1,0 +1,65 @@
+{
+  "nome": "Kawakami Princess",
+  "imagem": "icon_cartas/speed/Kawakami_Princess_SSR.png",
+  "eventos": {
+    "Eventos únicos": [
+      {
+        "nome": "(❯) Modestly! Boldly!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Mood +1",
+          "Speed +5",
+          "Kawakami Princess bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Skill points +10",
+          "'Tether' hint +1",
+          "Kawakami Princess bond +5"
+        ]
+      },
+      {
+        "nome": "(❯❯) Princess Power ☆ to the Max!",
+        "detalhes": [
+          "Speed +5",
+          "Guts +5"
+        ]
+      },
+      {
+        "nome": "(❯❯❯) Hit It! Princess Road!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Speed +15",
+          "Guts +15",
+          "'Center Stage' hint +1",
+          "Kawakami Princess bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Energy +25",
+          "Skill points +25"
+        ]
+      }
+    ],
+    "Eventos aleatórios": [
+      {
+        "nome": "Princess Punch!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Guts +10",
+          "Kawakami Princess bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "Mood +1",
+          "Kawakami Princess bond +5"
+        ]
+      },
+      {
+        "nome": "Princess Escape!",
+        "detalhes": [
+          "\\033[1mOpção de cima\\033[0m",
+          "Energy +10",
+          "Kawakami Princess bond +5",
+          "\\033[1mOpção de baixo\\033[0m",
+          "'Steadfast' hint +1",
+          "Kawakami Princess bond +5"
+        ]
+      }
+    ]
+  }
+}
