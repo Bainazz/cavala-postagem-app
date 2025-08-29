@@ -167,6 +167,7 @@ class UmaApp:
 
         self.frame_eventos = tk.Frame(self.wrapper_eventos, bg='#606060')
         self.frame_eventos.pack(anchor='n', pady=10)
+        
         # Repassa scroll se o mouse estiver em qualquer espaço vazio entre os eventos
         self.frame_eventos.bind("<MouseWheel>", lambda e: self.canvas_eventos.event_generate("<MouseWheel>", delta=e.delta))
         self.frame_eventos.bind("<Button-4>", lambda e: self.canvas_eventos.yview_scroll(-1, "units"))
@@ -350,7 +351,7 @@ class UmaApp:
             caminho_img_carta = os.path.join(BASE, card_id)
             try:
                 pil_img_carta = Image.open(caminho_img_carta).convert("RGBA")
-                pil_img_carta_res = pil_img_carta.resize((128, 128), Image.Resampling.LANCZOS)
+                pil_img_carta_res = pil_img_carta.resize((96, 96), Image.Resampling.LANCZOS)
                 img_colorida = ImageTk.PhotoImage(pil_img_carta_res)
                 img_cinza = ImageTk.PhotoImage(ImageOps.grayscale(pil_img_carta_res.convert("RGB")))
             except Exception as e:
@@ -392,7 +393,7 @@ class UmaApp:
                 caminho_img_carta = os.path.join(BASE, self.carta_avulsa)
                 try:
                     pil_img_carta = Image.open(caminho_img_carta).convert("RGBA")
-                    pil_img_carta_res = pil_img_carta.resize((128, 128), Image.Resampling.LANCZOS)
+                    pil_img_carta_res = pil_img_carta.resize((96, 96), Image.Resampling.LANCZOS)
                     img_colorida = ImageTk.PhotoImage(pil_img_carta_res)
                     img_cinza = ImageTk.PhotoImage(ImageOps.grayscale(pil_img_carta_res.convert("RGB")))
                 except Exception as e:
@@ -414,7 +415,7 @@ class UmaApp:
                     btn_img_carta.image_colorida = img_colorida
                     btn_img_carta.image_cinza = img_cinza
                     btn_img_carta.pack()
-                    tk.Label(frame_carta, text=nome_carta + " (avulsa)", fg='white', bg=self.area_cor).pack()
+                    tk.Label(frame_carta, text=nome_carta, fg='white', bg=self.area_cor).pack()
 
                     self.imagens_exibidas[f"avulsa:{self.carta_avulsa}"] = btn_img_carta
                     self.img_refs[f"avulsa:{self.carta_avulsa}_colorida"] = img_colorida

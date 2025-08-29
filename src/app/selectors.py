@@ -112,6 +112,8 @@ def abrir_seletor_cavala(app):
         try:
             from PIL import Image
             pil_img = Image.open(caminho_img).convert("RGBA")
+            # ADICIONE ESTA LINHA:
+            pil_img = pil_img.resize((96, 96), Image.Resampling.LANCZOS)
             bg = Image.new("RGBA", pil_img.size, "#505050")
             pil_img = Image.alpha_composite(bg, pil_img)
             img = ImageTk.PhotoImage(pil_img)
@@ -299,6 +301,8 @@ def abrir_seletor_cartas(app, limite, ao_confirmar):
             nome = dados.get("nome", "Carta")
             try:
                 pil_image = Image.open(img_path).convert("RGBA")
+                # ADICIONE ESTA LINHA:
+                pil_image = pil_image.resize((96, 96), Image.Resampling.LANCZOS)
                 bg = Image.new("RGBA", pil_image.size, "#505050")
                 pil_image_colorida = Image.alpha_composite(bg, pil_image)
                 pil_image_cinza = ImageOps.grayscale(pil_image_colorida.convert("RGB"))

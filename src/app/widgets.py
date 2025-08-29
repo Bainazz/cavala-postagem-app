@@ -103,6 +103,9 @@ class EventoExpandivel(tk.Frame):
                 while widget and not isinstance(widget, tk.Canvas):
                     widget = widget.master
                 if widget:
+                    top, bottom = widget.yview()
+                    if top <= 0.0:  # já está no topo, não rola mais
+                        return "break"
                     widget.yview_scroll(-1, "units")
                 return "break"
             except Exception:
@@ -114,6 +117,9 @@ class EventoExpandivel(tk.Frame):
                 while widget and not isinstance(widget, tk.Canvas):
                     widget = widget.master
                 if widget:
+                    top, bottom = widget.yview()
+                    if bottom >= 1.0:  # já está no final, não rola mais
+                        return "break"
                     widget.yview_scroll(1, "units")
                 return "break"
             except Exception:
@@ -126,17 +132,24 @@ class EventoExpandivel(tk.Frame):
                 while widget and not isinstance(widget, tk.Canvas):
                     widget = widget.master
                 if widget:
+                    top, bottom = widget.yview()
+                    if delta < 0 and top <= 0.0:      # tentando subir além do topo
+                        return "break"
+                    if delta > 0 and bottom >= 1.0:   # tentando descer além do final
+                        return "break"
                     widget.yview_scroll(delta, "units")
                 return "break"
             except Exception:
                 return "break"
 
+        # Bindings
         self.text_widget.bind("<MouseWheel>", _scroll_mousewheel)
         self.text_widget.bind("<Button-4>", _scroll_canvas_para_cima)
         self.text_widget.bind("<Button-5>", _scroll_canvas_para_baixo)
         self.botao.bind("<MouseWheel>", _scroll_mousewheel)
         self.botao.bind("<Button-4>", _scroll_canvas_para_cima)
         self.botao.bind("<Button-5>", _scroll_canvas_para_baixo)
+
 
 
         self.text_widget.update_idletasks()
